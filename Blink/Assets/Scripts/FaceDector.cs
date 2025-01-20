@@ -14,7 +14,7 @@ public class FaceDector : MonoBehaviour
 
         webCamTexture = new WebCamTexture(devices[0].name);
         webCamTexture.Play();
-        cascade = new CascadeClassifier(@"Assets\OpenCV+Unity\Demo\Face_Detector\haarcascade_frontalface_default.xml");
+        cascade = new CascadeClassifier(@"Assets\Imported_Packages\OpenCV+Unity\Demo\Face_Detector\haarcascade_frontalface_default.xml");
         //cascade = new CascadeClassifier(@"Assets\OpenCV+Unity\Demo\Face_Detector\haarcascade_eye.xml");
     }
 
