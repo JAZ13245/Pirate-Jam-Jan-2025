@@ -1,0 +1,33 @@
+fileFormatVersion: 2
+guid: 4fe9abfd9bd783442ac80fdba1c2550e
+AssetOrigin:
+  serializedVersion: 1
+  productId: 64314
+  packageName: Dlib FaceLandmark Detector
+  packageVersion: 1.4.1
+  assetPath: Assets/DlibFaceLandmarkDetector/Plugins/WebGL/2021.2/dlibfacelandmarkdetector.bc
+  uploadId: 708705
+PluginImporter:
+  externalObjects: {}
+  serializedVersion: 3
+  iconMap: {}
+  executionOrder: {}
+  defineConstraints: []
+  isPreloaded: 0
+  isOverridable: 0
+  isExplicitlyReferenced: 0
+  validateReferences: 1
+  platformData:
+    Any:
+      enabled: 0
+      settings: {}
+    Editor:
+      enabled: 0
+      settings:
+        DefaultValueInitialized: true
+    WebGL:
+      enabled: 0
+      settings: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

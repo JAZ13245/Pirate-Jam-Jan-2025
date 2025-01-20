@@ -1,0 +1,34 @@
+fileFormatVersion: 2
+guid: f9ba257f5f6e14952aa2acac7ae299c8
+AssetOrigin:
+  serializedVersion: 1
+  productId: 64314
+  packageName: Dlib FaceLandmark Detector
+  packageVersion: 1.4.1
+  assetPath: Assets/DlibFaceLandmarkDetector/Plugins/iOS/device/libdlibfacelandmarkdetector.a
+  uploadId: 708705
+PluginImporter:
+  externalObjects: {}
+  serializedVersion: 3
+  iconMap: {}
+  executionOrder: {}
+  defineConstraints: []
+  isPreloaded: 1
+  isOverridable: 0
+  isExplicitlyReferenced: 0
+  validateReferences: 1
+  platformData:
+    Any:
+      enabled: 0
+      settings: {}
+    Editor:
+      enabled: 0
+      settings:
+        DefaultValueInitialized: true
+    iOS:
+      enabled: 1
+      settings:
+        AddToEmbeddedBinaries: true
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

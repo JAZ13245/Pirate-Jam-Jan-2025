@@ -1,0 +1,34 @@
+fileFormatVersion: 2
+guid: 75c6a729833f8c44e8eb9e813f099b43
+AssetOrigin:
+  serializedVersion: 1
+  productId: 64314
+  packageName: Dlib FaceLandmark Detector
+  packageVersion: 1.4.1
+  assetPath: Assets/DlibFaceLandmarkDetector/Plugins/Android/libs/x86_64/libdlibfacelandmarkdetector.so
+  uploadId: 708705
+PluginImporter:
+  externalObjects: {}
+  serializedVersion: 3
+  iconMap: {}
+  executionOrder: {}
+  defineConstraints: []
+  isPreloaded: 1
+  isOverridable: 0
+  isExplicitlyReferenced: 0
+  validateReferences: 1
+  platformData:
+    Android:
+      enabled: 1
+      settings:
+        CPU: x86_64
+    Any:
+      enabled: 0
+      settings: {}
+    Editor:
+      enabled: 0
+      settings:
+        DefaultValueInitialized: true
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
