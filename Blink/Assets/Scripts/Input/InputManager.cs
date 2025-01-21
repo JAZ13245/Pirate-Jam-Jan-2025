@@ -8,7 +8,7 @@ public class InputManager : MonoBehaviour
     public static InputManager Instance { get; private set; }
 
     // Movement and Look
-    public Vector3 MoveInput { get; private set; }
+    public Vector3 Move { get; private set; }
     public Vector2 Look { get; private set; }
 
     // Jumping
@@ -77,7 +77,7 @@ public class InputManager : MonoBehaviour
     private void UpdateInputs()
     {
         // Movement and Look inputs
-        MoveInput = _moveAction.ReadValue<Vector2>();
+        Move = _moveAction.ReadValue<Vector2>();
         Look = _lookAction.ReadValue<Vector2>();
 
         Jump = _jumpAction.WasPressedThisFrame();
