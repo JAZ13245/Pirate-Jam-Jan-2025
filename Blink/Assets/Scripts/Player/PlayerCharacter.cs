@@ -1,30 +1,49 @@
 using KinematicCharacterController;
 using UnityEngine;
 
+public enum Stance
+{
+    Stand, Crouch
+}
 public struct CharacterInput
 {
     public Quaternion Rotation;
     public Vector2 Move;
     public bool Jump;
+    public bool Crouch;
+    public bool CrouchHeld;
+    public bool crouchToggleable;
 }
 public class PlayerCharacter : MonoBehaviour, ICharacterController
 {
-    [Header("Character Settings")]
+    [Header("Movement Settings")]
     [SerializeField] private float walkSpeed = 20f;
+    [Header("Jump Settings")]
     [SerializeField] private float jumpSpeed = 20f;
     [SerializeField] private float gravity = -90f;
+    [Header("Crouch Settings")]
+    [SerializeField] private float crouchSpeed = 10f;
+    [SerializeField] private float standHeight = 2f;
+    [SerializeField] private float crouchHeight = 1f;
+    [Range(0, 1f)] [SerializeField] private float standCameraTargetHeight = 0.9f;
+    [Range(0, 1f)] [SerializeField] private float crouchCameraTargetHeight = 0.7f;
 
     [Header("Components")]
+    [SerializeField] private Transform root;
     [SerializeField] private KinematicCharacterMotor motor;
     [SerializeField] private Transform cameraTarget;
 
+    private Stance _stance;
     private Quaternion _requestedRotation;
     private Vector3 _requestedMovement;
     private bool _requestedJump;
+    private bool _requestedCrouch;
 
     // Sets Up Player Movement
     public void Intialize()
     {
+        _stance = Stance.Stand;
+
         motor.CharacterController = this;
     }
 
@@ -39,6 +58,27 @@ public class PlayerCharacter : MonoBehaviour, ICharacterController
         _requestedMovement = input.Rotation * _requestedMovement;
 
         _requestedJump = _requestedJump || input.Jump;
+
+        if(input.Crouch && input.crouchToggleable) _requestedCrouch = !_requestedCrouch; // Toggle Crouch
+        else if (!input.crouchToggleable) _requestedCrouch = input.CrouchHeld; // NonToggle Crouch
+    }
+
+    public void UpdateBody()
+    {
+        var currentHeight = motor.Capsule.height;
+        var normalizedHeight = currentHeight / standHeight;
+
+        // Get Camera Target Height by Stance State
+        var cameraTargetHeight = currentHeight * 
+        (
+            _stance is Stance.Stand
+                ? standCameraTargetHeight
+                : crouchCameraTargetHeight
+        );
+        var rootTargetScale = new Vector3(1f, normalizedHeight, 1f);
+
+        cameraTarget.localPosition = new Vector3(0f, cameraTargetHeight, 0f);
+        root.localScale = rootTargetScale;
     }
 
     // Rotates the Physical Character
@@ -72,8 +112,12 @@ public class PlayerCharacter : MonoBehaviour, ICharacterController
                 surfaceNormal: motor.GroundingStatus.GroundNormal
             ) * _requestedMovement.magnitude;
 
+            var speed = _stance is Stance.Stand
+                ? walkSpeed
+                : crouchSpeed;
+
             // And move along the ground in that direction.
-            currentVelocity = groundedMovement * walkSpeed;
+            currentVelocity = groundedMovement * speed;
         }else // If in the air
         {
             // Gravity
@@ -95,12 +139,38 @@ public class PlayerCharacter : MonoBehaviour, ICharacterController
         }
     }
 
+    public void BeforeCharacterUpdate(float deltaTime)
+    {
+        // Crouch
+        if(_requestedCrouch && _stance is Stance.Stand)
+        {
+            // Shrink Character
+            motor.SetCapsuleDimensions
+            (
+                radius: motor.Capsule.radius,
+                height: crouchHeight,
+                yOffset: 0
+            );
+            
+            _stance = Stance.Crouch;
+        }
+    }
 
     public void AfterCharacterUpdate(float deltaTime)
-    {}
-
-    public void BeforeCharacterUpdate(float deltaTime)
-    {}
+    {
+        // Uncrouch
+        if(!_requestedCrouch && _stance is not Stance.Stand)
+        {
+            // Shrink Character
+            motor.SetCapsuleDimensions
+            (
+                radius: motor.Capsule.radius,
+                height: standHeight,
+                yOffset: 0
+            );
+            _stance = Stance.Stand;
+        }
+    }
 
     public bool IsColliderValidForCollisions(Collider coll) => true;
 

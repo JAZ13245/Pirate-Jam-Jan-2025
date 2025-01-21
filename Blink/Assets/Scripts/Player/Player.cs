@@ -2,6 +2,9 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
+    [Header("Player Settings")]
+    [SerializeField] private bool crouchToggleable;
+    [Header("Components")]
     [SerializeField] private PlayerCharacter playerCharacter;
     [SerializeField] private PlayerCamera playerCamera;
 
@@ -22,13 +25,17 @@ public class Player : MonoBehaviour
         playerCamera.UpdateRotation(cameraInput);
         playerCamera.UpdatePosition(playerCharacter.GetCameraTarget());
 
-        // Get Character Input and Update it.
+        // Get Character Input and Update it
         var characterInput = new CharacterInput
         {
             Rotation = playerCamera.transform.rotation,
             Move = InputManager.Instance.Move,
-            Jump = InputManager.Instance.Jump
+            Jump = InputManager.Instance.Jump,
+            Crouch = InputManager.Instance.Crouch,
+            CrouchHeld = InputManager.Instance.CrouchHeld,
+            crouchToggleable = crouchToggleable
         };
         playerCharacter.UpdateInput(characterInput);
+        playerCharacter.UpdateBody();
     }
 }
