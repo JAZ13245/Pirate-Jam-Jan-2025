@@ -37,10 +37,14 @@ public class Player : MonoBehaviour
             JumpHeld = InputManager.Instance.JumpHeld,
             Crouch = InputManager.Instance.Crouch,
             CrouchHeld = InputManager.Instance.CrouchHeld,
-            crouchToggleable = crouchToggleable
+            crouchToggleable = crouchToggleable, 
+            Blink = InputManager.Instance.Blink,
+            BlinkHeld = InputManager.Instance.BlinkHeld,
+            BlinkReleased = InputManager.Instance.BlinkReleased
         };
         playerCharacter.UpdateInput(characterInput);
         playerCharacter.UpdateBody(deltaTime);
+        playerCharacter.BlinkTeleport(playerCamera);
 
         // EDITOR ONLY: Allows Telporting the Player
         #if UNITY_EDITOR

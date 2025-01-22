@@ -14,6 +14,9 @@ public struct CharacterInput
     public bool Crouch;
     public bool CrouchHeld;
     public bool crouchToggleable;
+    public bool Blink;
+    public bool BlinkHeld;
+    public bool BlinkReleased;
 }
 public class PlayerCharacter : MonoBehaviour, ICharacterController
 {
@@ -35,6 +38,10 @@ public class PlayerCharacter : MonoBehaviour, ICharacterController
     [SerializeField] private float crouchHeightResponse = 15f;
     [Range(0, 1f)] [SerializeField] private float standCameraTargetHeight = 0.9f;
     [Range(0, 1f)] [SerializeField] private float crouchCameraTargetHeight = 0.7f;
+    [Header("Blink Setting")]
+    [SerializeField] private float blinkTimeThreshold = 0.5f;
+    [SerializeField] private float baseBlinkDistance = 15f;
+    [SerializeField] private float maxBlinkDistance = 30f;
 
     [Header("Components")]
     [SerializeField] private Transform root;
@@ -47,6 +54,12 @@ public class PlayerCharacter : MonoBehaviour, ICharacterController
     private bool _requestedJump;
     private bool _requestedJumpHeld;
     private bool _requestedCrouch;
+    private bool _requestedBlink;
+    private bool _requestedBlinkHeld;
+    private bool _requestedBlinkRelease;
+
+    // Blink Timer Variables
+    private float _currentBlinkTime;
 
     // Sets Up Player Movement
     public void Intialize()
@@ -72,6 +85,10 @@ public class PlayerCharacter : MonoBehaviour, ICharacterController
 
         if(input.Crouch && input.crouchToggleable) _requestedCrouch = !_requestedCrouch; // Toggle Crouch
         else if (!input.crouchToggleable) _requestedCrouch = input.CrouchHeld; // NonToggle Crouch
+
+        _requestedBlink = _requestedBlink || input.Blink;
+        _requestedBlinkHeld = input.BlinkHeld;
+        _requestedBlinkRelease = input.BlinkReleased;
     }
 
     public void UpdateBody(float deltaTime)
@@ -203,6 +220,31 @@ public class PlayerCharacter : MonoBehaviour, ICharacterController
             var targetVerticalSpeed = Mathf.Max(currentVerticalSpeed, jumpSpeed);
             // Add the difference in current and target vertical speed to the character's velocity
             currentVelocity += motor.CharacterUp * (targetVerticalSpeed - currentVerticalSpeed);
+        }
+    }
+
+    public void BlinkTeleport(PlayerCamera cam)
+    {
+        if (_requestedBlinkHeld)
+        {
+            _currentBlinkTime += Time.deltaTime;
+        }
+        else if (_requestedBlinkRelease)
+        {
+            RaycastHit hit;
+            float blinkDistance = baseBlinkDistance;
+            if (_currentBlinkTime < .5f && Physics.Raycast(cam.transform.position, cam.transform.forward, out hit, baseBlinkDistance))
+            {
+                if (hit.distance < 2) { _currentBlinkTime = 0; return; }
+                blinkDistance = hit.distance - 1;
+                SetPosition(cam.transform.position + cam.transform.forward * blinkDistance);
+            }
+            else if (_currentBlinkTime < .5f)
+            {
+                SetPosition(cam.transform.position + cam.transform.forward * baseBlinkDistance);
+            }
+
+            _currentBlinkTime = 0;
         }
     }
 
