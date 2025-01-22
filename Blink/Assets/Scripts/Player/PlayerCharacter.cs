@@ -32,11 +32,13 @@ public class PlayerCharacter : MonoBehaviour, ICharacterController
     [SerializeField] private float crouchResponse = 20f;
     [SerializeField] private float standHeight = 2f;
     [SerializeField] private float crouchHeight = 1f;
+    [SerializeField] private float ceilingCheckRadius = 0.5f;
     [SerializeField] private float crouchHeightResponse = 15f;
     [Range(0, 1f)] [SerializeField] private float standCameraTargetHeight = 0.9f;
     [Range(0, 1f)] [SerializeField] private float crouchCameraTargetHeight = 0.7f;
 
     [Header("Components")]
+    [SerializeField] private Transform ceilingCheck;
     [SerializeField] private Transform root;
     [SerializeField] private KinematicCharacterMotor motor;
     [SerializeField] private Transform cameraTarget;
@@ -228,14 +230,30 @@ public class PlayerCharacter : MonoBehaviour, ICharacterController
         // Uncrouch
         if(!_requestedCrouch && _stance is not Stance.Stand)
         {
-            // Shrink Character
-            motor.SetCapsuleDimensions
-            (
-                radius: motor.Capsule.radius,
-                height: standHeight,
-                yOffset: 0
-            );
-            _stance = Stance.Stand;
+            // Ceiling Detection
+            bool stayCrouched = false;
+            Collider[] hitColliders = Physics.OverlapSphere(ceilingCheck.position, ceilingCheckRadius);
+            foreach (var hitCollider in hitColliders)
+            {
+                // Check if the hit object is not the player
+                if (hitCollider.gameObject != this.gameObject)
+                {
+                    stayCrouched = true;
+                }
+            }
+
+            if(!stayCrouched) // No Ceiling Detected
+            {
+                // Grow Character
+                motor.SetCapsuleDimensions
+                (
+                    radius: motor.Capsule.radius,
+                    height: standHeight,
+                    yOffset: 0
+                );
+                _stance = Stance.Stand;
+            }
+
         }
     }
 
@@ -265,5 +283,12 @@ public class PlayerCharacter : MonoBehaviour, ICharacterController
         {
             motor.BaseVelocity = Vector3.zero;
         }
+    }
+
+    void OnDrawGizmosSelected()
+    {
+        // Draw a yellow sphere at the transform's position
+        Gizmos.color = Color.yellow;
+        Gizmos.DrawWireSphere(ceilingCheck.position, ceilingCheckRadius);
     }
 }
