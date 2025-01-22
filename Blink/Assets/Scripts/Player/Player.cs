@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class Player : MonoBehaviour
 {
@@ -20,6 +21,8 @@ public class Player : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        var deltaTime = Time.deltaTime;
+
         // Get Camera Input and Update its rotation and position.
         var cameraInput = new CameraInput{ Look = InputManager.Instance.Look };
         playerCamera.UpdateRotation(cameraInput);
@@ -31,11 +34,29 @@ public class Player : MonoBehaviour
             Rotation = playerCamera.transform.rotation,
             Move = InputManager.Instance.Move,
             Jump = InputManager.Instance.Jump,
+            JumpHeld = InputManager.Instance.JumpHeld,
             Crouch = InputManager.Instance.Crouch,
             CrouchHeld = InputManager.Instance.CrouchHeld,
             crouchToggleable = crouchToggleable
         };
         playerCharacter.UpdateInput(characterInput);
-        playerCharacter.UpdateBody();
+        playerCharacter.UpdateBody(deltaTime);
+
+        // EDITOR ONLY: Allows Telporting the Player
+        #if UNITY_EDITOR
+        if(Keyboard.current.tKey.wasPressedThisFrame)
+        {
+            var ray = new Ray(playerCamera.transform.position, playerCamera.transform.forward);
+            if(Physics.Raycast(ray, out var hit))
+            {
+                Teleport(hit.point);
+            }
+        }
+        #endif
+    }
+
+    public void Teleport(Vector3 position)
+    {
+        playerCharacter.SetPosition(position);
     }
 }

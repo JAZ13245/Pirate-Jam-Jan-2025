@@ -10,6 +10,7 @@ public struct CharacterInput
     public Quaternion Rotation;
     public Vector2 Move;
     public bool Jump;
+    public bool JumpHeld;
     public bool Crouch;
     public bool CrouchHeld;
     public bool crouchToggleable;
@@ -18,13 +19,20 @@ public class PlayerCharacter : MonoBehaviour, ICharacterController
 {
     [Header("Movement Settings")]
     [SerializeField] private float walkSpeed = 20f;
+    [SerializeField] private float walkResponse = 25f;
     [Header("Jump Settings")]
     [SerializeField] private float jumpSpeed = 20f;
+    [Range(0, 1f)] [SerializeField] private float jumpHeldGravity = 0.4f;
     [SerializeField] private float gravity = -90f;
+    [Header("In Air Settings")]
+    [SerializeField] private float airSpeed = 15f;
+    [SerializeField] private float airAcceleration = 70f;
     [Header("Crouch Settings")]
     [SerializeField] private float crouchSpeed = 10f;
+    [SerializeField] private float crouchResponse = 20f;
     [SerializeField] private float standHeight = 2f;
     [SerializeField] private float crouchHeight = 1f;
+    [SerializeField] private float crouchHeightResponse = 15f;
     [Range(0, 1f)] [SerializeField] private float standCameraTargetHeight = 0.9f;
     [Range(0, 1f)] [SerializeField] private float crouchCameraTargetHeight = 0.7f;
 
@@ -37,6 +45,7 @@ public class PlayerCharacter : MonoBehaviour, ICharacterController
     private Quaternion _requestedRotation;
     private Vector3 _requestedMovement;
     private bool _requestedJump;
+    private bool _requestedJumpHeld;
     private bool _requestedCrouch;
 
     // Sets Up Player Movement
@@ -57,13 +66,15 @@ public class PlayerCharacter : MonoBehaviour, ICharacterController
         // Orient the input so it's relative to the direction the player is facing.
         _requestedMovement = input.Rotation * _requestedMovement;
 
+        // Jumping
         _requestedJump = _requestedJump || input.Jump;
+        _requestedJumpHeld = input.JumpHeld;
 
         if(input.Crouch && input.crouchToggleable) _requestedCrouch = !_requestedCrouch; // Toggle Crouch
         else if (!input.crouchToggleable) _requestedCrouch = input.CrouchHeld; // NonToggle Crouch
     }
 
-    public void UpdateBody()
+    public void UpdateBody(float deltaTime)
     {
         var currentHeight = motor.Capsule.height;
         var normalizedHeight = currentHeight / standHeight;
@@ -77,8 +88,18 @@ public class PlayerCharacter : MonoBehaviour, ICharacterController
         );
         var rootTargetScale = new Vector3(1f, normalizedHeight, 1f);
 
-        cameraTarget.localPosition = new Vector3(0f, cameraTargetHeight, 0f);
-        root.localScale = rootTargetScale;
+        cameraTarget.localPosition = Vector3.Lerp
+        (
+            a: cameraTarget.localPosition,
+            b: new Vector3(0f, cameraTargetHeight, 0f),
+            t: 1f - Mathf.Exp(-crouchHeightResponse * deltaTime)
+        );
+        root.localScale = Vector3.Lerp
+        (
+            a: root.localScale,
+            b: rootTargetScale,
+            t: 1f - Mathf.Exp(-crouchHeightResponse * deltaTime)
+        );
     }
 
     // Rotates the Physical Character
@@ -112,16 +133,62 @@ public class PlayerCharacter : MonoBehaviour, ICharacterController
                 surfaceNormal: motor.GroundingStatus.GroundNormal
             ) * _requestedMovement.magnitude;
 
+            // Calculate the speed and responsivness based on stance
             var speed = _stance is Stance.Stand
                 ? walkSpeed
                 : crouchSpeed;
+            var response = _stance is Stance.Stand
+                ? walkResponse
+                : crouchResponse;
+            
 
             // And move along the ground in that direction.
-            currentVelocity = groundedMovement * speed;
+            var targetVelocity = groundedMovement * speed;
+            currentVelocity = Vector3.Lerp
+            (
+                a: currentVelocity,
+                b: targetVelocity,
+                t: 1f - Mathf.Exp(-response * deltaTime)
+            );
         }else // If in the air
         {
+            // In Air Movement
+            if(_requestedMovement.sqrMagnitude > 0f)
+            {
+                // Requested Movement Projected onto Movement Plane
+                var planarMovement = Vector3.ProjectOnPlane
+                (
+                    vector: _requestedMovement,
+                    planeNormal: motor.CharacterUp
+                ) * _requestedMovement.magnitude;
+
+                // Current Velocity on Movement Plane
+                var currentPlanarVelocity = Vector3.ProjectOnPlane
+                (
+                    vector: currentVelocity,
+                    planeNormal: motor.CharacterUp
+                );
+
+                // Calculate Movement Force
+                var movementForce = planarMovement * airAcceleration * deltaTime;
+
+                // Add it to the current planar velocity for a target velocity
+                var targetPlanarVelocity = currentPlanarVelocity + movementForce;
+
+                // Limit Target Velocity to Air Speed
+                targetPlanarVelocity = Vector3.ClampMagnitude(targetPlanarVelocity, airSpeed);
+
+                // Steer Towards Current Velocity
+                currentVelocity += targetPlanarVelocity - currentPlanarVelocity;
+            }
             // Gravity
-            currentVelocity += motor.CharacterUp * gravity * deltaTime;
+            var effectiveGravity = gravity;
+            var verticalSpeed = Vector3.Dot(currentVelocity, motor.CharacterUp);
+            if(_requestedJumpHeld && verticalSpeed > 0f) // Allows for user to hold jump to jump higher
+            {
+                effectiveGravity *= jumpHeldGravity;
+            }
+            currentVelocity += motor.CharacterUp * effectiveGravity * deltaTime;
         }
 
         if(_requestedJump)
@@ -151,7 +218,7 @@ public class PlayerCharacter : MonoBehaviour, ICharacterController
                 height: crouchHeight,
                 yOffset: 0
             );
-            
+
             _stance = Stance.Crouch;
         }
     }
@@ -191,4 +258,12 @@ public class PlayerCharacter : MonoBehaviour, ICharacterController
 
     // Used for PlayerCamera Script Intialization
     public Transform GetCameraTarget() => cameraTarget;
+    public void SetPosition(Vector3 position, bool killVelocity = true)
+    {
+        motor.SetPosition(position);
+        if (killVelocity)
+        {
+            motor.BaseVelocity = Vector3.zero;
+        }
+    }
 }
