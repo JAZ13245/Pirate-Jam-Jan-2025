@@ -55,8 +55,8 @@ public class Player : MonoBehaviour
         #endif
     }
 
-    public void Teleport(Vector3 position)
+    public void Teleport(Vector3 position, bool killVelocity = true)
     {
-        playerCharacter.SetPosition(position);
+        playerCharacter.SetPosition(position, killVelocity);
     }
 }
