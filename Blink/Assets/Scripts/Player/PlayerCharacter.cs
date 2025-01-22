@@ -40,6 +40,7 @@ public class PlayerCharacter : MonoBehaviour, ICharacterController
     [Range(0, 1f)] [SerializeField] private float crouchCameraTargetHeight = 0.7f;
     [Header("Blink Setting")]
     [SerializeField] private float blinkTimeThreshold = 0.5f;
+    [SerializeField] private float maxBlinkTime = 3f;
     [SerializeField] private float baseBlinkDistance = 15f;
     [SerializeField] private float maxBlinkDistance = 30f;
 
@@ -228,23 +229,39 @@ public class PlayerCharacter : MonoBehaviour, ICharacterController
         if (_requestedBlinkHeld)
         {
             _currentBlinkTime += Time.deltaTime;
+
+            //Test Blinking
+            cam.transform.GetChild(1).GetChild(0).gameObject.SetActive(true);
         }
         else if (_requestedBlinkRelease)
         {
             RaycastHit hit;
             float blinkDistance = baseBlinkDistance;
-            if (_currentBlinkTime < .5f && Physics.Raycast(cam.transform.position, cam.transform.forward, out hit, baseBlinkDistance))
+            if (_currentBlinkTime < .5f)
             {
-                if (hit.distance < 2) { _currentBlinkTime = 0; return; }
-                blinkDistance = hit.distance - 1;
-                SetPosition(cam.transform.position + cam.transform.forward * blinkDistance);
+                if (Physics.Raycast(cam.transform.position, cam.transform.forward, out hit, baseBlinkDistance))
+                {
+                    if (hit.distance < 2) { _currentBlinkTime = 0; return; }
+                    blinkDistance = hit.distance - 1;
+                }
             }
-            else if (_currentBlinkTime < .5f)
+            else if (_currentBlinkTime >= .5f)
             {
-                SetPosition(cam.transform.position + cam.transform.forward * baseBlinkDistance);
+                blinkDistance = Mathf.Lerp(baseBlinkDistance, maxBlinkDistance, (_currentBlinkTime - .5f) / maxBlinkTime);
+
+                if (Physics.Raycast(cam.transform.position, cam.transform.forward, out hit, maxBlinkDistance))
+                {
+                    if (hit.distance < 2) { _currentBlinkTime = 0; return; }
+                    blinkDistance = hit.distance - 1;
+                }
             }
 
+            SetPosition(cam.transform.position + cam.transform.forward * blinkDistance);
+
             _currentBlinkTime = 0;
+
+            //Test Blinking
+            cam.transform.GetChild(1).GetChild(0).gameObject.SetActive(false);
         }
     }
 
