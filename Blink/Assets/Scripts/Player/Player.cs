@@ -18,7 +18,7 @@ public class Player : MonoBehaviour
     [SerializeField] private PlayerCamera playerCamera;
     [Space]
     [SerializeField] private CameraSpring cameraSpring;
-    [SerializeField] private CameraLean cameraLean;
+    //[SerializeField] private CameraLean cameraLean;
 
     [SerializeField] private int _numberOfBlinks = 2;
 
@@ -61,7 +61,7 @@ public class Player : MonoBehaviour
         playerCamera.Initialize(playerCharacter.GetCameraTarget());
 
         cameraSpring.Initialize();
-        cameraLean.Initialize();
+        //cameraLean.Initialize();
     }
 
     // Update is called once per frame
@@ -136,6 +136,7 @@ public class Player : MonoBehaviour
         var state = playerCharacter.GetState();
         
         cameraSpring.UpdateSpring(deltaTime, cameraTarget.up);
+        /* Not Working / Looks Weird. May come back to this
         cameraLean.UpdateLean
         (
             deltaTime, 
@@ -143,6 +144,7 @@ public class Player : MonoBehaviour
             state.Acceleration,
             cameraTarget.up
         );
+        */
     }
 
     public IEnumerator ChargeBlink()
