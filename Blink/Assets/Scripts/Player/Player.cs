@@ -43,7 +43,6 @@ public class Player : MonoBehaviour
     public Coroutine Regen = null;
 
     // Blink Detection Variables
-    int blinkAmount = 0;
 
     bool blink = false;
     bool blinkHeld = false;
@@ -167,7 +166,6 @@ public class Player : MonoBehaviour
                         blink = false;
                         blinkHeld = true;
                     }
-                    blinkAmount++;
                 }
                 else if (blinkHeld)
                 {
@@ -209,8 +207,6 @@ public class Player : MonoBehaviour
                 Teleport(hit.point);
             }
         }
-
-        //Debug.Log("blink amount: " + blinkAmount);
 #endif
 
     }
