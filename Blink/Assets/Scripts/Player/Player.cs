@@ -41,8 +41,7 @@ public class Player : MonoBehaviour
     public Coroutine Regen = null;
 
     // Blink Detection Variables
-
-    bool previousBlinkFrame = false;
+    int blinkAmount = 0;
    
     /// Set the name of the device to use.
     [SerializeField, TooltipAttribute("Set the name of the device to use.")]
@@ -170,17 +169,15 @@ public class Player : MonoBehaviour
             {
                 List<Vector2> points = faceLandmarkDetector.DetectLandmark(detectResult[0]);
 
-                if((IsEyeClosed(DetectLeftEye(points)) || IsEyeClosed(DetectRightEye(points))) && !previousBlinkFrame)
+                if((IsEyeClosed(DetectLeftEye(points)) || IsEyeClosed(DetectRightEye(points))))
                 {
-                    previousBlinkFrame = true;
                     var ray = new Ray(playerCamera.transform.position, playerCamera.transform.forward);
                     if (Physics.Raycast(ray, out var hit))
                     {
                         Teleport(hit.point);
                     }
+                    blinkAmount++;
                 }
-                else
-                previousBlinkFrame = false;
             }
         }
 
@@ -194,6 +191,8 @@ public class Player : MonoBehaviour
                 Teleport(hit.point);
             }
         }
+
+        Debug.Log("blink amount: " + blinkAmount);
 #endif
 
     }
@@ -254,6 +253,9 @@ public class Player : MonoBehaviour
         if (CalculateEAR(eye) <= 0.2) return true;
         return false;
     }
+
+
+
 
 
     // All the gross webcam code
