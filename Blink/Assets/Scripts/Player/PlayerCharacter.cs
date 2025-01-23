@@ -1,10 +1,6 @@
 using KinematicCharacterController;
 using UnityEngine;
 
-public enum Stance
-{
-    Stand, Crouch
-}
 public struct CharacterInput
 {
     public Quaternion Rotation;
@@ -17,6 +13,15 @@ public struct CharacterInput
     public bool Blink;
     public bool BlinkHeld;
     public bool BlinkReleased;
+}
+public enum Stance
+{
+    Stand, Crouch
+}
+public struct CharacterState
+{
+    public bool Grounded;
+    public Stance Stance;
 }
 public class PlayerCharacter : MonoBehaviour, ICharacterController
 {
@@ -44,6 +49,8 @@ public class PlayerCharacter : MonoBehaviour, ICharacterController
     [SerializeField] private float maxBlinkTime = 3f;
     [SerializeField] private float baseBlinkDistance = 15f;
     [SerializeField] private float maxBlinkDistance = 30f;
+    [Header("Sliding Settings")]
+    [SerializeField] private float slideStartSpeed = 25f;
 
     [Header("Components")]
     [SerializeField] private Transform ceilingCheck;
@@ -51,7 +58,9 @@ public class PlayerCharacter : MonoBehaviour, ICharacterController
     [SerializeField] private KinematicCharacterMotor motor;
     [SerializeField] private Transform cameraTarget;
 
-    private Stance _stance;
+    private CharacterState _state;
+    private CharacterState _lastState;
+    private CharacterState _tempState;
     private Quaternion _requestedRotation;
     private Vector3 _requestedMovement;
     private bool _requestedJump;
@@ -67,7 +76,8 @@ public class PlayerCharacter : MonoBehaviour, ICharacterController
     // Sets Up Player Movement
     public void Intialize()
     {
-        _stance = Stance.Stand;
+        _state.Stance = Stance.Stand;
+        _lastState = _state;
 
         motor.CharacterController = this;
     }
@@ -102,7 +112,7 @@ public class PlayerCharacter : MonoBehaviour, ICharacterController
         // Get Camera Target Height by Stance State
         var cameraTargetHeight = currentHeight * 
         (
-            _stance is Stance.Stand
+            _state.Stance is Stance.Stand
                 ? standCameraTargetHeight
                 : crouchCameraTargetHeight
         );
@@ -154,10 +164,10 @@ public class PlayerCharacter : MonoBehaviour, ICharacterController
             ) * _requestedMovement.magnitude;
 
             // Calculate the speed and responsivness based on stance
-            var speed = _stance is Stance.Stand
+            var speed = _state.Stance is Stance.Stand
                 ? walkSpeed
                 : crouchSpeed;
-            var response = _stance is Stance.Stand
+            var response = _state.Stance is Stance.Stand
                 ? walkResponse
                 : crouchResponse;
             
@@ -276,8 +286,10 @@ public class PlayerCharacter : MonoBehaviour, ICharacterController
 
     public void BeforeCharacterUpdate(float deltaTime)
     {
+        _tempState = _state;
+
         // Crouch
-        if(_requestedCrouch && _stance is Stance.Stand)
+        if(_requestedCrouch && _state.Stance is Stance.Stand)
         {
             // Shrink Character
             motor.SetCapsuleDimensions
@@ -287,14 +299,14 @@ public class PlayerCharacter : MonoBehaviour, ICharacterController
                 yOffset: 0
             );
 
-            _stance = Stance.Crouch;
+            _state.Stance = Stance.Crouch;
         }
     }
 
     public void AfterCharacterUpdate(float deltaTime)
     {
         // Uncrouch
-        if(!_requestedCrouch && _stance is not Stance.Stand)
+        if(!_requestedCrouch && _state.Stance is not Stance.Stand)
         {
             // Ceiling Detection
             bool stayCrouched = false;
@@ -317,10 +329,16 @@ public class PlayerCharacter : MonoBehaviour, ICharacterController
                     height: standHeight,
                     yOffset: 0
                 );
-                _stance = Stance.Stand;
+
+                _state.Stance = Stance.Stand;
             }
 
         }
+
+        // Update State to reflect relevant motor properties
+        _state.Grounded = motor.GroundingStatus.IsStableOnGround;
+        // And update the _lastState to store the character state
+        _lastState = _tempState;
     }
 
     public bool IsColliderValidForCollisions(Collider coll) => true;
