@@ -618,6 +618,44 @@ namespace DlibFaceLandmarkDetector
             return points;
         }
 
+        public List<Vector2> DetectLeftEye(List<Vector2> points)
+        {
+            //Points for the left eye are 37 to 42
+            List<Vector2> eye = new List<Vector2>();
+            for(int i = 36; i < 42;  i++)
+                eye.Add(points[i]);
+            return eye;
+
+        }
+
+        public List<Vector2> DetectRightEye(List<Vector2> points)
+        {
+            //Points for the left eye are 43 to 48
+            List<Vector2> eye = new List<Vector2>();
+            for (int i = 42; i < 48; i++)
+                eye.Add(points[i]);
+            return eye;
+
+        }
+
+        public float CalculateEAR(List<Vector2> eye)
+        {
+            float y1 = Vector3.Distance(eye[1], eye[5]);
+            float y2 = Vector3.Distance(eye[2], eye[4]);
+
+            float x1 = Vector3.Distance(eye[0], eye[3]);
+
+            float EAR = (y1 + y2) / x1;
+
+            return EAR;
+        }
+
+        public bool IsEyeClosed(List<Vector2> eye)
+        {
+            if(CalculateEAR(eye) <= 0.2) return true;
+            return false;
+        }
+
         /// <summary>
         /// Detects the object landmarks within the specified region defined by a rectangle.
         /// </summary>
@@ -661,7 +699,7 @@ namespace DlibFaceLandmarkDetector
                     points[i].x = detectLandmarkResultBuffer[i * 2 + 0];
                     points[i].y = detectLandmarkResultBuffer[i * 2 + 1];
                 }
-
+                Debug.Log(points);
                 return points;
             }
 
@@ -998,6 +1036,7 @@ namespace DlibFaceLandmarkDetector
                 unsafe
                 {
                     NativeArray<byte> rawTextureData = texture2D.GetRawTextureData<byte>();
+                    Debug.Log("data:" + rawTextureData.Length);
 
                     DlibFaceLandmarkDetector_DrawDetectResult(nativeObj, (IntPtr)NativeArrayUnsafeUtility.GetUnsafeReadOnlyPtr(rawTextureData), texture2D.width, texture2D.height, (int)texture2D.format, true, r, g, b, a, thickness);
                 }
@@ -1316,6 +1355,7 @@ namespace DlibFaceLandmarkDetector
         /// </param>
         public void DrawDetectLandmarkResult(Texture2D texture2D, int r, int g, int b, int a, Color32[] pixels32Buffer, byte[] rawTextureDataBuffer = null, bool updateMipmaps = false, bool makeNoLongerReadable = false)
         {
+            Debug.Log("called");
             if (texture2D == null)
                 throw new ArgumentNullException("texture2D");
             ThrowIfDisposed();
