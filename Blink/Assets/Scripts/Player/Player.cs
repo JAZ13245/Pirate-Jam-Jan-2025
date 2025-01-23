@@ -44,110 +44,73 @@ public class Player : MonoBehaviour
 
     bool previousBlinkFrame = false;
    
-    /// <summary>
     /// Set the name of the device to use.
-    /// </summary>
     [SerializeField, TooltipAttribute("Set the name of the device to use.")]
     public string requestedDeviceName = null;
 
-    /// <summary>
     /// The face landmark detector.
-    /// </summary>
     FaceLandmarkDetector faceLandmarkDetector;
-    /// <summary>
+
     /// The dlib shape predictor file name.
-    /// </summary>
     string dlibShapePredictorFileName = "DlibFaceLandmarkDetector/sp_human_face_68.dat";
-    /// <summary>
+
     /// The dlib shape predictor file path.
-    /// </summary>
     string dlibShapePredictorFilePath;
-    /// <summary>
+
     /// The CancellationTokenSource.
-    /// </summary>
     CancellationTokenSource cts = new CancellationTokenSource();
 
-    /// <summary>
     /// The webcam texture.
-    /// </summary>
     WebCamTexture webCamTexture;
 
-    /// <summary>
     /// The webcam device.
-    /// </summary>
     WebCamDevice webCamDevice;
 
-    /// <summary>
     /// The colors.
-    /// </summary>
     Color32[] colors;
 
-    /// <summary>
     /// The rotated colors.
-    /// </summary>
     Color32[] rotatedColors;
 
-    /// <summary>
     /// Set the width of WebCamTexture.
-    /// </summary>
     [SerializeField, TooltipAttribute("Set the width of WebCamTexture.")]
     public int requestedWidth = 320;
 
-    /// <summary>
     /// Set the height of WebCamTexture.
-    /// </summary>
     [SerializeField, TooltipAttribute("Set the height of WebCamTexture.")]
     public int requestedHeight = 240;
 
-    /// <summary>
+
     /// Set FPS of WebCamTexture.
-    /// </summary>
     [SerializeField, TooltipAttribute("Set FPS of WebCamTexture.")]
     public int requestedFPS = 30;
 
-    /// <summary>
     /// Set whether to use the front facing camera.
-    /// </summary>
     [SerializeField, TooltipAttribute("Set whether to use the front facing camera.")]
     public bool requestedIsFrontFacing = false;
 
-    /// <summary>
     /// The texture.
-    /// </summary>
     Texture2D texture;
 
-    /// <summary>
     /// Indicates whether this instance is waiting for initialization to complete.
-    /// </summary>
     bool isInitWaiting = false;
 
-    /// <summary>
     /// Indicates whether this instance has been initialized.
-    /// </summary>
     bool hasInitDone = false;
 
-    /// <summary>
     /// Determines if rotates 90 degree.
-    /// </summary>
     bool rotate90Degree = false;
 
-    /// <summary>
     /// The screenOrientation.
-    /// </summary>
     ScreenOrientation screenOrientation;
 
-    /// <summary>
     /// The width of the screen.
-    /// </summary>
     int screenWidth;
 
-    /// <summary>
     /// The height of the screen.
-    /// </summary>
     int screenHeight;
-    /// <summary>
+
     /// Determines if adjust pixels direction.
-    /// </summary>
     [SerializeField, TooltipAttribute("Determines if adjust pixels direction.")]
     public bool adjustPixelsDirection = false;
 
@@ -166,6 +129,134 @@ public class Player : MonoBehaviour
         Run();
     }
 
+    // Update is called once per frame
+    void Update()
+    {
+        var deltaTime = Time.deltaTime;
+
+        // Get Camera Input and Update its rotation and position.
+        var cameraInput = new CameraInput{ Look = InputManager.Instance.Look };
+        playerCamera.UpdateRotation(cameraInput);
+        playerCamera.UpdatePosition(playerCharacter.GetCameraTarget());
+
+        // Get Character Input and Update it
+        var characterInput = new CharacterInput
+        {
+            Rotation = playerCamera.transform.rotation,
+            Move = InputManager.Instance.Move,
+            Jump = InputManager.Instance.Jump,
+            JumpHeld = InputManager.Instance.JumpHeld,
+            Crouch = InputManager.Instance.Crouch,
+            CrouchHeld = InputManager.Instance.CrouchHeld,
+            crouchToggleable = crouchToggleable, 
+            Blink = InputManager.Instance.Blink,
+            BlinkHeld = InputManager.Instance.BlinkHeld,
+            BlinkReleased = InputManager.Instance.BlinkReleased
+        };
+        playerCharacter.UpdateInput(characterInput);
+        playerCharacter.UpdateBody(deltaTime);
+        playerCharacter.BlinkTeleport(this, playerCamera);
+
+        // Blink
+        Color32[] colors = GetColors();
+
+        if (colors != null)
+        {
+            faceLandmarkDetector.SetImage<Color32>(colors, texture.width, texture.height, 4, true);
+
+            List<UnityEngine.Rect> detectResult = faceLandmarkDetector.Detect();
+
+            if (detectResult.Count > 0)
+            {
+                List<Vector2> points = faceLandmarkDetector.DetectLandmark(detectResult[0]);
+
+                if((IsEyeClosed(DetectLeftEye(points)) || IsEyeClosed(DetectRightEye(points))) && !previousBlinkFrame)
+                {
+                    previousBlinkFrame = true;
+                    var ray = new Ray(playerCamera.transform.position, playerCamera.transform.forward);
+                    if (Physics.Raycast(ray, out var hit))
+                    {
+                        Teleport(hit.point);
+                    }
+                }
+                else
+                previousBlinkFrame = false;
+            }
+        }
+
+        // EDITOR ONLY: Allows Telporting the Player
+#if UNITY_EDITOR
+        if (Keyboard.current.tKey.wasPressedThisFrame)
+        {
+            var ray = new Ray(playerCamera.transform.position, playerCamera.transform.forward);
+            if(Physics.Raycast(ray, out var hit))
+            {
+                Teleport(hit.point);
+            }
+        }
+#endif
+
+    }
+
+    public IEnumerator ChargeBlink()
+    {
+        yield return new WaitForSeconds(.5f);
+
+        while (BlinkCharge < _numberOfBlinks * 100)
+        {
+            BlinkCharge += (int)((_numberOfBlinks * 100) / (_blinkChargeDuration*10));
+            yield return new WaitForSeconds(.1f);
+        }
+
+        Regen = null;
+    }
+
+    public void Teleport(Vector3 position, bool killVelocity = true)
+    {
+        playerCharacter.SetPosition(position, killVelocity);
+    }
+
+    public static List<Vector2> DetectLeftEye(List<Vector2> points)
+    {
+        //Points for the left eye are 37 to 42
+        List<Vector2> eye = new List<Vector2>();
+        for (int i = 36; i < 42; i++)
+            eye.Add(points[i]);
+        return eye;
+
+    }
+
+    public static List<Vector2> DetectRightEye(List<Vector2> points)
+    {
+        //Points for the left eye are 43 to 48
+        List<Vector2> eye = new List<Vector2>();
+        for (int i = 42; i < 48; i++)
+            eye.Add(points[i]);
+        return eye;
+
+    }
+
+    //Uses points given by the face detection to calculate when the eye is closed
+    public float CalculateEAR(List<Vector2> eye)
+    {
+        float y1 = Vector3.Distance(eye[1], eye[5]);
+        float y2 = Vector3.Distance(eye[2], eye[4]);
+
+        float x1 = Vector3.Distance(eye[0], eye[3]);
+
+        float EAR = (y1 + y2) / x1;
+
+        return EAR;
+    }
+
+    public bool IsEyeClosed(List<Vector2> eye)
+    {
+        if (CalculateEAR(eye) <= 0.2) return true;
+        return false;
+    }
+
+
+    // All the gross webcam code
     private void Run()
     {
         if (string.IsNullOrEmpty(dlibShapePredictorFilePath))
@@ -358,132 +449,6 @@ public class Player : MonoBehaviour
         {
             texture = new Texture2D(webCamTexture.width, webCamTexture.height, TextureFormat.RGBA32, false);
         }
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        var deltaTime = Time.deltaTime;
-
-        // Get Camera Input and Update its rotation and position.
-        var cameraInput = new CameraInput{ Look = InputManager.Instance.Look };
-        playerCamera.UpdateRotation(cameraInput);
-        playerCamera.UpdatePosition(playerCharacter.GetCameraTarget());
-
-        // Get Character Input and Update it
-        var characterInput = new CharacterInput
-        {
-            Rotation = playerCamera.transform.rotation,
-            Move = InputManager.Instance.Move,
-            Jump = InputManager.Instance.Jump,
-            JumpHeld = InputManager.Instance.JumpHeld,
-            Crouch = InputManager.Instance.Crouch,
-            CrouchHeld = InputManager.Instance.CrouchHeld,
-            crouchToggleable = crouchToggleable, 
-            Blink = InputManager.Instance.Blink,
-            BlinkHeld = InputManager.Instance.BlinkHeld,
-            BlinkReleased = InputManager.Instance.BlinkReleased
-        };
-        playerCharacter.UpdateInput(characterInput);
-        playerCharacter.UpdateBody(deltaTime);
-        playerCharacter.BlinkTeleport(this, playerCamera);
-
-        // Blink
-        Color32[] colors = GetColors();
-
-        if (colors != null)
-        {
-            faceLandmarkDetector.SetImage<Color32>(colors, texture.width, texture.height, 4, true);
-
-            List<UnityEngine.Rect> detectResult = faceLandmarkDetector.Detect();
-
-            if (detectResult.Count > 0)
-            {
-                List<Vector2> points = faceLandmarkDetector.DetectLandmark(detectResult[0]);
-
-                if((IsEyeClosed(DetectLeftEye(points)) || IsEyeClosed(DetectRightEye(points))) && !previousBlinkFrame)
-                {
-                    previousBlinkFrame = true;
-                    var ray = new Ray(playerCamera.transform.position, playerCamera.transform.forward);
-                    if (Physics.Raycast(ray, out var hit))
-                    {
-                        Teleport(hit.point);
-                    }
-                }
-                else
-                previousBlinkFrame = false;
-            }
-        }
-
-        // EDITOR ONLY: Allows Telporting the Player
-#if UNITY_EDITOR
-        if (Keyboard.current.tKey.wasPressedThisFrame)
-        {
-            var ray = new Ray(playerCamera.transform.position, playerCamera.transform.forward);
-            if(Physics.Raycast(ray, out var hit))
-            {
-                Teleport(hit.point);
-            }
-        }
-#endif
-
-    }
-
-    public IEnumerator ChargeBlink()
-    {
-        yield return new WaitForSeconds(.5f);
-
-        while (BlinkCharge < _numberOfBlinks * 100)
-        {
-            BlinkCharge += (int)((_numberOfBlinks * 100) / (_blinkChargeDuration*10));
-            yield return new WaitForSeconds(.1f);
-        }
-
-        Regen = null;
-    }
-
-    public void Teleport(Vector3 position, bool killVelocity = true)
-    {
-        playerCharacter.SetPosition(position, killVelocity);
-    }
-
-    public static List<Vector2> DetectLeftEye(List<Vector2> points)
-    {
-        //Points for the left eye are 37 to 42
-        List<Vector2> eye = new List<Vector2>();
-        for (int i = 36; i < 42; i++)
-            eye.Add(points[i]);
-        return eye;
-
-    }
-
-    public static List<Vector2> DetectRightEye(List<Vector2> points)
-    {
-        //Points for the left eye are 43 to 48
-        List<Vector2> eye = new List<Vector2>();
-        for (int i = 42; i < 48; i++)
-            eye.Add(points[i]);
-        return eye;
-
-    }
-
-    //Uses points given by the face detection to calculate when the eye is closed
-    public float CalculateEAR(List<Vector2> eye)
-    {
-        float y1 = Vector3.Distance(eye[1], eye[5]);
-        float y2 = Vector3.Distance(eye[2], eye[4]);
-
-        float x1 = Vector3.Distance(eye[0], eye[3]);
-
-        float EAR = (y1 + y2) / x1;
-
-        return EAR;
-    }
-
-    public bool IsEyeClosed(List<Vector2> eye)
-    {
-        if (CalculateEAR(eye) <= 0.2) return true;
-        return false;
     }
 
     /// <summary>
