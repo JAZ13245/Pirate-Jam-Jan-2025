@@ -54,6 +54,8 @@ public class PlayerCharacter : MonoBehaviour, ICharacterController
     [SerializeField] private float slideStartSpeed = 25f;
     [SerializeField] private float slideEndSpeed = 15f;
     [SerializeField] private float slideFriction = 0.8f;
+    [SerializeField] private float slideSteerAcceleration = 5f;
+    [SerializeField] private float slideGravity = -90f;
 
     [Header("Components")]
     [SerializeField] private Transform ceilingCheck;
@@ -212,6 +214,23 @@ public class PlayerCharacter : MonoBehaviour, ICharacterController
                 // Friction
                 currentVelocity -= currentVelocity * (slideFriction * deltaTime);
 
+                // Slope
+                var force = Vector3.ProjectOnPlane
+                (
+                    vector: -motor.CharacterUp,
+                    planeNormal: motor.GroundingStatus.GroundNormal
+                ) * slideGravity;
+                currentVelocity -= force * deltaTime;
+
+                // Steering
+                // Target Velocity is the Player's movement direction, at the current speed
+                var currentSpeed = currentVelocity.magnitude;
+                var targetVelocity = groundedMovement * currentSpeed;
+                var steerForce = (targetVelocity - currentVelocity) * slideSteerAcceleration * deltaTime;
+                // Add Steer Force, but clamp speed so the slide speed doesn't increase due to direct movement input
+                currentVelocity += steerForce;
+                currentVelocity = Vector3.ClampMagnitude(currentVelocity, currentSpeed);
+
                 // Stop
                 if (currentVelocity.magnitude < slideEndSpeed)
                 {
@@ -238,16 +257,53 @@ public class PlayerCharacter : MonoBehaviour, ICharacterController
                 );
 
                 // Calculate Movement Force
+                // Will be changed depending on current velocity
                 var movementForce = planarMovement * airAcceleration * deltaTime;
 
-                // Add it to the current planar velocity for a target velocity
-                var targetPlanarVelocity = currentPlanarVelocity + movementForce;
+                // If moving slower than the max air speed, treat movement force as a simple steering force.
+                if(currentPlanarVelocity.magnitude < airSpeed)
+                {
+                    // Add it to the current planar velocity for a target velocity
+                    var targetPlanarVelocity = currentPlanarVelocity + movementForce;
 
-                // Limit Target Velocity to Air Speed
-                targetPlanarVelocity = Vector3.ClampMagnitude(targetPlanarVelocity, airSpeed);
+                    // Limit Target Velocity to Air Speed
+                    targetPlanarVelocity = Vector3.ClampMagnitude(targetPlanarVelocity, airSpeed);
 
-                // Steer Towards Current Velocity
-                currentVelocity += targetPlanarVelocity - currentPlanarVelocity;
+                    // Steer Towards Target Velocity
+                    movementForce = targetPlanarVelocity - currentPlanarVelocity;
+                }
+                // Otherwise, nerf the movement force when it is in the direction of the current planar velocity
+                else if(Vector3.Dot(currentPlanarVelocity, movementForce) > 0f)
+                {
+                    // Project movement force onto the plane whose normal is the current planar velocity
+                    var constrainedMovementForce = Vector3.ProjectOnPlane
+                    (
+                        vector: movementForce,
+                        planeNormal: currentPlanarVelocity.normalized
+                    );
+
+                    movementForce = constrainedMovementForce;
+                }
+
+                // Prevent Air-Climbing Steep Slopes
+                if (motor.GroundingStatus.FoundAnyGround)
+                {
+                    // If moving in the same direction as the resultant velocity
+                    if(Vector3.Dot(movementForce, currentVelocity + movementForce,) > 0f)
+                    {
+                        // Calculate obstruction normal
+                        var obstructionNormal = Vector3.Cross
+                        (
+                            motor.CharacterUp,
+                            motor.GroundingStatus.GroundNormal
+                        ).normalized;
+
+                        // Project Movement force onto obstruction plane
+                        movementForce = Vector3.ProjectOnPlane(movementForce, obstructionNormal);
+                    }
+                }
+
+                currentVelocity += movementForce;
             }
             // Gravity
             var effectiveGravity = gravity;

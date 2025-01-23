@@ -2165,6 +2165,10 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4338589318534406155, guid: b0422a5510d08354d922603e3034d2f6, type: 3}
+      propertyPath: slideStartSpeed
+      value: 30
+      objectReference: {fileID: 0}
+    - target: {fileID: 4338589318534406155, guid: b0422a5510d08354d922603e3034d2f6, type: 3}
       propertyPath: testBlinkEffect
       value: 
       objectReference: {fileID: 50130789}
@@ -2178,7 +2182,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4338589318534406155, guid: b0422a5510d08354d922603e3034d2f6, type: 3}
       propertyPath: crouchCameraTargetHeight
-      value: 0.1
+      value: 0.15
       objectReference: {fileID: 0}
     - target: {fileID: 4720221620894803009, guid: b0422a5510d08354d922603e3034d2f6, type: 3}
       propertyPath: m_LocalPosition.y
