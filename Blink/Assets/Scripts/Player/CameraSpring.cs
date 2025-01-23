@@ -7,8 +7,8 @@ public class CameraSpring : MonoBehaviour
     [SerializeField] private float frequency = 18f;
     [SerializeField] private float angularDisplacement = 2f;
     [SerializeField] private float linearDisplacement = 0.05f;
-    private Vector2 _springPosition;
-    private Vector2 _springVelocity;
+    private Vector3 _springPosition;
+    private Vector3 _springVelocity;
 
     public void Intialize()
     {
@@ -16,21 +16,19 @@ public class CameraSpring : MonoBehaviour
         _springVelocity = Vector3.zero;
     }
     
-    public void UpdateSpring(float deltaTime)
+    public void UpdateSpring(float deltaTime, Vector3 up)
     {
         Spring(ref _springPosition, ref _springVelocity, transform.position, halfLife, frequency, deltaTime);
-    }
 
-    void OnDrawGizmos()
-    {
-        Gizmos.color = Color.green;
-        Gizmos.DrawLine(transform.position, _springPosition);
-        Gizmos.DrawSphere(_springPosition, 0.01f);
+        var localSpringPosition = _springPosition - transform.position;
+        var springHeight = Vector3.Dot(localSpringPosition, up);
+
+        transform.localEulerAngles = new Vector3(-springHeight * angularDisplacement, 0f, 0f);
     }
     
 
     // Source: http://allenchou.net/2015/04/game-math-precise-control-over-numeric-springing/
-    public void Spring(ref Vector2 current, ref Vector2 velocity, Vector2 target, float dampingRatio, float angularFrequency, float timeStep)
+    public void Spring(ref Vector3 current, ref Vector3 velocity, Vector2 target, float dampingRatio, float angularFrequency, float timeStep)
     {
         dampingRatio = -Mathf.Log(0.5f) / (frequency * halfLife);
         float f = 1.0f + 2.0f * timeStep * dampingRatio * angularFrequency;
@@ -38,8 +36,15 @@ public class CameraSpring : MonoBehaviour
         float hoo = timeStep * oo;
         float hhoo = timeStep * hoo;
         float detInv = 1.0f / (f + hhoo);
-        var detX = f * current + timeStep * velocity + hhoo * target;
-        var detV = velocity + hoo * (target - current);
+
+        // Convert Vector2 target to Vector3
+        Vector3 target3D = new Vector3(target.x, target.y, 0);
+
+        // Calculate detX and detV
+        var detX = f * current + timeStep * velocity + hhoo * target3D;
+        var detV = velocity + hoo * (target3D - current);
+
+        // Update current and velocity
         current = detX * detInv;
         velocity = detV * detInv;
     }

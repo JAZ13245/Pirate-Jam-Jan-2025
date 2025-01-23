@@ -85,7 +85,9 @@ public class Player : MonoBehaviour
 
     private void LateUpdate() {
         var deltaTime = Time.deltaTime;;
-        cameraSpring.UpdateSpring(deltaTime);
+        var cameraTarget = playerCharacter.GetCameraTarget();
+        
+        cameraSpring.UpdateSpring(deltaTime, cameraTarget.up);
     }
 
     public IEnumerator ChargeBlink()
