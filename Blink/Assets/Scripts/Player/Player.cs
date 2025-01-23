@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
+using System.Collections;
 
 public class Player : MonoBehaviour
 {
@@ -8,6 +9,26 @@ public class Player : MonoBehaviour
     [Header("Components")]
     [SerializeField] private PlayerCharacter playerCharacter;
     [SerializeField] private PlayerCamera playerCamera;
+
+    [SerializeField] private int _numberOfBlinks = 2;
+    public int NumberOfBlinks { get { return _numberOfBlinks; } }
+    
+    private int blinkCharge = 200;
+    public int BlinkCharge { 
+        get { return blinkCharge; } 
+        set {
+            if (blinkCharge == value) return;
+            blinkCharge = value;
+            if (OnVariableChange != null)
+                OnVariableChange(blinkCharge);
+        }
+    }
+    public delegate void OnVariableChangeDelegate(int newVal);
+    public event OnVariableChangeDelegate OnVariableChange;
+
+    [SerializeField] private float _blinkChargeDuration = 3f;
+
+    public Coroutine Regen = null;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -44,7 +65,7 @@ public class Player : MonoBehaviour
         };
         playerCharacter.UpdateInput(characterInput);
         playerCharacter.UpdateBody(deltaTime);
-        playerCharacter.BlinkTeleport(playerCamera);
+        playerCharacter.BlinkTeleport(this, playerCamera);
 
         // EDITOR ONLY: Allows Telporting the Player
         #if UNITY_EDITOR
@@ -57,6 +78,19 @@ public class Player : MonoBehaviour
             }
         }
         #endif
+    }
+
+    public IEnumerator ChargeBlink()
+    {
+        yield return new WaitForSeconds(.5f);
+
+        while (BlinkCharge < _numberOfBlinks * 100)
+        {
+            BlinkCharge += (int)((_numberOfBlinks * 100) / (_blinkChargeDuration*10));
+            yield return new WaitForSeconds(.1f);
+        }
+
+        Regen = null;
     }
 
     public void Teleport(Vector3 position, bool killVelocity = true)

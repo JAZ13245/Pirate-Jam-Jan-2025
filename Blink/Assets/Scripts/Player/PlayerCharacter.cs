@@ -224,8 +224,10 @@ public class PlayerCharacter : MonoBehaviour, ICharacterController
         }
     }
 
-    public void BlinkTeleport(PlayerCamera cam)
+    public void BlinkTeleport(Player player, PlayerCamera cam)
     {
+        if (player.BlinkCharge < 100) { _currentBlinkTime = 0; return; }
+
         if (_requestedBlinkHeld)
         {
             _currentBlinkTime += Time.deltaTime;
@@ -259,6 +261,11 @@ public class PlayerCharacter : MonoBehaviour, ICharacterController
             SetPosition(cam.transform.position + cam.transform.forward * blinkDistance);
 
             _currentBlinkTime = 0;
+
+            player.BlinkCharge -= 100;
+
+            if(player.Regen != null) { StopCoroutine(player.Regen); }
+            player.Regen = StartCoroutine(player.ChargeBlink());
 
             //Test Blinking
             cam.transform.GetChild(1).GetChild(0).gameObject.SetActive(false);
