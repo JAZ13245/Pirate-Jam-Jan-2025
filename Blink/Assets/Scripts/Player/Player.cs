@@ -10,6 +10,7 @@ using DlibFaceLandmarkDetector.UnityUtils;
 using System;
 using DlibFaceLandmarkDetectorExample;
 using UnityEngine.UI;
+using static Unity.Collections.AllocatorManager;
 
 public class Player : MonoBehaviour
 {
@@ -43,6 +44,10 @@ public class Player : MonoBehaviour
 
     // Blink Detection Variables
     int blinkAmount = 0;
+
+    bool blink = false;
+    bool blinkHeld = false;
+    bool blinkRelased = false;
    
     /// Set the name of the device to use.
     [SerializeField, TooltipAttribute("Set the name of the device to use.")]
@@ -140,24 +145,6 @@ public class Player : MonoBehaviour
         playerCamera.UpdateRotation(cameraInput);
         playerCamera.UpdatePosition(playerCharacter.GetCameraTarget());
 
-        // Get Character Input and Update it
-        var characterInput = new CharacterInput
-        {
-            Rotation = playerCamera.transform.rotation,
-            Move = InputManager.Instance.Move,
-            Jump = InputManager.Instance.Jump,
-            JumpHeld = InputManager.Instance.JumpHeld,
-            Crouch = InputManager.Instance.Crouch,
-            CrouchHeld = InputManager.Instance.CrouchHeld,
-            crouchToggleable = crouchToggleable, 
-            Blink = InputManager.Instance.Blink,
-            BlinkHeld = InputManager.Instance.BlinkHeld,
-            BlinkReleased = InputManager.Instance.BlinkReleased
-        };
-        playerCharacter.UpdateInput(characterInput);
-        playerCharacter.UpdateBody(deltaTime);
-        playerCharacter.BlinkTeleport(this, playerCamera);
-
         // Blink
         Color32[] colors = GetColors();
 
@@ -171,17 +158,46 @@ public class Player : MonoBehaviour
             {
                 List<Vector2> points = faceLandmarkDetector.DetectLandmark(detectResult[0]);
 
-                if((IsEyeClosed(DetectLeftEye(points)) || IsEyeClosed(DetectRightEye(points))))
+                if (IsEyeClosed(DetectLeftEye(points)) || IsEyeClosed(DetectRightEye(points)))
                 {
-                    var ray = new Ray(playerCamera.transform.position, playerCamera.transform.forward);
-                    if (Physics.Raycast(ray, out var hit))
+                    if (!blink)
+                        blink = true;
+                    else
                     {
-                        Teleport(hit.point);
+                        blink = false;
+                        blinkHeld = true;
                     }
                     blinkAmount++;
                 }
+                else if (blinkHeld)
+                {
+                    blinkHeld = false;
+                    blinkRelased = true;
+                }
+                else
+                {
+                    blinkRelased = false;
+                }
             }
         }
+
+        // Get Character Input and Update it
+        var characterInput = new CharacterInput
+        {
+            Rotation = playerCamera.transform.rotation,
+            Move = InputManager.Instance.Move,
+            Jump = InputManager.Instance.Jump,
+            JumpHeld = InputManager.Instance.JumpHeld,
+            Crouch = InputManager.Instance.Crouch,
+            CrouchHeld = InputManager.Instance.CrouchHeld,
+            crouchToggleable = crouchToggleable, 
+            Blink = blink,
+            BlinkHeld = blinkHeld,
+            BlinkReleased = blinkRelased
+        };
+        playerCharacter.UpdateInput(characterInput);
+        playerCharacter.UpdateBody(deltaTime);
+        playerCharacter.BlinkTeleport(this, playerCamera);
 
         // EDITOR ONLY: Allows Telporting the Player
 #if UNITY_EDITOR
@@ -194,7 +210,7 @@ public class Player : MonoBehaviour
             }
         }
 
-        Debug.Log("blink amount: " + blinkAmount);
+        //Debug.Log("blink amount: " + blinkAmount);
 #endif
 
     }
