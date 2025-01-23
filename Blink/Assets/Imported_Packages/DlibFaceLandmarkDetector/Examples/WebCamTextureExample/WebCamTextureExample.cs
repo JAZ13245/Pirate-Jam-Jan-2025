@@ -499,6 +499,7 @@ namespace DlibFaceLandmarkDetectorExample
 
                         //draw landmark points
                         faceLandmarkDetector.DrawDetectLandmarkResult<Color32>(colors, texture.width, texture.height, 4, true, 0, 255, 0, 255);
+                        Debug.Log(texture.width);
                     }
 
                     //draw face rect
