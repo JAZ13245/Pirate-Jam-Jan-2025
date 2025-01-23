@@ -1356,6 +1356,18 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
+    - target: {fileID: 4338589318534406155, guid: b0422a5510d08354d922603e3034d2f6, type: 3}
+      propertyPath: standCameraTargetHeight
+      value: 0.25
+      objectReference: {fileID: 0}
+    - target: {fileID: 4504212382219420356, guid: b0422a5510d08354d922603e3034d2f6, type: 3}
+      propertyPath: walkStrength
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4504212382219420356, guid: b0422a5510d08354d922603e3034d2f6, type: 3}
+      propertyPath: slideStrength
+      value: 1.75
+      objectReference: {fileID: 0}
     - target: {fileID: 8151788517916251948, guid: b0422a5510d08354d922603e3034d2f6, type: 3}
       propertyPath: m_LocalPosition.x
       value: 62.6

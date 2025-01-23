@@ -16,7 +16,9 @@ public class Player : MonoBehaviour
     [Header("Components")]
     [SerializeField] private PlayerCharacter playerCharacter;
     [SerializeField] private PlayerCamera playerCamera;
+    [Space]
     [SerializeField] private CameraSpring cameraSpring;
+    [SerializeField] private CameraLean cameraLean;
 
     [SerializeField] private int _numberOfBlinks = 2;
 
@@ -55,9 +57,11 @@ public class Player : MonoBehaviour
 
         Cursor.lockState = CursorLockMode.Locked;
 
-        playerCharacter.Intialize();
-        playerCamera.Intialize(playerCharacter.GetCameraTarget());
-        cameraSpring.Intialize();
+        playerCharacter.Initialize();
+        playerCamera.Initialize(playerCharacter.GetCameraTarget());
+
+        cameraSpring.Initialize();
+        cameraLean.Initialize();
     }
 
     // Update is called once per frame
@@ -129,8 +133,16 @@ public class Player : MonoBehaviour
     private void LateUpdate() {
         var deltaTime = Time.deltaTime;;
         var cameraTarget = playerCharacter.GetCameraTarget();
+        var state = playerCharacter.GetState();
         
         cameraSpring.UpdateSpring(deltaTime, cameraTarget.up);
+        cameraLean.UpdateLean
+        (
+            deltaTime, 
+            state.Stance is Stance.Slide, 
+            state.Acceleration,
+            cameraTarget.up
+        );
     }
 
     public IEnumerator ChargeBlink()

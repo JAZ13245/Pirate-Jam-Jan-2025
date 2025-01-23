@@ -10,7 +10,7 @@ public class CameraSpring : MonoBehaviour
     private Vector3 _springPosition;
     private Vector3 _springVelocity;
 
-    public void Intialize()
+    public void Initialize()
     {
         _springPosition = transform.position;
         _springVelocity = Vector3.zero;

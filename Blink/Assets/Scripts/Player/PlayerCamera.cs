@@ -12,7 +12,7 @@ public class PlayerCamera : MonoBehaviour
     private Vector3 _eulerAngels;
 
     // Sets Up Player Camera
-    public void Intialize(Transform target)
+    public void Initialize(Transform target)
     {
         transform.position = target.position;
         transform.rotation = target.rotation;

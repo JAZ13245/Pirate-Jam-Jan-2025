@@ -633,6 +633,7 @@ MonoBehaviour:
   playerCharacter: {fileID: 4338589318534406155}
   playerCamera: {fileID: 3787559548145609807}
   cameraSpring: {fileID: 5184728431748360982}
+  cameraLean: {fileID: 0}
   _numberOfBlinks: 2
   _blinkChargeDuration: 3
 --- !u!1 &2354225131267812333
@@ -1160,6 +1161,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0c910ca35b6ba8e41b9a02e10b2351be, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  halfLife: 0.075
+  frequency: 18
+  angularDisplacement: 2
+  linearDisplacement: 0.05
 --- !u!1 &5895268293728354145
 GameObject:
   m_ObjectHideFlags: 0
