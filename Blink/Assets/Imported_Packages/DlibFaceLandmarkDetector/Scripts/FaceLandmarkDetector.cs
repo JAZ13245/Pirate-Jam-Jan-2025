@@ -318,6 +318,7 @@ namespace DlibFaceLandmarkDetector
         /// <returns>A list of <see cref="Rect"/> representing the detected objects.</returns>
         public List<Rect> Detect()
         {
+            //Debug.Log("Detect called");
             return Detect(0.0);
         }
 
@@ -616,44 +617,6 @@ namespace DlibFaceLandmarkDetector
             }
 
             return points;
-        }
-
-        public List<Vector2> DetectLeftEye(List<Vector2> points)
-        {
-            //Points for the left eye are 37 to 42
-            List<Vector2> eye = new List<Vector2>();
-            for(int i = 36; i < 42;  i++)
-                eye.Add(points[i]);
-            return eye;
-
-        }
-
-        public List<Vector2> DetectRightEye(List<Vector2> points)
-        {
-            //Points for the left eye are 43 to 48
-            List<Vector2> eye = new List<Vector2>();
-            for (int i = 42; i < 48; i++)
-                eye.Add(points[i]);
-            return eye;
-
-        }
-
-        public float CalculateEAR(List<Vector2> eye)
-        {
-            float y1 = Vector3.Distance(eye[1], eye[5]);
-            float y2 = Vector3.Distance(eye[2], eye[4]);
-
-            float x1 = Vector3.Distance(eye[0], eye[3]);
-
-            float EAR = (y1 + y2) / x1;
-
-            return EAR;
-        }
-
-        public bool IsEyeClosed(List<Vector2> eye)
-        {
-            if(CalculateEAR(eye) <= 0.2) return true;
-            return false;
         }
 
         /// <summary>
