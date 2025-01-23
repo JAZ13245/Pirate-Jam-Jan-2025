@@ -9,6 +9,7 @@ public class Player : MonoBehaviour
     [Header("Components")]
     [SerializeField] private PlayerCharacter playerCharacter;
     [SerializeField] private PlayerCamera playerCamera;
+    [SerializeField] private CameraSpring cameraSpring;
 
     [SerializeField] private int _numberOfBlinks = 2;
     public int NumberOfBlinks { get { return _numberOfBlinks; } }
@@ -37,6 +38,8 @@ public class Player : MonoBehaviour
 
         playerCharacter.Intialize();
         playerCamera.Intialize(playerCharacter.GetCameraTarget());
+
+        cameraSpring.Intialize();
     }
 
     // Update is called once per frame
@@ -78,6 +81,11 @@ public class Player : MonoBehaviour
             }
         }
         #endif
+    }
+
+    private void LateUpdate() {
+        var deltaTime = Time.deltaTime;;
+        cameraSpring.UpdateSpring(deltaTime);
     }
 
     public IEnumerator ChargeBlink()

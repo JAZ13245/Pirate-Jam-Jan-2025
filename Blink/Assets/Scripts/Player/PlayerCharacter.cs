@@ -406,8 +406,6 @@ public class PlayerCharacter : MonoBehaviour, ICharacterController
         }
         else if (_requestedBlinkRelease)
         {
-            //Test Blinking
-            testBlinkEffect.SetActive(false);
 
             RaycastHit hit;
             float blinkDistance = baseBlinkDistance;
@@ -415,7 +413,12 @@ public class PlayerCharacter : MonoBehaviour, ICharacterController
             {
                 if (Physics.Raycast(cam.transform.position, cam.transform.forward, out hit, baseBlinkDistance))
                 {
-                    if (hit.distance < 2) { _currentBlinkTime = 0; return; }
+                    if (hit.distance < 2)
+                    { 
+                        _currentBlinkTime = 0;
+                        testBlinkEffect.SetActive(false);
+                        return; 
+                    }
                     blinkDistance = hit.distance - 1;
                 }
             }
@@ -425,12 +428,17 @@ public class PlayerCharacter : MonoBehaviour, ICharacterController
 
                 if (Physics.Raycast(cam.transform.position, cam.transform.forward, out hit, maxBlinkDistance))
                 {
-                    if (hit.distance < 2) { _currentBlinkTime = 0; return; }
+                    if (hit.distance < 2) 
+                    { 
+                        _currentBlinkTime = 0;
+                        testBlinkEffect.SetActive(false);
+                        return; 
+                    }
                     blinkDistance = hit.distance - 1;
                 }
             }
 
-            SetPosition(cam.transform.position + cam.transform.forward * blinkDistance);
+            SetPosition(cam.transform.position + cam.transform.forward * blinkDistance, false);
 
             _currentBlinkTime = 0;
 
@@ -438,6 +446,8 @@ public class PlayerCharacter : MonoBehaviour, ICharacterController
 
             if(player.Regen != null) { StopCoroutine(player.Regen); }
             player.Regen = StartCoroutine(player.ChargeBlink());
+
+            testBlinkEffect.SetActive(false);
         }
     }
 
