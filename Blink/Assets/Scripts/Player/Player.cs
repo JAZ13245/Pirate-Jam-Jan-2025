@@ -71,41 +71,6 @@ public class Player : MonoBehaviour
         playerCamera.UpdatePosition(playerCharacter.GetCameraTarget());
 
         // Blink
-        /*
-        Color32[] colors = GetColors();
-
-        if (colors != null)
-        {
-            faceLandmarkDetector.SetImage<Color32>(colors, texture.width, texture.height, 4, true);
-
-            List<UnityEngine.Rect> detectResult = faceLandmarkDetector.Detect();
-
-            if (detectResult.Count > 0)
-            {
-                List<Vector2> points = faceLandmarkDetector.DetectLandmark(detectResult[0]);
-
-                if (IsEyeClosed(DetectLeftEye(points)) || IsEyeClosed(DetectRightEye(points)))
-                {
-                    if (!blink)
-                        blink = true;
-                    else
-                    {
-                        blink = false;
-                        blinkHeld = true;
-                    }
-                }
-                else if (blinkHeld)
-                {
-                    blinkHeld = false;
-                    blinkRelased = true;
-                }
-                else
-                {
-                    blinkRelased = false;
-                }
-            }
-        }
-        */
 
         List<Vector2> points = gameManager.points;
 
