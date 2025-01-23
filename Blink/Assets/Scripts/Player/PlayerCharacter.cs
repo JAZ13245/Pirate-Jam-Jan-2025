@@ -44,11 +44,12 @@ public class PlayerCharacter : MonoBehaviour, ICharacterController
     [SerializeField] private float crouchHeightResponse = 15f;
     [Range(0, 1f)] [SerializeField] private float standCameraTargetHeight = 0.9f;
     [Range(0, 1f)] [SerializeField] private float crouchCameraTargetHeight = 0.7f;
-    [Header("Blink Setting")]
+    [Header("Blinks Setting")]
     [SerializeField] private float blinkTimeThreshold = 0.5f;
     [SerializeField] private float maxBlinkTime = 3f;
     [SerializeField] private float baseBlinkDistance = 15f;
     [SerializeField] private float maxBlinkDistance = 30f;
+    [SerializeField] private GameObject testBlinkEffect;
     [Header("Sliding Settings")]
     [SerializeField] private float slideStartSpeed = 25f;
 
@@ -240,15 +241,18 @@ public class PlayerCharacter : MonoBehaviour, ICharacterController
     {
         if (player.BlinkCharge < 100) { _currentBlinkTime = 0; return; }
 
-        if (_requestedBlinkHeld)
+        if (_requestedBlinkHeld && !_requestedBlinkRelease)
         {
             _currentBlinkTime += Time.deltaTime;
 
             //Test Blinking
-            cam.transform.GetChild(1).GetChild(0).gameObject.SetActive(true);
+            testBlinkEffect.gameObject.SetActive(true);
         }
         else if (_requestedBlinkRelease)
         {
+            //Test Blinking
+            testBlinkEffect.gameObject.SetActive(false);
+
             RaycastHit hit;
             float blinkDistance = baseBlinkDistance;
             if (_currentBlinkTime < .5f)
@@ -278,9 +282,6 @@ public class PlayerCharacter : MonoBehaviour, ICharacterController
 
             if(player.Regen != null) { StopCoroutine(player.Regen); }
             player.Regen = StartCoroutine(player.ChargeBlink());
-
-            //Test Blinking
-            cam.transform.GetChild(1).GetChild(0).gameObject.SetActive(false);
         }
     }
 
