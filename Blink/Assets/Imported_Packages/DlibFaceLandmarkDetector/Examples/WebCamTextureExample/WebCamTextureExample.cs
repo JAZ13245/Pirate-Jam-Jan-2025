@@ -485,6 +485,7 @@ namespace DlibFaceLandmarkDetectorExample
                 {
 
                     faceLandmarkDetector.SetImage<Color32>(colors, texture.width, texture.height, 4, true);
+                    //faceLandmarkDetector.SetImage(texture);
 
                     //detect face rects
                     List<Rect> detectResult = faceLandmarkDetector.Detect();
