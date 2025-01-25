@@ -13,6 +13,7 @@ public class Player : MonoBehaviour
 {
     [Header("Player Settings")]
     [SerializeField] private bool crouchToggleable;
+    [SerializeField] private bool usingCameraTracking;
     [Header("Components")]
     [SerializeField] private PlayerCharacter playerCharacter;
     [SerializeField] private PlayerCamera playerCamera;
@@ -47,7 +48,7 @@ public class Player : MonoBehaviour
 
     bool blink = false;
     bool blinkHeld = false;
-    bool blinkRelased = false;
+    bool blinkReleased = false;
    
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -91,11 +92,11 @@ public class Player : MonoBehaviour
         else if (blinkHeld)
         {
             blinkHeld = false;
-            blinkRelased = true;
+            blinkReleased = true;
         }
         else
         {
-            blinkRelased = false;
+            blinkReleased = false;
         }
 
         // Get Character Input and Update it
@@ -108,9 +109,9 @@ public class Player : MonoBehaviour
             Crouch = InputManager.Instance.Crouch,
             CrouchHeld = InputManager.Instance.CrouchHeld,
             crouchToggleable = crouchToggleable, 
-            Blink = blink,
-            BlinkHeld = blinkHeld,
-            BlinkReleased = blinkRelased
+            Blink = usingCameraTracking ? blink : InputManager.Instance.Blink,
+            BlinkHeld = usingCameraTracking ? blinkHeld : InputManager.Instance.BlinkHeld,
+            BlinkReleased = usingCameraTracking ? blinkReleased : InputManager.Instance.BlinkReleased
         };
         playerCharacter.UpdateInput(characterInput);
         playerCharacter.UpdateBody(deltaTime);
