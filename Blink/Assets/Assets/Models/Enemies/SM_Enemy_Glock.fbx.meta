@@ -1,9 +1,24 @@
 fileFormatVersion: 2
-guid: 04ad064367ac1d743bbae3c46cc9e79b
+guid: 4b5459d9a967a254c97f0e20de6264e4
 ModelImporter:
   serializedVersion: 22200
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Accessories
+    second: {fileID: 2100000, guid: 6ecb55c6be3a4d549a523167b0bb95b1, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Body
+    second: {fileID: 2100000, guid: 473b8252ed9c826428de961621e936b8, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Glock
+    second: {fileID: 2100000, guid: be6af02c486be52439d8c6b7d2274dbb, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0
