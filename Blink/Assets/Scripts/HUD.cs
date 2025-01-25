@@ -22,8 +22,8 @@ public class HUD : MonoBehaviour
     {
         for (int i = 0; i < player.NumberOfBlinks * 100; i += 100)
         {
-            if (player.BlinkCharge > i + 100) { blinkImages[i / 100].fillAmount = 1; break; }
-            blinkImages[i / 100].fillAmount = (player.BlinkCharge - i) / 100;
+            if (player.BlinkCharge > i + 100) { blinkImages[i / 100].fillAmount = 1; continue; }
+            blinkImages[i / 100].fillAmount = (float)(player.BlinkCharge - i) / 100f;
         }
     }
 }

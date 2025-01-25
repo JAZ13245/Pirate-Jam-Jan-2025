@@ -1,5 +1,6 @@
 using KinematicCharacterController;
 using UnityEngine;
+using System.Collections;
 
 public struct CharacterInput
 {
@@ -53,6 +54,7 @@ public class PlayerCharacter : MonoBehaviour, ICharacterController
     [SerializeField] private float baseBlinkDistance = 15f;
     [SerializeField] private float maxBlinkDistance = 30f;
     [SerializeField] private GameObject testBlinkEffect;
+    [SerializeField] private GameObject blinkHitBox;
     [Header("Sliding Settings")]
     [SerializeField] private float slideStartSpeed = 25f;
     [SerializeField] private float slideEndSpeed = 15f;
@@ -407,6 +409,11 @@ public class PlayerCharacter : MonoBehaviour, ICharacterController
     {
         if (player.BlinkCharge < 100) { _currentBlinkTime = 0; return; }
 
+
+        Vector3 hitBoxSize = blinkHitBox.transform.localScale;
+        hitBoxSize.z = 2;
+        blinkHitBox.transform.localScale = hitBoxSize;
+
         if (_requestedBlinkHeld && !_requestedBlinkRelease)
         {
             _currentBlinkTime += Time.deltaTime;
@@ -447,17 +454,20 @@ public class PlayerCharacter : MonoBehaviour, ICharacterController
                     blinkDistance = hit.distance - 1;
                 }
             }
-
+            hitBoxSize.z = blinkDistance;
+            blinkHitBox.transform.localScale = hitBoxSize;
             SetPosition(cam.transform.position + cam.transform.forward * blinkDistance, false);
-
-            _currentBlinkTime = 0;
+            blinkHitBox.GetComponent<CapsuleCollider>().enabled = true;
 
             player.BlinkCharge -= 100;
 
             if(player.Regen != null) { StopCoroutine(player.Regen); }
             player.Regen = StartCoroutine(player.ChargeBlink());
 
+
+            _currentBlinkTime = 0;
             testBlinkEffect.SetActive(false);
+            StartCoroutine(DeactivateHitBox(blinkHitBox));
         }
     }
 
@@ -559,4 +569,12 @@ public class PlayerCharacter : MonoBehaviour, ICharacterController
         Gizmos.color = Color.yellow;
         Gizmos.DrawWireSphere(ceilingCheck.position, ceilingCheckRadius);
     }
+
+    IEnumerator DeactivateHitBox(GameObject go)
+    {
+        yield return 0;
+
+        go.GetComponent<CapsuleCollider>().enabled = false;
+    }
+    
 }
