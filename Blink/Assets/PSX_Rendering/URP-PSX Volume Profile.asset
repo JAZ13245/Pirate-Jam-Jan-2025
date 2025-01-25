@@ -12,13 +12,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4265a041954897941afec871c608473b, type: 3}
   m_Name: Crt
   m_EditorClassIdentifier: 
-  active: 1
+  active: 0
   scanlinesWeight:
     m_OverrideState: 1
-    m_Value: 1
+    m_Value: 0.1
   noiseWeight:
     m_OverrideState: 1
-    m_Value: 1
+    m_Value: 0.01
   screenBendX:
     m_OverrideState: 1
     m_Value: 3
@@ -27,16 +27,16 @@ MonoBehaviour:
     m_Value: 3
   vignetteAmount:
     m_OverrideState: 1
-    m_Value: 0.98
+    m_Value: 0
   vignetteSize:
     m_OverrideState: 1
-    m_Value: 2.06
+    m_Value: 0
   vignetteRounding:
     m_OverrideState: 1
-    m_Value: 5.26
+    m_Value: 0.1
   vignetteSmoothing:
     m_OverrideState: 1
-    m_Value: 0.2
+    m_Value: 0.1
   scanlinesDensity:
     m_OverrideState: 1
     m_Value: 200
@@ -48,31 +48,31 @@ MonoBehaviour:
     m_Value: 250
   chromaticRed:
     m_OverrideState: 1
-    m_Value: {x: 0.004, y: -0.004}
+    m_Value: {x: 0.002, y: -0.002}
   chromaticGreen:
     m_OverrideState: 1
-    m_Value: {x: -0.004, y: 0.004}
+    m_Value: {x: -0.002, y: 0.002}
   chromaticBlue:
     m_OverrideState: 1
     m_Value: {x: 0, y: 0}
   grilleOpacity:
     m_OverrideState: 1
-    m_Value: 0.4
+    m_Value: 0.2
   grilleCounterOpacity:
     m_OverrideState: 1
-    m_Value: 0.2
+    m_Value: 0.3
   grilleResolution:
     m_OverrideState: 1
-    m_Value: 360
+    m_Value: 305.5
   grilleCounterResolution:
     m_OverrideState: 1
-    m_Value: 540
+    m_Value: 380
   grilleUvRotation:
     m_OverrideState: 1
     m_Value: 90
   grilleBrightness:
     m_OverrideState: 1
-    m_Value: 15
+    m_Value: 100
   grilleUvMidPoint:
     m_OverrideState: 1
     m_Value: 0.5
@@ -94,7 +94,7 @@ MonoBehaviour:
   active: 1
   shadows:
     m_OverrideState: 1
-    m_Value: {x: 0.8951759, y: 0.9023636, z: 1, w: 0}
+    m_Value: {x: 1, y: 1, z: 1, w: 0}
   midtones:
     m_OverrideState: 1
     m_Value: {x: 1, y: 1, z: 1, w: 0}
@@ -128,7 +128,7 @@ MonoBehaviour:
   active: 1
   distance:
     m_OverrideState: 1
-    m_Value: 0
+    m_Value: 0.1
   cropToFit:
     m_OverrideState: 1
     m_Value: 1
@@ -295,10 +295,10 @@ MonoBehaviour:
     m_Value: 512
   heightPixelation:
     m_OverrideState: 1
-    m_Value: 256
+    m_Value: 512
   colorPrecision:
     m_OverrideState: 1
-    m_Value: 4.6
+    m_Value: 100
 --- !u!114 &-1197353251979675065
 MonoBehaviour:
   m_ObjectHideFlags: 3
@@ -339,13 +339,13 @@ MonoBehaviour:
     m_Value: 1
   threshold:
     m_OverrideState: 1
-    m_Value: 0.9
+    m_Value: 1
   intensity:
     m_OverrideState: 1
-    m_Value: 0
+    m_Value: 10
   scatter:
     m_OverrideState: 1
-    m_Value: 0.7
+    m_Value: 0.337
   clamp:
     m_OverrideState: 1
     m_Value: 65472
@@ -380,19 +380,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5ea62842ddb6960488930897ba9ce398, type: 3}
   m_Name: Dithering
   m_EditorClassIdentifier: 
-  active: 1
+  active: 0
   patternIndex:
     m_OverrideState: 1
-    m_Value: 0
+    m_Value: 1
   ditherThreshold:
     m_OverrideState: 1
-    m_Value: 3.53
+    m_Value: 16.61
   ditherStrength:
     m_OverrideState: 1
-    m_Value: 1.37
+    m_Value: 1
   ditherScale:
     m_OverrideState: 1
-    m_Value: 4.67
+    m_Value: 3.43
 --- !u!114 &-380902937034316877
 MonoBehaviour:
   m_ObjectHideFlags: 3
@@ -661,34 +661,34 @@ MonoBehaviour:
   active: 1
   fogDensity:
     m_OverrideState: 1
-    m_Value: 10
+    m_Value: 0.9
   fogDistance:
     m_OverrideState: 1
-    m_Value: 4.7
+    m_Value: 8
   fogColor:
     m_OverrideState: 1
-    m_Value: {r: 0, g: 0, b: 0, a: 0}
+    m_Value: {r: 0.8773585, g: 0, b: 0, a: 0}
   ambientColor:
     m_OverrideState: 1
-    m_Value: {r: 0, g: 0, b: 0, a: 0}
+    m_Value: {r: 0.3962264, g: 0.014615475, b: 0, a: 0}
   fogNear:
     m_OverrideState: 1
-    m_Value: 0
+    m_Value: 14.1
   fogFar:
     m_OverrideState: 1
-    m_Value: 81.3
+    m_Value: 6.3
   fogAltScale:
     m_OverrideState: 1
-    m_Value: 10
+    m_Value: 1.5
   fogThinning:
     m_OverrideState: 1
-    m_Value: 458
+    m_Value: 752
   noiseScale:
     m_OverrideState: 1
-    m_Value: 843
+    m_Value: 626
   noiseStrength:
     m_OverrideState: 1
-    m_Value: 0.029
+    m_Value: 0.03
 --- !u!114 &291781209481029748
 MonoBehaviour:
   m_ObjectHideFlags: 3
