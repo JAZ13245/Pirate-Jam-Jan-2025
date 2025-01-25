@@ -1404,6 +1404,10 @@ PrefabInstance:
       propertyPath: slideStrength
       value: 1.75
       objectReference: {fileID: 0}
+    - target: {fileID: 4841819602135899392, guid: b0422a5510d08354d922603e3034d2f6, type: 3}
+      propertyPath: usingCameraTracking
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7461083226387489963, guid: b0422a5510d08354d922603e3034d2f6, type: 3}
       propertyPath: m_Enabled
       value: 0
