@@ -15,9 +15,9 @@ RenderSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 10
   m_Fog: 1
-  m_FogColor: {r: 1, g: 0, b: 0, a: 1}
+  m_FogColor: {r: 0.9622642, g: 0.9622642, b: 0.9622642, a: 1}
   m_FogMode: 3
-  m_FogDensity: 0.005
+  m_FogDensity: 0.015
   m_LinearFogStart: 0
   m_LinearFogEnd: 300
   m_AmbientSkyColor: {r: 0.212, g: 0.227, b: 0.259, a: 1}
@@ -25,9 +25,9 @@ RenderSettings:
   m_AmbientGroundColor: {r: 0.047, g: 0.043, b: 0.035, a: 1}
   m_AmbientIntensity: 1
   m_AmbientMode: 0
-  m_SubtractiveShadowColor: {r: 0.8490566, g: 0.8490566, b: 0.8490566, a: 1}
-  m_SkyboxMaterial: {fileID: 2100000, guid: f0ec21e3c6620d8499cc02316661d09a, type: 2}
-  m_HaloStrength: 0.5
+  m_SubtractiveShadowColor: {r: 0, g: 0, b: 0, a: 1}
+  m_SkyboxMaterial: {fileID: 2100000, guid: 988954ed6a5511642b6956cd3a5c0e6f, type: 2}
+  m_HaloStrength: 0.641
   m_FlareStrength: 1
   m_FlareFadeSpeed: 3
   m_HaloTexture: {fileID: 0}
@@ -1122,6 +1122,10 @@ PrefabInstance:
       propertyPath: usingCameraTracking
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 5577543384208113245, guid: b0422a5510d08354d922603e3034d2f6, type: 3}
+      propertyPath: m_RenderPostProcessing
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7461083226387489963, guid: b0422a5510d08354d922603e3034d2f6, type: 3}
       propertyPath: m_Enabled
       value: 0
@@ -1338,7 +1342,7 @@ Light:
   serializedVersion: 11
   m_Type: 1
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_Intensity: 1.5
+  m_Intensity: 1
   m_Range: 10
   m_SpotAngle: 30
   m_InnerSpotAngle: 21.80208
@@ -1862,8 +1866,8 @@ MonoBehaviour:
   fogThinning: 752
   noiseScale: 626
   noiseStrength: 0.03
-  fogColor: {r: 1, g: 0, b: 0, a: 0}
-  ambientColor: {r: 1, g: 0.039603963, b: 0, a: 0}
+  fogColor: {r: 1, g: 1, b: 1, a: 0}
+  ambientColor: {r: 1, g: 1, b: 1, a: 0}
 --- !u!4 &1912850475
 Transform:
   m_ObjectHideFlags: 0
