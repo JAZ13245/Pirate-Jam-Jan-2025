@@ -434,6 +434,7 @@ MonoBehaviour:
   baseBlinkDistance: 15
   maxBlinkDistance: 45
   testBlinkEffect: {fileID: 1776485752068148076}
+  blinkHitBox: {fileID: 8431345981147623406}
   slideStartSpeed: 30
   slideEndSpeed: 15
   slideFriction: 0.8
@@ -930,8 +931,9 @@ GameObject:
   m_Component:
   - component: {fileID: 8431345981147623406}
   - component: {fileID: 7461083226387489963}
+  - component: {fileID: 1010851614040840171}
   m_Layer: 0
-  m_Name: HitBox
+  m_Name: BlinkHitBox
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -946,8 +948,8 @@ Transform:
   m_GameObject: {fileID: 4542141666974742566}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1.5}
+  m_LocalPosition: {x: 0, y: 0, z: 1}
+  m_LocalScale: {x: 1, y: 1, z: 2}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 965420100503055320}
@@ -971,10 +973,22 @@ CapsuleCollider:
   m_ProvidesContacts: 0
   m_Enabled: 0
   serializedVersion: 2
-  m_Radius: 0.75
+  m_Radius: 1
   m_Height: 1
   m_Direction: 2
-  m_Center: {x: 0, y: 0, z: 0.5}
+  m_Center: {x: 0, y: 0, z: -0.5}
+--- !u!114 &1010851614040840171
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4542141666974742566}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c1c7ec0e238128247828ebc61b2c4c4b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &4544604851807324548
 GameObject:
   m_ObjectHideFlags: 0
