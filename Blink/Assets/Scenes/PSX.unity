@@ -15,7 +15,7 @@ RenderSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 10
   m_Fog: 1
-  m_FogColor: {r: 0.9622642, g: 0.9622642, b: 0.9622642, a: 1}
+  m_FogColor: {r: 0.38679248, g: 0.38679248, b: 0.38679248, a: 1}
   m_FogMode: 3
   m_FogDensity: 0.015
   m_LinearFogStart: 0
@@ -1090,9 +1090,13 @@ PrefabInstance:
       propertyPath: m_Enabled
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 965420100503055320, guid: b0422a5510d08354d922603e3034d2f6, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 1.04
+      objectReference: {fileID: 0}
     - target: {fileID: 1069626831073893871, guid: b0422a5510d08354d922603e3034d2f6, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1
+      value: 2.039999
       objectReference: {fileID: 0}
     - target: {fileID: 1847380794751731175, guid: b0422a5510d08354d922603e3034d2f6, type: 3}
       propertyPath: m_Name
@@ -1136,7 +1140,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8151788517916251948, guid: b0422a5510d08354d922603e3034d2f6, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1.83
+      value: 16.1
       objectReference: {fileID: 0}
     - target: {fileID: 8151788517916251948, guid: b0422a5510d08354d922603e3034d2f6, type: 3}
       propertyPath: m_LocalPosition.z

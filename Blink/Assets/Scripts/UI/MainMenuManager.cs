@@ -1,11 +1,24 @@
+using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
 public class MainMenuManager : MonoBehaviour
 {
+    [Header("Main Menu Settings")]
     private bool canLerp = false, waitToLerp;
+    [Header("Level Manager Settings")]
+    public LevelData firstLevel;
+    public TextMeshProUGUI levelName;
+    public TextMeshProUGUI levelNumber;
+    public Image levelPreview;
+    private LevelData selectedLevel;
 
     private CanvasGroup from, to;
+
+    private void Start() {
+        LoadLevelInfo(firstLevel);
+    }
 
     private void Update()
     {
@@ -33,5 +46,19 @@ public class MainMenuManager : MonoBehaviour
 
     public void ChangeSceneFromIndex(int sceneIndex) => SceneManager.LoadScene(sceneIndex); 
     public void ChangeSceneFromName(string sceneName) => SceneManager.LoadScene(sceneName); 
+
+    public void LoadLevelInfo(LevelData level)
+    {
+        selectedLevel = level;
+        levelName.text = level.levelName;
+        levelPreview.sprite = level.levelPreview;
+        levelNumber.text = $"{level.levelNumber}";
+    }
+
+    public void LoadSelectedLevel()
+    {
+        SceneManager.LoadScene(selectedLevel.sceneName);
+    }
+
     public void Quit() => Application.Quit();
 }
