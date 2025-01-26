@@ -801,7 +801,7 @@ GameObject:
   - component: {fileID: 4168383092314021468}
   - component: {fileID: 2326897348584610810}
   m_Layer: 5
-  m_Name: Slider
+  m_Name: volumeSlider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -879,7 +879,19 @@ MonoBehaviour:
   m_Value: 0
   m_OnValueChanged:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1123659612539314120}
+        m_TargetAssemblyTypeName: SettingsMenu, Assembly-CSharp
+        m_MethodName: SetVolume
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &2326897348584610810
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2629,6 +2641,7 @@ GameObject:
   - component: {fileID: 8702128366506300184}
   - component: {fileID: 7536161717457812106}
   - component: {fileID: 232185494249971094}
+  - component: {fileID: 1123659612539314120}
   m_Layer: 5
   m_Name: Settings
   m_TagString: Untagged
@@ -2643,7 +2656,7 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8310281459290463044}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -2687,6 +2700,21 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   amount: 6
   speed: 2
+--- !u!114 &1123659612539314120
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8310281459290463044}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e79c42ed276185142941790f8d01e542, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  volumeSlider: {fileID: 4168383092314021468}
+  audioMixer: {fileID: 24100000, guid: 2b4e8fe8d9c8ad74982b3976cc542970, type: 2}
+  volume: 0
 --- !u!1 &8846553333637513123
 GameObject:
   m_ObjectHideFlags: 0
