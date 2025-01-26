@@ -3,8 +3,6 @@ using UnityEngine.SceneManagement;
 
 public class MainMenuManager : MonoBehaviour
 {
-    [SerializeField] private CanvasGroup introMenu;
-
     private bool canLerp = false, waitToLerp;
 
     private CanvasGroup from, to;
@@ -15,10 +13,15 @@ public class MainMenuManager : MonoBehaviour
 
         to.gameObject.SetActive(true); 
         from.alpha -= Time.deltaTime;
-        if(from.alpha <= .2f && waitToLerp || !waitToLerp) to.alpha += Time.deltaTime;
+        if(from.alpha <= .2f && waitToLerp || !waitToLerp)
+        {
+            to.alpha += Time.deltaTime;
+        }
 
-        if (introMenu.alpha == 0) 
-        from.gameObject.SetActive(false);
+        if (from.alpha == 0)
+        {
+            from.gameObject.SetActive(false);
+        }
     }
 
     public void SetFrom(CanvasGroup From) => from = From;
