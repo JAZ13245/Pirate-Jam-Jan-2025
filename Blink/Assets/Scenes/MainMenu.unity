@@ -266,8 +266,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 211.25
-  m_fontSizeBase: 211.25
+  m_fontSize: 190.82
+  m_fontSizeBase: 190.82
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -276,9 +276,9 @@ MonoBehaviour:
   m_HorizontalAlignment: 1
   m_VerticalAlignment: 256
   m_textAlignment: 65535
-  m_characterSpacing: -12.1
-  m_wordSpacing: -48.65
-  m_lineSpacing: -1.8
+  m_characterSpacing: -8.5
+  m_wordSpacing: -24
+  m_lineSpacing: -2
   m_lineSpacingMax: 0
   m_paragraphSpacing: 0
   m_charWidthMaxAdj: 0
@@ -403,8 +403,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 211.25
-  m_fontSizeBase: 211.25
+  m_fontSize: 190.82
+  m_fontSizeBase: 190.82
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -413,9 +413,9 @@ MonoBehaviour:
   m_HorizontalAlignment: 1
   m_VerticalAlignment: 256
   m_textAlignment: 65535
-  m_characterSpacing: -12.1
-  m_wordSpacing: -48.65
-  m_lineSpacing: -1.8
+  m_characterSpacing: -8.5
+  m_wordSpacing: -24
+  m_lineSpacing: -2
   m_lineSpacingMax: 0
   m_paragraphSpacing: 0
   m_charWidthMaxAdj: 0
