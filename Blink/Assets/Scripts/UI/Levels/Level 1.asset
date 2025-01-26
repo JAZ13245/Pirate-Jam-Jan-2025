@@ -15,4 +15,4 @@ MonoBehaviour:
   levelName: Tutorial
   levelNumber: 1
   levelPreview: {fileID: 21300000, guid: 9156f4219de6e0b4b962b3c8b130f1ce, type: 3}
-  sceneName: level 1
+  sceneName: Level 1
