@@ -228,8 +228,8 @@ MonoBehaviour:
   obstructionMask:
     serializedVersion: 2
     m_Bits: 1
-  radius: 0
-  angle: 0
+  radius: 20
+  angle: 130
 --- !u!195 &6684704979986936392
 NavMeshAgent:
   m_ObjectHideFlags: 0

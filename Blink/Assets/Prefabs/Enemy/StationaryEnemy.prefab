@@ -158,10 +158,10 @@ GameObject:
   m_Component:
   - component: {fileID: 5605152572455319983}
   - component: {fileID: 8882985750714728384}
+  - component: {fileID: 7636389039861048910}
   - component: {fileID: 6684704979986936392}
-  - component: {fileID: 6805510144470983509}
   m_Layer: 0
-  m_Name: AggressiveEnemy
+  m_Name: StationaryEnemy
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -208,6 +208,28 @@ CapsuleCollider:
   m_Height: 2
   m_Direction: 1
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &7636389039861048910
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5359581158034492597}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3016a81cd9bd8ee4084abfabe549fd47, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  wander: {fileID: 11400000, guid: f1e3babaabb2eb946980006ae828cd92, type: 2}
+  aggressive: {fileID: 11400000, guid: a343d92f1890c954a88373bf36edf212, type: 2}
+  playerMask:
+    serializedVersion: 2
+    m_Bits: 64
+  obstructionMask:
+    serializedVersion: 2
+    m_Bits: 1
+  radius: 20
+  angle: 130
 --- !u!195 &6684704979986936392
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -230,28 +252,6 @@ NavMeshAgent:
   m_BaseOffset: 0
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
---- !u!114 &6805510144470983509
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5359581158034492597}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3016a81cd9bd8ee4084abfabe549fd47, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  wander: {fileID: 11400000, guid: 7a2a193b0f7af124ca4a12016d5a074b, type: 2}
-  aggressive: {fileID: 11400000, guid: 4f3fbeac96972914e9cc7e7d01dcb9de, type: 2}
-  playerMask:
-    serializedVersion: 2
-    m_Bits: 64
-  obstructionMask:
-    serializedVersion: 2
-    m_Bits: 1
-  radius: 20
-  angle: 130
 --- !u!1 &7816017661406903682
 GameObject:
   m_ObjectHideFlags: 0
