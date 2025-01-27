@@ -13,6 +13,12 @@ public class Enemy : MonoBehaviour
     public AggresiveState aggresiveState { get; set; }
     public DeathState deathState { get; set; }
 
+    [SerializeField] private BaseWander wander;
+    [SerializeField] private BaseAggresive aggressive;
+
+    public BaseWander BaseWanderInstance { get; set; }
+    public BaseAggresive BaseAggresiveInstance { get; set; }
+
     // Player detection
     [SerializeField] private LayerMask playerMask;
     [SerializeField] private LayerMask obstructionMask;
@@ -27,6 +33,9 @@ public class Enemy : MonoBehaviour
         player = GameObject.FindGameObjectWithTag("Player");
         agent = GetComponent<NavMeshAgent>();
 
+        BaseWanderInstance = Instantiate(wander);
+        BaseAggresiveInstance = Instantiate(aggressive);
+
         stateMachine = new StateMachine();
 
         wanderingState = new WanderingState(this, stateMachine);
@@ -37,6 +46,9 @@ public class Enemy : MonoBehaviour
 
     private void Start()
     {
+        BaseWanderInstance.Initialize(gameObject, this);
+        BaseAggresiveInstance.Initialize(gameObject, this);
+
         // Starts the state machine on the wandering state
         stateMachine.Initialize(wanderingState);
 
@@ -45,9 +57,6 @@ public class Enemy : MonoBehaviour
 
     private void Update()
     {
-        if(canSeePlayer)
-            stateMachine.ChangeState(aggresiveState);
-
         stateMachine.currentState.Update();
     }
 
@@ -66,12 +75,12 @@ public class Enemy : MonoBehaviour
     {
         Collider[] rangeChecks = Physics.OverlapSphere(transform.position, radius, playerMask);
 
-        if (rangeChecks.Length != 0) 
-        { 
+        if (rangeChecks.Length != 0)
+        {
             Transform target = rangeChecks[0].transform;
             Vector3 directionToTarget = (target.position - transform.position).normalized;
 
-            if(Vector3.Angle(transform.forward, directionToTarget) < angle / 2)
+            if (Vector3.Angle(transform.forward, directionToTarget) < angle / 2)
             {
                 float distanceToTarget = Vector3.Distance(transform.position, target.position);
 
@@ -83,6 +92,8 @@ public class Enemy : MonoBehaviour
             else
                 canSeePlayer = false;
         }
+        else if (canSeePlayer)
+            canSeePlayer = false;
 
     }
 }

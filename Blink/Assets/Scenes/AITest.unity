@@ -831,6 +831,14 @@ PrefabInstance:
       propertyPath: radius
       value: 20
       objectReference: {fileID: 0}
+    - target: {fileID: 6805510144470983509, guid: 8453e01d79c169846b8d646839269a94, type: 3}
+      propertyPath: wander
+      value: 
+      objectReference: {fileID: 11400000, guid: 7a2a193b0f7af124ca4a12016d5a074b, type: 2}
+    - target: {fileID: 6805510144470983509, guid: 8453e01d79c169846b8d646839269a94, type: 3}
+      propertyPath: aggressive
+      value: 
+      objectReference: {fileID: 11400000, guid: 4f3fbeac96972914e9cc7e7d01dcb9de, type: 2}
     - target: {fileID: 8882985750714728384, guid: 8453e01d79c169846b8d646839269a94, type: 3}
       propertyPath: m_Enabled
       value: 1
