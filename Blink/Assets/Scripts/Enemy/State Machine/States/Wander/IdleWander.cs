@@ -27,7 +27,7 @@ public class IdleWander : BaseWander
     public override void CallUpdate()
     {
         base.CallUpdate();
-        Debug.Log(enemy.transform.rotation);
+        //Debug.Log(enemy.transform.rotation);
     }
 
     public override void Initialize(GameObject gameObject, Enemy enemy)

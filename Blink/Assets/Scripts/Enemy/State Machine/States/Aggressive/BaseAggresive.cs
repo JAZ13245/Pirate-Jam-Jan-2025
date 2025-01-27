@@ -1,5 +1,7 @@
 using UnityEngine;
 using UnityEngine.AI;
+
+[CreateAssetMenu(fileName = "Aggressive-Aggressive Base", menuName = "Enemy Logic/Aggressive Logic/Aggressive Base")]
 public class BaseAggresive : ScriptableObject
 {
     protected Enemy enemy;
