@@ -1,15 +1,26 @@
+using System.Collections;
 using Unity.AI.Navigation;
 using UnityEngine;
 using UnityEngine.AI;
 
 public class Enemy : MonoBehaviour
 {
+    public NavMeshAgent agent { get; private set; }
+
     public StateMachine stateMachine { get; set; }
     public WanderingState wanderingState { get; set; }
     public AggresiveState aggresiveState { get; set; }
     public DeathState deathState { get; set; }
 
-    public NavMeshAgent agent { get; private set;}
+    // Player detection
+    private GameObject player;
+    [SerializeField] private LayerMask playerMask;
+    [SerializeField] private LayerMask obstructionMask;
+    public float radius;
+    [Range(0f, 360f)]
+    public float angle;
+
+    public bool canSeePlayer {  get; private set; }
 
     private void Awake()
     {
@@ -25,12 +36,54 @@ public class Enemy : MonoBehaviour
 
     private void Start()
     {
+        player = GameObject.FindGameObjectWithTag("Player");
+
         // Starts the state machine on the wandering state
         stateMachine.Initialize(wanderingState);
+
+        StartCoroutine(UpdateFOV());
     }
 
     private void Update()
     {
+        if(canSeePlayer)
+            stateMachine.ChangeState(aggresiveState);
+
         stateMachine.currentState.Update();
+    }
+
+    // Field of view check is done inside a enumerator
+    // So the check isn't run as often and saves on performance
+    private IEnumerator UpdateFOV()
+    {
+        while (true)
+        {
+            yield return new WaitForSeconds(0.2f);
+            FieldOfView();
+        }
+    }
+
+    private void FieldOfView()
+    {
+        Collider[] rangeChecks = Physics.OverlapSphere(transform.position, radius, playerMask);
+
+        if (rangeChecks.Length != 0) 
+        { 
+            Transform target = rangeChecks[0].transform;
+            Vector3 directionToTarget = (target.position - transform.position).normalized;
+
+            if(Vector3.Angle(transform.forward, directionToTarget) < angle / 2)
+            {
+                float distanceToTarget = Vector3.Distance(transform.position, target.position);
+
+                if (!Physics.Raycast(transform.position, directionToTarget, distanceToTarget, obstructionMask))
+                    canSeePlayer = true;
+                else
+                    canSeePlayer = false;
+            }
+            else
+                canSeePlayer = false;
+        }
+
     }
 }

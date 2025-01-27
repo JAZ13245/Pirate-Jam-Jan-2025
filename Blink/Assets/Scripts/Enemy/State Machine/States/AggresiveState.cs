@@ -19,6 +19,7 @@ public class AggresiveState : BaseState
 
     public override void Update()
     {
+        Debug.Log("aggressive");
         base.Update();
     }
 }

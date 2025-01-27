@@ -38,7 +38,7 @@ public class WanderingState : BaseState
 
     private Vector3 GetWanderPoint()
     {
-        Vector3 randomDirection = UnityEngine.Random.insideUnitSphere * radius;
+        Vector3 randomDirection = Random.insideUnitSphere * radius;
         randomDirection.y = 0f;
 
         Vector3 randomPoint = enemy.transform.position + randomDirection;
