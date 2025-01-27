@@ -43,4 +43,12 @@ public class Bullet : MonoBehaviour
         Debug.Log(other.gameObject.tag);
         //Destroy(this.gameObject);
     }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.tag == "PlayerBody")
+            Debug.Log("hit");
+        Debug.Log(collision.gameObject.tag);
+        //Destroy(this.gameObject);
+    }
 }
