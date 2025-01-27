@@ -10,7 +10,6 @@ public class AlertState : BaseState
     {
         base.Enter();
         enemy.enemyManager.SetAllEnemiesToAttack();
-        enemy.stateMachine.ChangeState(enemy.aggresiveState);
     }
 
     public override void Exit()
