@@ -7,8 +7,8 @@ public class Enemy : MonoBehaviour
 {
     public NavMeshAgent agent { get; private set; }
     public GameObject player { get; private set; }
-
     public EnemyManager enemyManager { get; private set; }
+    [SerializeField] private Gun gun;
 
     public StateMachine stateMachine { get; set; }
     public WanderingState wanderingState { get; set; }
@@ -63,6 +63,11 @@ public class Enemy : MonoBehaviour
     private void Update()
     {
         stateMachine.currentState.Update();
+    }
+
+    public void OnShoot()
+    {
+        gun.Shoot();
     }
 
     // Field of view check is done inside a enumerator
