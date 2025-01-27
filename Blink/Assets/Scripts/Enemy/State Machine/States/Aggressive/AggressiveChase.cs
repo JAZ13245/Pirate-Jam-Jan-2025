@@ -1,10 +1,9 @@
 using UnityEngine;
 using UnityEngine.AI;
 
-[CreateAssetMenu(fileName = "Aggressive-Strafing Aggressive", menuName = "Enemy Logic/Aggressive Logic/Strafing Aggressive")]
-public class StrafingAggressive : BaseAggresive
+[CreateAssetMenu(fileName = "Aggressive-Aggressive Chase", menuName = "Enemy Logic/Aggressive Logic/Aggressive Chase")]
+public class AggressiveChase : BaseAggresive
 {
-
     public override void CallEnter()
     {
         base.CallEnter();
@@ -17,13 +16,10 @@ public class StrafingAggressive : BaseAggresive
 
     public override void CallUpdate()
     {
-        if (base.agent.isStopped)
-        {
-
-        }
         base.CallUpdate();
-    }
 
+        base.agent.isStopped = base.closeToPlayer;
+    }
     public override void Initialize(GameObject gameObject, Enemy enemy)
     {
         base.Initialize(gameObject, enemy);

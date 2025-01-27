@@ -1,7 +1,6 @@
 using UnityEngine;
 using UnityEngine.AI;
 
-[CreateAssetMenu(fileName = "Aggressive-Aggressive Base", menuName = "Enemy Logic/Aggressive Logic/Aggressive Base")]
 public class BaseAggresive : ScriptableObject
 {
     protected Enemy enemy;
@@ -10,6 +9,7 @@ public class BaseAggresive : ScriptableObject
 
     protected PlayerCharacter player;
     protected NavMeshAgent agent;
+    protected bool closeToPlayer;
 
     public virtual void Initialize(GameObject gameObject, Enemy enemy)
     {
@@ -30,11 +30,8 @@ public class BaseAggresive : ScriptableObject
 
         // If the player is in range
         if (agent.remainingDistance <= agent.stoppingDistance)
-        {
-            agent.isStopped = true;
-
-        }
+            closeToPlayer = true;
         else
-            agent.isStopped = false;
+            closeToPlayer = false;
     }
 }
