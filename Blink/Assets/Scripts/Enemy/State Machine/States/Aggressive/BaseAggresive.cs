@@ -21,7 +21,10 @@ public class BaseAggresive : ScriptableObject
         player = enemy.player.GetComponent<Player>().GetPlayerCharacter;
     }
 
-    public virtual void CallEnter() { }
+    public virtual void CallEnter() 
+    {
+        //enemy.enemyManager.SetAllEnemiesToAttack();
+    }
     public virtual void CallExit() { }
     public virtual void CallUpdate() 
     {

@@ -8,9 +8,12 @@ public class Enemy : MonoBehaviour
     public NavMeshAgent agent { get; private set; }
     public GameObject player { get; private set; }
 
+    public EnemyManager enemyManager { get; private set; }
+
     public StateMachine stateMachine { get; set; }
     public WanderingState wanderingState { get; set; }
     public AggresiveState aggresiveState { get; set; }
+    public AlertState alertState { get; set; }
     public DeathState deathState { get; set; }
 
     [SerializeField] private BaseWander wander;
@@ -32,6 +35,7 @@ public class Enemy : MonoBehaviour
     {
         player = GameObject.FindGameObjectWithTag("Player");
         agent = GetComponent<NavMeshAgent>();
+        enemyManager = GameObject.FindGameObjectWithTag("EnemyManager").GetComponent<EnemyManager>();
 
         BaseWanderInstance = Instantiate(wander);
         BaseAggresiveInstance = Instantiate(aggressive);
@@ -41,6 +45,7 @@ public class Enemy : MonoBehaviour
         wanderingState = new WanderingState(this, stateMachine);
         aggresiveState = new AggresiveState(this, stateMachine);
         deathState = new DeathState(this, stateMachine);
+        alertState = new AlertState(this, stateMachine);
 
     }
 

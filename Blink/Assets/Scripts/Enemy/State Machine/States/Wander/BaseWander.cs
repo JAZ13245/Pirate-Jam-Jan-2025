@@ -17,7 +17,7 @@ public class BaseWander : ScriptableObject
     public virtual void CallExit() { }
     public virtual void CallUpdate() {
         if (enemy.canSeePlayer)
-            enemy.stateMachine.ChangeState(enemy.aggresiveState);
+            enemy.stateMachine.ChangeState(enemy.alertState);
     }
 
 }

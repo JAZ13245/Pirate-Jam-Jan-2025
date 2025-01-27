@@ -7,6 +7,7 @@ TagManager:
   - Enemy
   - Critical
   - Weapons
+  - EnemyManager
   layers:
   - Default
   - TransparentFX
