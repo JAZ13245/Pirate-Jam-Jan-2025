@@ -156,8 +156,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3016a81cd9bd8ee4084abfabe549fd47, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  wander: {fileID: 0}
-  aggressive: {fileID: 0}
+  wander: {fileID: 11400000, guid: 7a2a193b0f7af124ca4a12016d5a074b, type: 2}
+  aggressive: {fileID: 11400000, guid: a2348c9036ba09845b42c335bf5622df, type: 2}
   playerMask:
     serializedVersion: 2
     m_Bits: 64

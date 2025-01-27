@@ -29,7 +29,7 @@ public class BaseAggresive : ScriptableObject
         agent.SetDestination(player.transform.position);
 
         // If the player is in range
-        if (agent.remainingDistance <= agent.stoppingDistance)
+        if (Vector3.Distance(enemy.transform.position, player.transform.position) <= agent.stoppingDistance)
             closeToPlayer = true;
         else
             closeToPlayer = false;

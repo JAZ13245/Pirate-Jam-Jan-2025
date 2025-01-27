@@ -40,7 +40,7 @@ public class IdleWander : BaseWander
         while (isWander)
         {
             yield return new WaitForSeconds(5);
-            Vector3 rotationAngle = new Vector3(0, Random.Range(0f, 360f), 0);
+            Vector3 rotationAngle = new Vector3(0, Random.Range(0f, 360f + 1), 0);
             enemy.transform.Rotate(rotationAngle);
             isWander = false;
         }
