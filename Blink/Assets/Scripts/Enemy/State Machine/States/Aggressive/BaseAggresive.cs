@@ -18,7 +18,7 @@ public class BaseAggresive : ScriptableObject
         this.enemy = enemy;
 
         agent = enemy.GetComponent<NavMeshAgent>();
-        player = enemy.player.GetComponent<Player>().GetPlayerCharacter;
+        player = enemy.player;
     }
 
     public virtual void CallEnter() 
@@ -30,6 +30,7 @@ public class BaseAggresive : ScriptableObject
     {
         enemy.transform.LookAt(player.transform.position);
         agent.SetDestination(player.transform.position);
+        enemy.OnShoot();
 
         // If the player is in range
         if (Vector3.Distance(enemy.transform.position, player.transform.position) <= agent.stoppingDistance)

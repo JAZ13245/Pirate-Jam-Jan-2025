@@ -6,7 +6,7 @@ using UnityEngine.AI;
 public class Enemy : MonoBehaviour
 {
     public NavMeshAgent agent { get; private set; }
-    public GameObject player { get; private set; }
+    public PlayerCharacter player { get; private set; }
     public EnemyManager enemyManager { get; private set; }
     [SerializeField] private Gun gun;
 
@@ -33,7 +33,7 @@ public class Enemy : MonoBehaviour
 
     private void Awake()
     {
-        player = GameObject.FindGameObjectWithTag("Player");
+        player = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>().GetPlayerCharacter;
         agent = GetComponent<NavMeshAgent>();
         enemyManager = GameObject.FindGameObjectWithTag("EnemyManager").GetComponent<EnemyManager>();
 
@@ -67,7 +67,7 @@ public class Enemy : MonoBehaviour
 
     public void OnShoot()
     {
-        gun.Shoot();
+        gun.Shoot(player);
     }
 
     // Field of view check is done inside a enumerator
