@@ -3,11 +3,10 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "Aggressive-Aggressive Stationary", menuName = "Enemy Logic/Aggressive Logic/Aggressive Stationary")]
 public class StationaryAggressive : BaseAggresive
 {
-    private PlayerCharacter player;
     public override void CallEnter()
     {
         base.CallEnter();
-        player = enemy.player.GetComponent<Player>().GetPlayerCharacter;
+        Debug.Log("aggressive state entered");
     }
 
     public override void CallExit()
@@ -17,8 +16,7 @@ public class StationaryAggressive : BaseAggresive
 
     public override void CallUpdate()
     {
-        base.CallUpdate();
-        enemy.transform.LookAt(player.transform.position);
+        enemy.transform.LookAt(base.player.transform.position);
     }
 
     public override void Initialize(GameObject gameObject, Enemy enemy)

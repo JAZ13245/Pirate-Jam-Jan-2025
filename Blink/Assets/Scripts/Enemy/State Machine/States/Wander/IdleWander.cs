@@ -27,7 +27,7 @@ public class IdleWander : BaseWander
     public override void CallUpdate()
     {
         base.CallUpdate();
-        //Debug.Log(enemy.transform.rotation);
+        Debug.Log(enemy.transform.rotation);
     }
 
     public override void Initialize(GameObject gameObject, Enemy enemy)
@@ -42,6 +42,7 @@ public class IdleWander : BaseWander
             yield return new WaitForSeconds(5);
             Vector3 rotationAngle = new Vector3(0, Random.Range(0f, 360f), 0);
             enemy.transform.Rotate(rotationAngle);
+            isWander = false;
         }
     }
 }

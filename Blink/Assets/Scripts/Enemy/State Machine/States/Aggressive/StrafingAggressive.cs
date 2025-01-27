@@ -1,8 +1,8 @@
 using UnityEngine;
 using UnityEngine.AI;
 
-[CreateAssetMenu(fileName = "Aggressive-Aggressive Chase", menuName = "Enemy Logic/Aggressive Logic/Aggressive Chase")]
-public class AggressiveChase : BaseAggresive
+[CreateAssetMenu(fileName = "Aggressive-Strafing Aggressive", menuName = "Enemy Logic/Aggressive Logic/Strafing Aggressive")]
+public class StrafingAggressive : BaseAggresive
 {
 
     public override void CallEnter()
@@ -17,6 +17,7 @@ public class AggressiveChase : BaseAggresive
 
     public override void CallUpdate()
     {
+
         base.CallUpdate();
     }
 
