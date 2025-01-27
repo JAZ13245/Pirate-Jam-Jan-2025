@@ -24,8 +24,15 @@ public class AggresiveState : BaseState
 
     public override void Update()
     {
-        if(agent.remainingDistance <= agent.stoppingDistance)
-            agent.SetDestination(player.transform.position);
+        enemy.transform.LookAt(player.transform.position);
+        agent.SetDestination(player.transform.position);
+
+        // If the player is in range
+        if (agent.remainingDistance <= agent.stoppingDistance)
+            agent.isStopped = true;
+        else
+            agent.isStopped = false;
+
 
         base.Update();
     }

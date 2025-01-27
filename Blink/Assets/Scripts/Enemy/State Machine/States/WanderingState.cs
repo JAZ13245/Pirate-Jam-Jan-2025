@@ -6,7 +6,6 @@ public class WanderingState : BaseState
 {
     private NavMeshAgent agent;
     private float radius = 20f;
-    private Vector3 wanderPoint;
 
     public WanderingState(Enemy enemy, StateMachine stateMachine) : base(enemy, stateMachine)
     {
@@ -16,8 +15,7 @@ public class WanderingState : BaseState
     public override void Enter()
     {
         base.Enter();
-        wanderPoint = GetWanderPoint();
-        agent.SetDestination(wanderPoint);
+        SetWanderPoint(GetWanderPoint());
     }
 
     public override void Exit()
@@ -31,8 +29,7 @@ public class WanderingState : BaseState
 
         if (agent.remainingDistance <= agent.stoppingDistance)
         {
-            wanderPoint = GetWanderPoint();
-            agent.SetDestination(wanderPoint);
+            SetWanderPoint(GetWanderPoint());
         }
     }
 
@@ -52,5 +49,11 @@ public class WanderingState : BaseState
         }
 
         return finalPosition;
+    }
+
+    private void SetWanderPoint(Vector3 point)
+    {
+        agent.SetDestination(point);
+        enemy.transform.LookAt(point);
     }
 }
