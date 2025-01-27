@@ -9,7 +9,7 @@ public class BaseAggresive : ScriptableObject
     protected GameObject gameObject;
 
     protected PlayerCharacter player;
-    private NavMeshAgent agent;
+    protected NavMeshAgent agent;
 
     public virtual void Initialize(GameObject gameObject, Enemy enemy)
     {
