@@ -1,10 +1,15 @@
 using UnityEngine;
+using UnityEngine.AI;
 
 public class AggresiveState : BaseState
 {
+    private PlayerCharacter player;
+    private NavMeshAgent agent;
+
     public AggresiveState(Enemy enemy, StateMachine stateMachine) : base(enemy, stateMachine)
     {
-
+        player = enemy.player.GetComponent<Player>().GetPlayerCharacter;
+        agent = enemy.agent;
     }
 
     public override void Enter()
@@ -19,7 +24,9 @@ public class AggresiveState : BaseState
 
     public override void Update()
     {
-        Debug.Log("aggressive");
+        if(agent.remainingDistance <= agent.stoppingDistance)
+            agent.SetDestination(player.transform.position);
+
         base.Update();
     }
 }

@@ -6,6 +6,7 @@ using UnityEngine.AI;
 public class Enemy : MonoBehaviour
 {
     public NavMeshAgent agent { get; private set; }
+    public GameObject player { get; private set; }
 
     public StateMachine stateMachine { get; set; }
     public WanderingState wanderingState { get; set; }
@@ -13,7 +14,6 @@ public class Enemy : MonoBehaviour
     public DeathState deathState { get; set; }
 
     // Player detection
-    private GameObject player;
     [SerializeField] private LayerMask playerMask;
     [SerializeField] private LayerMask obstructionMask;
     public float radius;
@@ -24,6 +24,7 @@ public class Enemy : MonoBehaviour
 
     private void Awake()
     {
+        player = GameObject.FindGameObjectWithTag("Player");
         agent = GetComponent<NavMeshAgent>();
 
         stateMachine = new StateMachine();
@@ -36,8 +37,6 @@ public class Enemy : MonoBehaviour
 
     private void Start()
     {
-        player = GameObject.FindGameObjectWithTag("Player");
-
         // Starts the state machine on the wandering state
         stateMachine.Initialize(wanderingState);
 

@@ -22,6 +22,9 @@ public class Player : MonoBehaviour
 
     [SerializeField] private int _numberOfBlinks = 2;
 
+    public PlayerCharacter GetPlayerCharacter
+    { get { return playerCharacter; } }
+
     public int NumberOfBlinks { get { return _numberOfBlinks; } }
     
     private int blinkCharge = 200;
