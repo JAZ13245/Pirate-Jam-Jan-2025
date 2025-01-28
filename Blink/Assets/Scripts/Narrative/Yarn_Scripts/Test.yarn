@@ -1,7 +1,9 @@
 ﻿title: Test
 tags:
 ---
+<<ChangeTrack 1>>
 <<SetTextSpeed 25>> 
+<<StartAutoContinue 25>>
 <<PlayVoiceLine 0>>
 Test Test 123...
 <<PlayVoiceLine 1>>

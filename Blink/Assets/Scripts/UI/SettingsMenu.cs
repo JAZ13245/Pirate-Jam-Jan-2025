@@ -30,8 +30,6 @@ public class SettingsMenu : MonoBehaviour
         // Save the volume setting
         PlayerPrefs.SetFloat("Volume", volume);
         PlayerPrefs.Save();
-
-        Debug.Log("Test?");
     }
 
     private float GetDecibelVolume(float volume)

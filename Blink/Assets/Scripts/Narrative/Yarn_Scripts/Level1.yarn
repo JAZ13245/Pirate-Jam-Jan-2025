@@ -1,13 +1,16 @@
 ﻿title: Level1
 tags:
 ---
-<<SetTextSpeed 25>> 
+<<StartAutoContinue 25>>
+<<ChangeTrack 1>>
+
+<<SetTextSpeed 25>>
+
 <<PlayVoiceLine 0>>
-Test Test 123...
+Finish These Lines
 <<PlayVoiceLine 1>>
-Test Test 123...
-<<PlayVoiceLine 2>>
-Now we can see if this works.
-<<StopAutoContinue>>
+Loading Next Level
+
 <<LoadSelectedLevelScene>>
+<<StopAutoContinue>>
 ===

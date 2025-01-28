@@ -8,7 +8,6 @@ public class MainMenuManager : MonoBehaviour
     [Header("Main Menu Settings")]
     private bool canLerp = false, waitToLerp;
     [Header("Level Manager Settings")]
-    public LevelData firstLevel;
     public TextMeshProUGUI levelName;
     public TextMeshProUGUI levelNumber;
     public Image levelPreview;
@@ -17,7 +16,11 @@ public class MainMenuManager : MonoBehaviour
     private CanvasGroup from, to;
 
     private void Start() {
-        LoadLevelInfo(firstLevel);
+        LevelData firstLevel = LevelDataManager.Instance.GetLevelByIndex(0);
+        LevelDataManager.Instance.SetSelectedLevelInfoByIndex(firstLevel.levelNumber - 1);
+        LoadLevelInfo(0);
+
+        MusicManager.Instance.PlayTrack(0);
     }
 
     private void Update()
@@ -47,15 +50,14 @@ public class MainMenuManager : MonoBehaviour
     public void ChangeSceneFromIndex(int sceneIndex) => SceneManager.LoadScene(sceneIndex); 
     public void ChangeSceneFromName(string sceneName) => SceneManager.LoadScene(sceneName); 
 
-    public void LoadLevelInfo(LevelData level)
+    public void LoadLevelInfo(int levelIndex)
     {
+        LevelData level = LevelDataManager.Instance.GetLevelByIndex(levelIndex);
+
         selectedLevel = level;
         levelName.text = level.levelName;
         levelPreview.sprite = level.levelPreview;
         levelNumber.text = $"{level.levelNumber}";
-        PlayerPrefs.SetString("selectedSceneName", selectedLevel.sceneName);
-        PlayerPrefs.SetString("selectedLevelName", selectedLevel.levelName);
-        PlayerPrefs.SetInt("selectedLevelNumber", selectedLevel.levelNumber);
     }
 
     public void LoadCutscene()

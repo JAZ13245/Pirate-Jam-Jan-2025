@@ -89,14 +89,13 @@ public class EndScreenManager : MonoBehaviour
 
     public void NextScene()
     {
-        int nextSceneIndex = SceneManager.GetActiveScene().buildIndex + 1;
-        
         // Unpause
         Time.timeScale = 1f;
         Cursor.visible = false;
         Cursor.lockState = CursorLockMode.Locked;
 
-        ChangeSceneFromIndex(nextSceneIndex);
+        LevelDataManager.Instance.SetSelectedLevelToNextLevel();
+        ChangeSceneFromName("Cutscene");
     }
 
     public void ChangeSceneFromIndex(int sceneIndex) => SceneManager.LoadScene(sceneIndex); 

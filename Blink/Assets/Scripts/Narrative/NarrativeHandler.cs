@@ -41,7 +41,6 @@ public class NarrativeHandler : MonoBehaviour
 
     private void Start() {
         // Run Cutscene based off the loaded level
-        Debug.Log(PlayerPrefs.GetString("selectedSceneName", "Test"));
         StartDialogue(PlayerPrefs.GetString("selectedSceneName", "Test"));
     }
 
@@ -53,11 +52,13 @@ public class NarrativeHandler : MonoBehaviour
     public void DialogueStarted()
     {
         inDialogue = true;
+        MusicManager.Instance.QuietMusicVolume();
     }
 
     public void DialogueCompleted()
     {
         inDialogue = false;
+        MusicManager.Instance.NormalMusicVolume();
     }
 
     // Converts Functions to Yarn Commands
@@ -96,6 +97,11 @@ public class NarrativeHandler : MonoBehaviour
             dialogueRunner.AddCommandHandler(
                 "LoadSelectedLevelScene",
                 LoadSelectedLevelScene
+            );
+
+            dialogueRunner.AddCommandHandler<int>(
+                "ChangeTrack",
+                ChangeTrack
             );
         }
     }
@@ -200,5 +206,8 @@ public class NarrativeHandler : MonoBehaviour
         LoadSceneByName(PlayerPrefs.GetString("selectedSceneName", "MainMenu"));
     }
 
-
+    private void ChangeTrack(int trackIndex)
+    {
+        MusicManager.Instance.PlayTrack(trackIndex);
+    }
 }
