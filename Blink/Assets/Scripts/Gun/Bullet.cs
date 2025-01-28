@@ -20,10 +20,17 @@ public class Bullet : MonoBehaviour
 
     private ObjectPool<Bullet> pool;
 
-
-    private void Start()
+    private void Awake()
     {
         rb = GetComponent<Rigidbody>();
+    }
+
+    private void OnEnable()
+    {
+        lifeTime = 0.0f;
+        maxLifeTime = 10.0f;
+        distance = 0f;
+        rb.linearVelocity = Vector3.zero;
     }
 
     public void Shoot(Vector3 direction, Player player)

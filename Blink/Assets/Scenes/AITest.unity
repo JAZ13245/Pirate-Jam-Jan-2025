@@ -394,37 +394,9 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1159382569}
     m_Modifications:
-    - target: {fileID: 1339785765149545979, guid: 6f6e6a82e11b30f41b947555678966b0, type: 3}
-      propertyPath: maxAmmo
-      value: 20
-      objectReference: {fileID: 0}
-    - target: {fileID: 1339785765149545979, guid: 6f6e6a82e11b30f41b947555678966b0, type: 3}
-      propertyPath: shootDelay
-      value: 0.1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1339785765149545979, guid: 6f6e6a82e11b30f41b947555678966b0, type: 3}
-      propertyPath: bulletSpeed
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 1339785765149545979, guid: 6f6e6a82e11b30f41b947555678966b0, type: 3}
-      propertyPath: bulletSpreadVariance.x
-      value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 1339785765149545979, guid: 6f6e6a82e11b30f41b947555678966b0, type: 3}
-      propertyPath: bulletSpreadVariance.y
-      value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 1339785765149545979, guid: 6f6e6a82e11b30f41b947555678966b0, type: 3}
-      propertyPath: bulletSpreadVariance.z
-      value: 0.5
-      objectReference: {fileID: 0}
     - target: {fileID: 5359581158034492597, guid: 6f6e6a82e11b30f41b947555678966b0, type: 3}
       propertyPath: m_Name
       value: StationaryEnemy
-      objectReference: {fileID: 0}
-    - target: {fileID: 5359581158034492597, guid: 6f6e6a82e11b30f41b947555678966b0, type: 3}
-      propertyPath: m_IsActive
-      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5605152572455319983, guid: 6f6e6a82e11b30f41b947555678966b0, type: 3}
       propertyPath: m_LocalPosition.x
@@ -466,14 +438,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 7636389039861048910, guid: 6f6e6a82e11b30f41b947555678966b0, type: 3}
-      propertyPath: wander
-      value: 
-      objectReference: {fileID: 11400000, guid: f1e3babaabb2eb946980006ae828cd92, type: 2}
-    - target: {fileID: 7636389039861048910, guid: 6f6e6a82e11b30f41b947555678966b0, type: 3}
-      propertyPath: aggressive
-      value: 
-      objectReference: {fileID: 11400000, guid: a343d92f1890c954a88373bf36edf212, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -760,49 +724,9 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1159382569}
     m_Modifications:
-    - target: {fileID: 763152609291451223, guid: 1bade32abe0b8a242b3e002c7e0d63fe, type: 3}
-      propertyPath: type
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 763152609291451223, guid: 1bade32abe0b8a242b3e002c7e0d63fe, type: 3}
-      propertyPath: maxAmmo
-      value: -1
-      objectReference: {fileID: 0}
-    - target: {fileID: 763152609291451223, guid: 1bade32abe0b8a242b3e002c7e0d63fe, type: 3}
-      propertyPath: shootDelay
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 763152609291451223, guid: 1bade32abe0b8a242b3e002c7e0d63fe, type: 3}
-      propertyPath: bulletSpeed
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 763152609291451223, guid: 1bade32abe0b8a242b3e002c7e0d63fe, type: 3}
-      propertyPath: bulletDamage
-      value: 10
-      objectReference: {fileID: 0}
-    - target: {fileID: 763152609291451223, guid: 1bade32abe0b8a242b3e002c7e0d63fe, type: 3}
-      propertyPath: addBulletSpread
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 763152609291451223, guid: 1bade32abe0b8a242b3e002c7e0d63fe, type: 3}
-      propertyPath: bulletSpreadVariance.x
-      value: 0.9
-      objectReference: {fileID: 0}
-    - target: {fileID: 763152609291451223, guid: 1bade32abe0b8a242b3e002c7e0d63fe, type: 3}
-      propertyPath: bulletSpreadVariance.y
-      value: 0.9
-      objectReference: {fileID: 0}
-    - target: {fileID: 763152609291451223, guid: 1bade32abe0b8a242b3e002c7e0d63fe, type: 3}
-      propertyPath: bulletSpreadVariance.z
-      value: 0.9
-      objectReference: {fileID: 0}
     - target: {fileID: 5359581158034492597, guid: 1bade32abe0b8a242b3e002c7e0d63fe, type: 3}
       propertyPath: m_Name
       value: StrafingEnemy
-      objectReference: {fileID: 0}
-    - target: {fileID: 5359581158034492597, guid: 1bade32abe0b8a242b3e002c7e0d63fe, type: 3}
-      propertyPath: m_IsActive
-      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5605152572455319983, guid: 1bade32abe0b8a242b3e002c7e0d63fe, type: 3}
       propertyPath: m_LocalPosition.x
@@ -844,10 +768,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 7636389039861048910, guid: 1bade32abe0b8a242b3e002c7e0d63fe, type: 3}
-      propertyPath: gun
-      value: 
-      objectReference: {fileID: 1242774829}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -863,22 +783,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 5605152572455319983, guid: 1bade32abe0b8a242b3e002c7e0d63fe, type: 3}
   m_PrefabInstance: {fileID: 712783985}
   m_PrefabAsset: {fileID: 0}
---- !u!4 &1069551141 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 8175121215320722847, guid: 8453e01d79c169846b8d646839269a94, type: 3}
-  m_PrefabInstance: {fileID: 1715548544}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &1069551146 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 1951251290778651314, guid: 8453e01d79c169846b8d646839269a94, type: 3}
-  m_PrefabInstance: {fileID: 1715548544}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1d744f15844bb3d40ba2191f32361dc7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1159382567
 GameObject:
   m_ObjectHideFlags: 0
@@ -927,17 +831,6 @@ Transform:
   - {fileID: 1060585334}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1242774829 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 763152609291451223, guid: 1bade32abe0b8a242b3e002c7e0d63fe, type: 3}
-  m_PrefabInstance: {fileID: 712783985}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1d744f15844bb3d40ba2191f32361dc7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1379667696
 GameObject:
   m_ObjectHideFlags: 0
@@ -1054,21 +947,9 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1159382569}
     m_Modifications:
-    - target: {fileID: 1951251290778651314, guid: 8453e01d79c169846b8d646839269a94, type: 3}
-      propertyPath: bulletSpeed
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 3318491150293241961, guid: 8453e01d79c169846b8d646839269a94, type: 3}
-      propertyPath: m_TagString
-      value: Enemy
-      objectReference: {fileID: 0}
     - target: {fileID: 5359581158034492597, guid: 8453e01d79c169846b8d646839269a94, type: 3}
       propertyPath: m_Name
       value: AggressiveEnemy
-      objectReference: {fileID: 0}
-    - target: {fileID: 5359581158034492597, guid: 8453e01d79c169846b8d646839269a94, type: 3}
-      propertyPath: m_IsActive
-      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5605152572455319983, guid: 8453e01d79c169846b8d646839269a94, type: 3}
       propertyPath: m_LocalPosition.x
@@ -1110,68 +991,7 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 6684704979986936392, guid: 8453e01d79c169846b8d646839269a94, type: 3}
-      propertyPath: m_Speed
-      value: 7
-      objectReference: {fileID: 0}
-    - target: {fileID: 6684704979986936392, guid: 8453e01d79c169846b8d646839269a94, type: 3}
-      propertyPath: m_StoppingDistance
-      value: 7
-      objectReference: {fileID: 0}
-    - target: {fileID: 6805510144470983509, guid: 8453e01d79c169846b8d646839269a94, type: 3}
-      propertyPath: gun
-      value: 
-      objectReference: {fileID: 1069551146}
-    - target: {fileID: 6805510144470983509, guid: 8453e01d79c169846b8d646839269a94, type: 3}
-      propertyPath: radius
-      value: 20
-      objectReference: {fileID: 0}
-    - target: {fileID: 6805510144470983509, guid: 8453e01d79c169846b8d646839269a94, type: 3}
-      propertyPath: wander
-      value: 
-      objectReference: {fileID: 11400000, guid: 7a2a193b0f7af124ca4a12016d5a074b, type: 2}
-    - target: {fileID: 6805510144470983509, guid: 8453e01d79c169846b8d646839269a94, type: 3}
-      propertyPath: aggressive
-      value: 
-      objectReference: {fileID: 11400000, guid: 4f3fbeac96972914e9cc7e7d01dcb9de, type: 2}
-    - target: {fileID: 7573217392893251662, guid: 8453e01d79c169846b8d646839269a94, type: 3}
-      propertyPath: m_IsTrigger
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8095685810575995682, guid: 8453e01d79c169846b8d646839269a94, type: 3}
-      propertyPath: bullet
-      value: 
-      objectReference: {fileID: 7378275618909043269, guid: e14b6048d76b906488f51333084de42b, type: 3}
-    - target: {fileID: 8095685810575995682, guid: 8453e01d79c169846b8d646839269a94, type: 3}
-      propertyPath: shootDelay
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 8095685810575995682, guid: 8453e01d79c169846b8d646839269a94, type: 3}
-      propertyPath: bulletTrail
-      value: 
-      objectReference: {fileID: 8052922314363125729, guid: 743cbc05d047e6e48bb00cab49ddb800, type: 3}
-    - target: {fileID: 8095685810575995682, guid: 8453e01d79c169846b8d646839269a94, type: 3}
-      propertyPath: player.m_Bits
-      value: 64
-      objectReference: {fileID: 0}
-    - target: {fileID: 8095685810575995682, guid: 8453e01d79c169846b8d646839269a94, type: 3}
-      propertyPath: addBulletSpread
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8095685810575995682, guid: 8453e01d79c169846b8d646839269a94, type: 3}
-      propertyPath: bulletSpawnPoint
-      value: 
-      objectReference: {fileID: 1069551141}
-    - target: {fileID: 8095685810575995682, guid: 8453e01d79c169846b8d646839269a94, type: 3}
-      propertyPath: obstructionMask.m_Bits
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8882985750714728384, guid: 8453e01d79c169846b8d646839269a94, type: 3}
-      propertyPath: m_Enabled
-      value: 1
-      objectReference: {fileID: 0}
-    m_RemovedComponents:
-    - {fileID: 2695628368536378196, guid: 8453e01d79c169846b8d646839269a94, type: 3}
+    m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
