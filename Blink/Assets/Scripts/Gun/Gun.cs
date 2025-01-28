@@ -13,9 +13,17 @@ public class Gun : MonoBehaviour
 
     public virtual void Shoot(Player player, PlayerCharacter playerBody)
     {
+        if (lastShootTime + shootDelay < Time.time)
+        {
+            Vector3 direction = GetDirection(playerBody);
+
+            GameObject currentBullet = Instantiate(bullet, bulletSpawnPoint.position, Quaternion.identity);
+            currentBullet.GetComponent<Bullet>().Shoot(direction, player);
+            lastShootTime = Time.time;
+        }
     }
 
-    public virtual Vector3 GetDirection(PlayerCharacter playerBody)
+    protected Vector3 GetDirection(PlayerCharacter playerBody)
     {
         Vector3 direction = playerBody.transform.position - bulletSpawnPoint.position;
 

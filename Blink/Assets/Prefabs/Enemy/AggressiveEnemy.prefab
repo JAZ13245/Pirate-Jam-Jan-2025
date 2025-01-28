@@ -97,7 +97,7 @@ GameObject:
   - component: {fileID: 8175121215320722847}
   - component: {fileID: 4723702655522190345}
   - component: {fileID: 6417373376336029406}
-  - component: {fileID: 8902284443628683143}
+  - component: {fileID: 1951251290778651314}
   m_Layer: 0
   m_Name: Gun
   m_TagString: Untagged
@@ -173,7 +173,7 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!114 &8902284443628683143
+--- !u!114 &1951251290778651314
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -182,7 +182,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 3318491150293241961}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d04adcd2830695448a17fee0d5655578, type: 3}
+  m_Script: {fileID: 11500000, guid: 1d744f15844bb3d40ba2191f32361dc7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   addBulletSpread: 0
@@ -283,7 +283,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3016a81cd9bd8ee4084abfabe549fd47, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gun: {fileID: 8902284443628683143}
+  gun: {fileID: 1951251290778651314}
   wander: {fileID: 11400000, guid: 7a2a193b0f7af124ca4a12016d5a074b, type: 2}
   aggressive: {fileID: 11400000, guid: 4f3fbeac96972914e9cc7e7d01dcb9de, type: 2}
   playerMask:
