@@ -7,9 +7,11 @@ tags:
 <<SetTextSpeed 25>>
 
 <<PlayVoiceLine 0>>
-Finish These Lines
-<<PlayVoiceLine 1>>
-Loading Next Level
+“Contacting Agent Iris…”
+“I got a job for you…”
+“Dispose of the target and return to station”
+“This one should be simple”
+“Don’t screw around…”
 
 <<LoadSelectedLevelScene>>
 <<StopAutoContinue>>
