@@ -1,0 +1,12 @@
+﻿title: Test
+tags:
+---
+<<SetTextSpeed 25>> 
+<<PlayVoiceLine 0>>
+Test Test 123...
+<<PlayVoiceLine 1>>
+Test Test 123...
+<<PlayVoiceLine 2>>
+Now we can see if this works.
+<<StopAutoContinue>>
+===

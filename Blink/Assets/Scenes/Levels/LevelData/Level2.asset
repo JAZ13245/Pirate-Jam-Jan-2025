@@ -10,9 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e55e778dac7a0f74584a10f2cee00af0, type: 3}
-  m_Name: Level 3
+  m_Name: Level2
   m_EditorClassIdentifier: 
-  levelName: Ballin
-  levelNumber: 3
-  levelPreview: {fileID: 21300000, guid: afe30a586d5ae0d439316a3c646fd022, type: 3}
-  sceneName: Level 3
+  levelName: Tutorial
+  levelNumber: 2
+  levelPreview: {fileID: 21300000, guid: 9156f4219de6e0b4b962b3c8b130f1ce, type: 3}
+  sceneName: Level1
