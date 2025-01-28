@@ -8,6 +8,7 @@ public class IdleWander : BaseWander
     private NavMeshAgent agent;
     private bool isWander;
     private MonoBehaviour mono;
+    private Vector3 newRotation;
 
     public override void CallEnter()
     {
@@ -27,7 +28,8 @@ public class IdleWander : BaseWander
     public override void CallUpdate()
     {
         base.CallUpdate();
-        //Debug.Log(enemy.transform.rotation);
+        Quaternion rotationLerp = Quaternion.Lerp(enemy.transform.rotation, Quaternion.Euler(newRotation), Time.deltaTime);
+        enemy.transform.rotation = rotationLerp;
     }
 
     public override void Initialize(GameObject gameObject, Enemy enemy)
@@ -39,10 +41,9 @@ public class IdleWander : BaseWander
     {
         while (isWander)
         {
+            Vector3 rotationAngle = new Vector3(0, Random.Range(0f, 360f), 0);
+            newRotation = rotationAngle;
             yield return new WaitForSeconds(5);
-            Vector3 rotationAngle = new Vector3(0, Random.Range(0f, 360f + 1), 0);
-            enemy.transform.Rotate(rotationAngle);
-            isWander = false;
         }
     }
 }
