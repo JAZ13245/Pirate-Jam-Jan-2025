@@ -1,17 +1,15 @@
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.AI;
 
 [CreateAssetMenu(fileName = "Aggressive-Strafing Aggressive", menuName = "Enemy Logic/Aggressive Logic/Strafing Aggressive")]
 public class StrafingAggressive : BaseAggresive
 {
-    private int goLeft;
     private float currentAngleFromPlayer;
-    private float angleIncrease = 20f;
 
     public override void CallEnter()
     {
         base.CallEnter();
-        goLeft = Random.Range(0, 2);
     }
 
     public override void CallExit()
@@ -25,19 +23,8 @@ public class StrafingAggressive : BaseAggresive
 
         if (base.closeToPlayer)
         {
-            currentAngleFromPlayer = Vector3.Angle(base.player.transform.position, enemy.transform.position);
-            if (goLeft == 0)
-            {
-                currentAngleFromPlayer =- 20;
-                goLeft = 1;
-            }
-            else if (goLeft == 1) 
-            {
-                currentAngleFromPlayer += 20;
-                goLeft = 0;
-            }
-
-            base.agent.destination = GetDistanceFromStoppingDistanceCircle();
+            if(Vector3.Distance(enemy.transform.position, base.agent.destination) <= agent.stoppingDistance)
+                base.agent.destination = GetDistanceFromStoppingDistanceCircle();
         }
     }
 
@@ -48,9 +35,11 @@ public class StrafingAggressive : BaseAggresive
 
     private Vector3 GetDistanceFromStoppingDistanceCircle()
     {
-        float x = base.player.transform.position.x + base.agent.radius * Mathf.Cos(currentAngleFromPlayer * (Mathf.PI / 180));
-        float z = base.player.transform.position.z + base.agent.radius * Mathf.Cos(currentAngleFromPlayer * (Mathf.PI / 180));
+        Debug.Log("called");
+        int position = Random.Range(0, 14);
+        float x = base.player.transform.position.x + agent.stoppingDistance * Mathf.Cos(2 * Mathf.PI * 10 / 14);
+        float z = base.player.transform.position.z + agent.stoppingDistance * Mathf.Sin(2 * Mathf.PI * 10 / 14); ;
 
-        return new Vector3(x, 0, z);
+        return new Vector3(x, enemy.transform.position.y, z);
     }
 }
