@@ -5,13 +5,18 @@ public class Bullet : MonoBehaviour
 {
     private float lifeTime = 0.0f;
     [SerializeField] private float maxLifeTime = 10.0f;
-    public float speed = 5f;
+    private float speed;
     private Vector3 direction;
     private float distance = 0f;
     [SerializeField] private float range = 100f;
     public int damage = 10;
     private Player player;
     private Rigidbody rb;
+
+    public void SetSpeed(float speed)
+    {
+        this.speed = speed;
+    }
 
     private void Start()
     {
@@ -37,7 +42,6 @@ public class Bullet : MonoBehaviour
         {
             DestroyImmediate(gameObject);
         }
-        Debug.Log(speed);
     }
 
     private void OnTriggerEnter(Collider other)

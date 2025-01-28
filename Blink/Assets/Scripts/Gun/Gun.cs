@@ -10,25 +10,34 @@ public class Gun : MonoBehaviour
     [SerializeField] protected float shootDelay = 2f;
     [SerializeField] protected float bulletSpeed = 5f;
     [SerializeField] protected int bulletDamage = 10;
+    [SerializeField] protected int maxAmmo = -1;
+
+    protected int currentAmmo;
+
+    private void Start()
+    {
+        currentAmmo = maxAmmo;
+    }
 
     protected float lastShootTime;
 
-    public void Start()
-    {
-        Bullet bulletScript = bullet.GetComponent<Bullet>();
-        bulletScript.speed = bulletSpeed;
-        bulletScript.damage = bulletDamage;
-    }
-
     public virtual void Shoot(Player player, PlayerCharacter playerBody)
     {
-        if (lastShootTime + shootDelay < Time.time)
+        if ((lastShootTime + shootDelay < Time.time) && currentAmmo != 0)
         {
             Vector3 direction = GetDirection(playerBody);
 
-            GameObject currentBullet = Instantiate(bullet, bulletSpawnPoint.position, Quaternion.identity);
-            currentBullet.GetComponent<Bullet>().Shoot(direction, player);
+            SpawnBullet().Shoot(direction, player);
             lastShootTime = Time.time;
+
+            if(currentAmmo > 0)
+            {
+                currentAmmo--;
+            }
+        }
+        else if(currentAmmo == 0)
+        {
+            Invoke("Reload", 3f);
         }
     }
 
@@ -46,6 +55,21 @@ public class Gun : MonoBehaviour
         }
 
         return direction;
+    }
+
+    protected Bullet SpawnBullet()
+    {
+        // Bad practice - make sure to fix this
+        GameObject currentBullet = Instantiate(bullet, bulletSpawnPoint.position, Quaternion.identity);
+        Bullet bulletScript = currentBullet.GetComponent<Bullet>();
+        bulletScript.SetSpeed(bulletSpeed);
+        bulletScript.damage = bulletDamage;
+        return bulletScript;
+    }
+
+    protected void Reload()
+    {
+        currentAmmo = maxAmmo;
     }
 
 }

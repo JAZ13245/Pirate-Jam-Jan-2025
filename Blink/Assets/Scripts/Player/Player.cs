@@ -158,7 +158,7 @@ public class Player : MonoBehaviour
     public void DamagePlayer(int damage)
     {
         currentHealth -= damage;
-        Debug.Log(currentHealth);
+        //Debug.Log(currentHealth);
     }
 
     public IEnumerator ChargeBlink()
