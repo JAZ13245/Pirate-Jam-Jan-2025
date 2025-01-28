@@ -9,6 +9,7 @@ TagManager:
   - Weapons
   - EnemyManager
   - PlayerBody
+  - Bullet
   layers:
   - Default
   - TransparentFX

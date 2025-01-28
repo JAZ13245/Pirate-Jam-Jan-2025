@@ -46,7 +46,7 @@ public class Bullet : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.tag == "Enemy")
+        if (other.gameObject.tag == "Enemy" || other.gameObject.tag == "Bullet")
             return;
 
         if(other.gameObject.tag == "PlayerBody")

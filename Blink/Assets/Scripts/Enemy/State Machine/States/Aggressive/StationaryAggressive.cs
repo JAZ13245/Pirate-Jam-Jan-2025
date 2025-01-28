@@ -6,7 +6,6 @@ public class StationaryAggressive : BaseAggresive
     public override void CallEnter()
     {
         base.CallEnter();
-        Debug.Log("aggressive state entered");
     }
 
     public override void CallExit()

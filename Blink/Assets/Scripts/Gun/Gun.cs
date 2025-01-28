@@ -3,25 +3,57 @@ using UnityEngine;
 
 public class Gun : MonoBehaviour
 {
-    [SerializeField] protected bool addBulletSpread = false;
-    [SerializeField] protected Vector3 bulletSpreadVariance = new Vector3(0.1f, 0.1f, 0.1f);
-    [SerializeField] protected Transform bulletSpawnPoint;
-    [SerializeField] protected GameObject bullet;
-    [SerializeField] protected float shootDelay = 2f;
-    [SerializeField] protected float bulletSpeed = 5f;
-    [SerializeField] protected int bulletDamage = 10;
-    [SerializeField] protected int maxAmmo = -1;
+    [SerializeField] private GunType type;
+    [SerializeField] private Transform bulletSpawnPoint;
+    [SerializeField] private GameObject bullet;
+    private bool addBulletSpread = false;
+    private float shootDelay = 2f;
+    private float bulletSpeed = 5f;
+    private int bulletDamage = 10;
+    private int maxAmmo = -1;
+    private float reloadTime = 3;
+    private Vector3 bulletSpreadVariance = new Vector3(0.1f, 0.1f, 0.1f);
 
-    protected int currentAmmo;
+    private enum GunType { pistol, machineGun, shotgun }
+
+    private int currentAmmo;
+
 
     private void Start()
     {
+        switch (type)
+        {
+            case GunType.pistol:
+                shootDelay = 2f;
+                bulletSpeed = 3;
+                bulletDamage = 10;
+                // -1 means that the enemy never has to reload
+                maxAmmo = -1;
+                addBulletSpread = false;
+                bulletSpreadVariance = new Vector3(0.1f, 0.1f, 0.1f);
+
+                break;
+
+            case GunType.machineGun:
+                shootDelay = 0.1f;
+                bulletSpeed = 5;
+                bulletDamage = 10;
+                maxAmmo = 20;
+                reloadTime = 3;
+                addBulletSpread = true;
+                bulletSpreadVariance = new Vector3(0.5f, 0.5f, 0.5f);
+
+                break;
+
+            case GunType.shotgun:
+                break;
+        }
         currentAmmo = maxAmmo;
     }
 
-    protected float lastShootTime;
+    private float lastShootTime;
 
-    public virtual void Shoot(Player player, PlayerCharacter playerBody)
+    public void Shoot(Player player, PlayerCharacter playerBody)
     {
         if ((lastShootTime + shootDelay < Time.time) && currentAmmo != 0)
         {
@@ -37,11 +69,11 @@ public class Gun : MonoBehaviour
         }
         else if(currentAmmo == 0)
         {
-            Invoke("Reload", 3f);
+            Invoke("Reload", reloadTime);
         }
     }
 
-    protected Vector3 GetDirection(PlayerCharacter playerBody)
+    private Vector3 GetDirection(PlayerCharacter playerBody)
     {
         Vector3 direction = playerBody.transform.position - bulletSpawnPoint.position;
 
@@ -57,7 +89,7 @@ public class Gun : MonoBehaviour
         return direction;
     }
 
-    protected Bullet SpawnBullet()
+    private Bullet SpawnBullet()
     {
         // Bad practice - make sure to fix this
         GameObject currentBullet = Instantiate(bullet, bulletSpawnPoint.position, Quaternion.identity);
@@ -67,7 +99,7 @@ public class Gun : MonoBehaviour
         return bulletScript;
     }
 
-    protected void Reload()
+    private void Reload()
     {
         currentAmmo = maxAmmo;
     }

@@ -99,11 +99,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1d744f15844bb3d40ba2191f32361dc7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  addBulletSpread: 1
-  bulletSpreadVariance: {x: 0.1, y: 0.1, z: 0.1}
+  type: 1
   bulletSpawnPoint: {fileID: 4832700628521021439}
   bullet: {fileID: 7378275618909043269, guid: e14b6048d76b906488f51333084de42b, type: 3}
-  shootDelay: 0.5
 --- !u!1 &1686295797001693204
 GameObject:
   m_ObjectHideFlags: 0

@@ -761,8 +761,36 @@ PrefabInstance:
     m_TransformParent: {fileID: 1159382569}
     m_Modifications:
     - target: {fileID: 763152609291451223, guid: 1bade32abe0b8a242b3e002c7e0d63fe, type: 3}
+      propertyPath: maxAmmo
+      value: -1
+      objectReference: {fileID: 0}
+    - target: {fileID: 763152609291451223, guid: 1bade32abe0b8a242b3e002c7e0d63fe, type: 3}
+      propertyPath: shootDelay
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 763152609291451223, guid: 1bade32abe0b8a242b3e002c7e0d63fe, type: 3}
       propertyPath: bulletSpeed
       value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 763152609291451223, guid: 1bade32abe0b8a242b3e002c7e0d63fe, type: 3}
+      propertyPath: bulletDamage
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 763152609291451223, guid: 1bade32abe0b8a242b3e002c7e0d63fe, type: 3}
+      propertyPath: addBulletSpread
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 763152609291451223, guid: 1bade32abe0b8a242b3e002c7e0d63fe, type: 3}
+      propertyPath: bulletSpreadVariance.x
+      value: 0.9
+      objectReference: {fileID: 0}
+    - target: {fileID: 763152609291451223, guid: 1bade32abe0b8a242b3e002c7e0d63fe, type: 3}
+      propertyPath: bulletSpreadVariance.y
+      value: 0.9
+      objectReference: {fileID: 0}
+    - target: {fileID: 763152609291451223, guid: 1bade32abe0b8a242b3e002c7e0d63fe, type: 3}
+      propertyPath: bulletSpreadVariance.z
+      value: 0.9
       objectReference: {fileID: 0}
     - target: {fileID: 5359581158034492597, guid: 1bade32abe0b8a242b3e002c7e0d63fe, type: 3}
       propertyPath: m_Name
