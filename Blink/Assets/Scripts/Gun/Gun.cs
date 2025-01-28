@@ -8,26 +8,25 @@ public class Gun : MonoBehaviour
     [SerializeField] private Transform bulletSpawnPoint;
     [SerializeField] private GameObject bullet;
     [SerializeField] private float shootDelay = 2f;
-    [SerializeField] LayerMask player;
 
     private float lastShootTime;
 
-    public void Shoot(PlayerCharacter player)
+    public void Shoot(Player player, PlayerCharacter playerBody)
     {
         if (lastShootTime + shootDelay < Time.time) 
         { 
 
-            Vector3 direction = GetDirection(player);
+            Vector3 direction = GetDirection(playerBody);
 
             GameObject currentBullet = Instantiate(bullet, bulletSpawnPoint.position, Quaternion.identity);
-            currentBullet.GetComponent<Bullet>().Shoot(direction);
+            currentBullet.GetComponent<Bullet>().Shoot(direction, player);
             lastShootTime = Time.time;
         }
     }
 
-    private Vector3 GetDirection(PlayerCharacter player)
+    private Vector3 GetDirection(PlayerCharacter playerBody)
     {
-        Vector3 direction = player.transform.position - bulletSpawnPoint.position;
+        Vector3 direction = playerBody.transform.position - bulletSpawnPoint.position;
 
         if(addBulletSpread)
         {

@@ -5,14 +5,17 @@ public class Bullet : MonoBehaviour
 {
     private float lifeTime = 0.0f;
     [SerializeField] private float maxLifeTime = 10.0f;
-    private float speed = 5f;
+    [SerializeField] private float speed = 5f;
     private Vector3 direction;
     private float distance = 0f;
     [SerializeField] private float range = 100f;
+    [SerializeField] private int damage = 10;
+    private Player player;
 
-    public void Shoot(Vector3 direction)
+    public void Shoot(Vector3 direction, Player player)
     {
         this.direction = direction;
+        this.player = player;
     }
 
     // Update is called once per frame
@@ -36,7 +39,7 @@ public class Bullet : MonoBehaviour
             return;
 
         if(other.gameObject.tag == "PlayerBody")
-            Debug.Log("hit");
+            player.DamagePlayer(damage);
 
         Destroy(this.gameObject);
     }

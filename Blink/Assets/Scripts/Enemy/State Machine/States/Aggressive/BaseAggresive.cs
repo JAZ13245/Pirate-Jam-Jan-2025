@@ -18,7 +18,7 @@ public class BaseAggresive : ScriptableObject
         this.enemy = enemy;
 
         agent = enemy.GetComponent<NavMeshAgent>();
-        player = enemy.player;
+        player = enemy.playerBody;
     }
 
     public virtual void CallEnter() 
