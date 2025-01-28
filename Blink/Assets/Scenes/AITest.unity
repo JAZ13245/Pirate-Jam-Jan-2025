@@ -799,11 +799,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 5605152572455319983, guid: 1bade32abe0b8a242b3e002c7e0d63fe, type: 3}
   m_PrefabInstance: {fileID: 712783985}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &1069551140 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 3318491150293241961, guid: 8453e01d79c169846b8d646839269a94, type: 3}
-  m_PrefabInstance: {fileID: 1715548544}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &1069551141 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8175121215320722847, guid: 8453e01d79c169846b8d646839269a94, type: 3}
@@ -814,39 +809,12 @@ MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 8095685810575995682, guid: 8453e01d79c169846b8d646839269a94, type: 3}
   m_PrefabInstance: {fileID: 1715548544}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1069551140}
+  m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 1d744f15844bb3d40ba2191f32361dc7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!54 &1069551146
-Rigidbody:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1069551140}
-  serializedVersion: 4
-  m_Mass: 1
-  m_Drag: 0
-  m_AngularDrag: 0.05
-  m_CenterOfMass: {x: 0, y: 0, z: 0}
-  m_InertiaTensor: {x: 1, y: 1, z: 1}
-  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ImplicitCom: 1
-  m_ImplicitTensor: 1
-  m_UseGravity: 0
-  m_IsKinematic: 0
-  m_Interpolate: 0
-  m_Constraints: 0
-  m_CollisionDetection: 0
 --- !u!1 &1159382567
 GameObject:
   m_ObjectHideFlags: 0
@@ -1123,10 +1091,7 @@ PrefabInstance:
     - {fileID: 2695628368536378196, guid: 8453e01d79c169846b8d646839269a94, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 3318491150293241961, guid: 8453e01d79c169846b8d646839269a94, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 1069551146}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8453e01d79c169846b8d646839269a94, type: 3}
 --- !u!1 &1818942943
 GameObject:

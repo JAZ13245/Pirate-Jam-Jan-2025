@@ -15,12 +15,6 @@ public class Bullet : MonoBehaviour
         this.direction = direction;
     }
 
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
-    {
-
-    }
-
     // Update is called once per frame
     void Update()
     {
@@ -38,17 +32,12 @@ public class Bullet : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
+        if (other.gameObject.tag == "Enemy")
+            return;
+
         if(other.gameObject.tag == "PlayerBody")
             Debug.Log("hit");
-        Debug.Log(other.gameObject.tag);
-        //Destroy(this.gameObject);
-    }
 
-    private void OnCollisionEnter(Collision collision)
-    {
-        if (collision.gameObject.tag == "PlayerBody")
-            Debug.Log("hit");
-        Debug.Log(collision.gameObject.tag);
-        //Destroy(this.gameObject);
+        Destroy(this.gameObject);
     }
 }
