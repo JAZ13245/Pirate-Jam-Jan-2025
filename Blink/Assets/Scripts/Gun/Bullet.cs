@@ -5,12 +5,18 @@ public class Bullet : MonoBehaviour
 {
     private float lifeTime = 0.0f;
     [SerializeField] private float maxLifeTime = 10.0f;
-    [SerializeField] private float speed = 5f;
+    public float speed = 5f;
     private Vector3 direction;
     private float distance = 0f;
     [SerializeField] private float range = 100f;
-    [SerializeField] private int damage = 10;
+    public int damage = 10;
     private Player player;
+    private Rigidbody rb;
+
+    private void Start()
+    {
+        rb = GetComponent<Rigidbody>();
+    }
 
     public void Shoot(Vector3 direction, Player player)
     {
@@ -23,7 +29,7 @@ public class Bullet : MonoBehaviour
     {
         // Move
         lifeTime += Time.deltaTime;
-        this.transform.Translate(direction * speed * Time.deltaTime);
+        rb.AddForce(direction * speed, ForceMode.Impulse);
 
         distance += speed * Time.deltaTime;
 
@@ -31,6 +37,7 @@ public class Bullet : MonoBehaviour
         {
             DestroyImmediate(gameObject);
         }
+        Debug.Log(speed);
     }
 
     private void OnTriggerEnter(Collider other)

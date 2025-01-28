@@ -8,8 +8,17 @@ public class Gun : MonoBehaviour
     [SerializeField] protected Transform bulletSpawnPoint;
     [SerializeField] protected GameObject bullet;
     [SerializeField] protected float shootDelay = 2f;
+    [SerializeField] protected float bulletSpeed = 5f;
+    [SerializeField] protected int bulletDamage = 10;
 
     protected float lastShootTime;
+
+    public void Start()
+    {
+        Bullet bulletScript = bullet.GetComponent<Bullet>();
+        bulletScript.speed = bulletSpeed;
+        bulletScript.damage = bulletDamage;
+    }
 
     public virtual void Shoot(Player player, PlayerCharacter playerBody)
     {

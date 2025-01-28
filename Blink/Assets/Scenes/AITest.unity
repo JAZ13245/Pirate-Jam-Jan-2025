@@ -736,6 +736,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1159382569}
     m_Modifications:
+    - target: {fileID: 763152609291451223, guid: 1bade32abe0b8a242b3e002c7e0d63fe, type: 3}
+      propertyPath: bulletSpeed
+      value: 100
+      objectReference: {fileID: 0}
     - target: {fileID: 5359581158034492597, guid: 1bade32abe0b8a242b3e002c7e0d63fe, type: 3}
       propertyPath: m_Name
       value: StrafingEnemy
@@ -994,6 +998,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1159382569}
     m_Modifications:
+    - target: {fileID: 1951251290778651314, guid: 8453e01d79c169846b8d646839269a94, type: 3}
+      propertyPath: bulletSpeed
+      value: 5
+      objectReference: {fileID: 0}
     - target: {fileID: 3318491150293241961, guid: 8453e01d79c169846b8d646839269a94, type: 3}
       propertyPath: m_TagString
       value: Enemy

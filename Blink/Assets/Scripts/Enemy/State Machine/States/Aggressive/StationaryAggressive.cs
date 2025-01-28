@@ -17,6 +17,7 @@ public class StationaryAggressive : BaseAggresive
     public override void CallUpdate()
     {
         enemy.transform.LookAt(base.player.transform.position);
+        base.enemy.OnShoot();
     }
 
     public override void Initialize(GameObject gameObject, Enemy enemy)
