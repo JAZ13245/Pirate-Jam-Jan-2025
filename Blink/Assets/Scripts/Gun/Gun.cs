@@ -10,6 +10,7 @@ public class Gun : MonoBehaviour
     private float shootDelay = 2f;
     private float bulletSpeed = 5f;
     private int bulletDamage = 10;
+    private float bulletRange = 100f;
     private int maxAmmo = -1;
     private float reloadTime = 3;
     private Vector3 bulletSpreadVariance = new Vector3(0.1f, 0.1f, 0.1f);
@@ -126,7 +127,8 @@ public class Gun : MonoBehaviour
         GameObject currentBullet = Instantiate(bullet, bulletSpawnPoint.position, Quaternion.identity);
         Bullet bulletScript = currentBullet.GetComponent<Bullet>();
         bulletScript.SetSpeed(bulletSpeed);
-        bulletScript.damage = bulletDamage;
+        bulletScript.SetDamage(bulletDamage);
+        bulletScript.SetRange(bulletRange);
         return bulletScript;
     }
 

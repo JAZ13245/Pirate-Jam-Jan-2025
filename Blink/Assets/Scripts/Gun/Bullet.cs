@@ -4,19 +4,19 @@ using UnityEngine;
 public class Bullet : MonoBehaviour
 {
     private float lifeTime = 0.0f;
-    [SerializeField] private float maxLifeTime = 10.0f;
-    private float speed;
+    private float maxLifeTime = 10.0f;
     private Vector3 direction;
     private float distance = 0f;
-    [SerializeField] private float range = 100f;
-    public int damage = 10;
+    private float range;
+    private int damage;
+    private float speed;
     private Player player;
     private Rigidbody rb;
 
-    public void SetSpeed(float speed)
-    {
-        this.speed = speed;
-    }
+    public void SetSpeed(float speed) {  this.speed = speed; }
+    public void SetDamage(int damage) {  this.damage = damage; }
+    public void SetRange(float range) { this.range = range; }
+
 
     private void Start()
     {
