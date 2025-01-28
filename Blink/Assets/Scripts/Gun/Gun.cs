@@ -17,7 +17,10 @@ public class Gun : MonoBehaviour
     private enum GunType { pistol, machineGun, shotgun }
 
     private int currentAmmo;
+    private float lastShootTime;
 
+    private delegate void ShootDelegate(Player player, PlayerCharacter playerBody);
+    ShootDelegate shoot;
 
     private void Start()
     {
@@ -31,6 +34,7 @@ public class Gun : MonoBehaviour
                 maxAmmo = -1;
                 addBulletSpread = false;
                 bulletSpreadVariance = new Vector3(0.1f, 0.1f, 0.1f);
+                shoot = RegularShoot;
 
                 break;
 
@@ -42,32 +46,59 @@ public class Gun : MonoBehaviour
                 reloadTime = 3;
                 addBulletSpread = true;
                 bulletSpreadVariance = new Vector3(0.5f, 0.5f, 0.5f);
+                shoot = RegularShoot;
 
                 break;
 
             case GunType.shotgun:
+                shootDelay = 2f;
+                bulletSpeed = 5;
+                bulletDamage = 3;
+                maxAmmo = 1;
+                reloadTime = 3;
+                addBulletSpread = true;
+                bulletSpreadVariance = new Vector3(0.9f, 0.9f, 0.9f);
+                shoot = ShotgunShoot;
                 break;
         }
         currentAmmo = maxAmmo;
     }
 
-    private float lastShootTime;
-
     public void Shoot(Player player, PlayerCharacter playerBody)
+    {
+        shoot(player, playerBody);
+    }
+
+    private void RegularShoot(Player player, PlayerCharacter playerBody)
     {
         if ((lastShootTime + shootDelay < Time.time) && currentAmmo != 0)
         {
-            Vector3 direction = GetDirection(playerBody);
-
-            SpawnBullet().Shoot(direction, player);
+            SpawnBullet().Shoot(GetDirection(playerBody), player);
             lastShootTime = Time.time;
 
             if(currentAmmo > 0)
-            {
                 currentAmmo--;
-            }
         }
         else if(currentAmmo == 0)
+        {
+            Invoke("Reload", reloadTime);
+        }
+
+    }
+
+    private void ShotgunShoot(Player player, PlayerCharacter playerBody) 
+    {
+        if ((lastShootTime + shootDelay < Time.time) && currentAmmo != 0)
+        {
+            for(int i = 0; i < 5; i++)
+                SpawnBullet().Shoot(GetDirection(playerBody), player);
+
+            lastShootTime = Time.time;
+
+            if (currentAmmo > 0)
+                currentAmmo--;
+        }
+        else if (currentAmmo == 0)
         {
             Invoke("Reload", reloadTime);
         }

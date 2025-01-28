@@ -73,6 +73,7 @@ public class Enemy : MonoBehaviour
     {
         if(canSeePlayer)
             gun.Shoot(player, playerBody);
+
     }
 
     // Field of view check is done inside a enumerator
