@@ -15,6 +15,8 @@ public class Gun : MonoBehaviour
     private float reloadTime = 3;
     private Vector3 bulletSpreadVariance = new Vector3(0.1f, 0.1f, 0.1f);
 
+    private BulletManager bulletManager;
+
     private enum GunType { pistol, machineGun, shotgun }
 
     private int currentAmmo;
@@ -25,6 +27,8 @@ public class Gun : MonoBehaviour
 
     private void Start()
     {
+        bulletManager = BulletManager.Instance;
+
         switch (type)
         {
             case GunType.pistol:
@@ -123,9 +127,9 @@ public class Gun : MonoBehaviour
 
     private Bullet SpawnBullet()
     {
-        // Bad practice - make sure to fix this
-        GameObject currentBullet = Instantiate(bullet, bulletSpawnPoint.position, Quaternion.identity);
-        Bullet bulletScript = currentBullet.GetComponent<Bullet>();
+        Bullet bulletScript = bulletManager.pool.Get();
+
+        bulletScript.transform.position = bulletSpawnPoint.position;
         bulletScript.SetSpeed(bulletSpeed);
         bulletScript.SetDamage(bulletDamage);
         bulletScript.SetRange(bulletRange);

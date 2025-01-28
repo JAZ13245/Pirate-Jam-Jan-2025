@@ -1,5 +1,6 @@
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.Pool;
 
 public class Bullet : MonoBehaviour
 {
@@ -16,6 +17,8 @@ public class Bullet : MonoBehaviour
     public void SetSpeed(float speed) {  this.speed = speed; }
     public void SetDamage(int damage) {  this.damage = damage; }
     public void SetRange(float range) { this.range = range; }
+
+    private ObjectPool<Bullet> pool;
 
 
     private void Start()
@@ -40,7 +43,8 @@ public class Bullet : MonoBehaviour
 
         if (distance > range || lifeTime > maxLifeTime)
         {
-            DestroyImmediate(gameObject);
+            //DestroyImmediate(gameObject);
+            pool.Release(this);
         }
     }
 
@@ -52,6 +56,9 @@ public class Bullet : MonoBehaviour
         if(other.gameObject.tag == "PlayerBody")
             player.DamagePlayer(damage);
 
-        Destroy(this.gameObject);
+        //Destroy(this.gameObject);
+        pool.Release(this);
     }
+
+    public void SetPool(ObjectPool<Bullet> pool) {  this.pool = pool; }
 }

@@ -45,7 +45,7 @@ public class Player : MonoBehaviour
 
     [SerializeField] private float _blinkChargeDuration = 3f;
 
-    GameManager gameManager;
+    private GameManager gameManager;
 
     public Coroutine Regen = null;
 
