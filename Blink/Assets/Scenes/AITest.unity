@@ -804,15 +804,15 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 8175121215320722847, guid: 8453e01d79c169846b8d646839269a94, type: 3}
   m_PrefabInstance: {fileID: 1715548544}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &1069551142 stripped
+--- !u!114 &1069551146 stripped
 MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 8095685810575995682, guid: 8453e01d79c169846b8d646839269a94, type: 3}
+  m_CorrespondingSourceObject: {fileID: 8902284443628683143, guid: 8453e01d79c169846b8d646839269a94, type: 3}
   m_PrefabInstance: {fileID: 1715548544}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1d744f15844bb3d40ba2191f32361dc7, type: 3}
+  m_Script: {fileID: 11500000, guid: d04adcd2830695448a17fee0d5655578, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &1159382567
@@ -1042,7 +1042,7 @@ PrefabInstance:
     - target: {fileID: 6805510144470983509, guid: 8453e01d79c169846b8d646839269a94, type: 3}
       propertyPath: gun
       value: 
-      objectReference: {fileID: 1069551142}
+      objectReference: {fileID: 1069551146}
     - target: {fileID: 6805510144470983509, guid: 8453e01d79c169846b8d646839269a94, type: 3}
       propertyPath: radius
       value: 20
