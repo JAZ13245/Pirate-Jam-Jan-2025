@@ -21,6 +21,7 @@ public class Player : MonoBehaviour
     [SerializeField] private CameraSpring cameraSpring;
     //[SerializeField] private CameraLean cameraLean;
 
+    [Header("Blink Settings")]
     [SerializeField] private int _numberOfBlinks = 2;
 
     public int NumberOfBlinks { get { return _numberOfBlinks; } }
@@ -49,7 +50,11 @@ public class Player : MonoBehaviour
     bool blink = false;
     bool blinkHeld = false;
     bool blinkReleased = false;
-   
+    [Header("End Screen Settings")]
+    [SerializeField] private EndScreenManager endScreenManager;
+    private bool gamePaused = false;
+    private bool playerDead = false;
+    private bool playerWin = false;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -68,6 +73,13 @@ public class Player : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if(InputManager.Instance.Pause && !playerDead && !playerWin)
+        {
+            SetPause(!gamePaused);
+        }
+
+        if(gamePaused || playerDead || playerWin) return;
+
         var deltaTime = Time.deltaTime;
 
         // Get Camera Input and Update its rotation and position.
@@ -117,8 +129,9 @@ public class Player : MonoBehaviour
         playerCharacter.UpdateBody(deltaTime);
         playerCharacter.BlinkTeleport(this, playerCamera);
 
+        /*
         // EDITOR ONLY: Allows Telporting the Player
-#if UNITY_EDITOR
+        #if UNITY_EDITOR
         if (Keyboard.current.tKey.wasPressedThisFrame)
         {
             var ray = new Ray(playerCamera.transform.position, playerCamera.transform.forward);
@@ -127,8 +140,8 @@ public class Player : MonoBehaviour
                 Teleport(hit.point);
             }
         }
-#endif
-
+        #endif
+        */
     }
 
     private void LateUpdate() {
@@ -203,6 +216,46 @@ public class Player : MonoBehaviour
     {
         if (CalculateEAR(eye) <= 0.2) return true;
         return false;
+    }
+
+    public void SetPause(bool pauseSet)
+    {
+        gamePaused = pauseSet;
+
+        if(pauseSet){
+            PauseGame(true);
+            endScreenManager.showEndScreen(0);
+        }else{
+            PauseGame(false);
+            endScreenManager.HideAllScreens();
+        }
+    }
+
+    public void Win()
+    {
+        playerWin = true;
+        PauseGame(true);
+        endScreenManager.showEndScreen(1);
+    }
+
+    public void Death()
+    {
+        playerDead = true;
+        PauseGame(true);
+        endScreenManager.showEndScreen(1);
+    }
+
+    public void PauseGame(bool paused)
+    {
+        if(paused){
+            Time.timeScale = 0f;
+            Cursor.visible = true;
+            Cursor.lockState = CursorLockMode.None;
+        }else{
+            Time.timeScale = 1f;
+            Cursor.visible = false;
+            Cursor.lockState = CursorLockMode.Locked;
+        }
     }
 
 }

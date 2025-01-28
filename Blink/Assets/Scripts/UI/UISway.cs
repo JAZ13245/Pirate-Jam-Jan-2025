@@ -17,6 +17,6 @@ public class UISway : MonoBehaviour
 	{
 		if (Mouse.current == null) return;
 
-		rect.localPosition = Vector3.Lerp(rect.localPosition, (-Mouse.current.position.ReadValue() + new Vector2(Screen.width / 2, Screen.height / 2)) * amount / 100, Time.deltaTime * speed);
+		rect.localPosition = Vector3.Lerp(rect.localPosition, (-Mouse.current.position.ReadValue() + new Vector2(Screen.width / 2, Screen.height / 2)) * amount / 100, Time.unscaledDeltaTime * speed);
     }
 }}

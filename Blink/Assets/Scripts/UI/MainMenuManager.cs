@@ -54,6 +54,8 @@ public class MainMenuManager : MonoBehaviour
         levelPreview.sprite = level.levelPreview;
         levelNumber.text = $"{level.levelNumber}";
         PlayerPrefs.SetString("selectedSceneName", selectedLevel.sceneName);
+        PlayerPrefs.SetString("selectedLevelName", selectedLevel.levelName);
+        PlayerPrefs.SetInt("selectedLevelNumber", selectedLevel.levelNumber);
     }
 
     public void LoadCutscene()

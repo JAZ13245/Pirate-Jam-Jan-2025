@@ -919,7 +919,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: MainMenuManager, Assembly-CSharp
-        m_MethodName: LoadSelectedLevel
+        m_MethodName: LoadCutscene
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1211,10 +1211,10 @@ RectTransform:
   m_Father: {fileID: 3982176113586094052}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0.0029296875, y: -212.05762}
-  m_SizeDelta: {x: 0.0048828, y: -424.1154}
-  m_Pivot: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 1, y: 0}
+  m_AnchoredPosition: {x: -0.00039291382, y: -537.5458}
+  m_SizeDelta: {x: 1769.6, y: 249.737}
+  m_Pivot: {x: 0.5, y: 0}
 --- !u!114 &6690663537184326518
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1277,7 +1277,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
-  m_AnchoredPosition: {x: 25.168114, y: -612.83124}
+  m_AnchoredPosition: {x: -0.000019073486, y: -50.14224}
   m_SizeDelta: {x: 1869.6438, y: 1175.3767}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &5128316739136964559
@@ -2175,7 +2175,7 @@ MonoBehaviour:
         m_MethodName: LoadLevelInfo
         m_Mode: 2
         m_Arguments:
-          m_ObjectArgument: {fileID: 11400000, guid: 7744eebd7236d484381c168434eb7a9b, type: 2}
+          m_ObjectArgument: {fileID: 11400000, guid: 0eb57b990370c794bb86f4db7c845732, type: 2}
           m_ObjectArgumentAssemblyTypeName: LevelData, Assembly-CSharp
           m_IntArgument: 0
           m_FloatArgument: 0
@@ -2675,6 +2675,6 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 10.696, y: -13.642}
+  m_AnchoredPosition: {x: 10.696, y: -13.641998}
   m_SizeDelta: {x: 1365.4988, y: 699.339}
   m_Pivot: {x: 0.5, y: 0.5}

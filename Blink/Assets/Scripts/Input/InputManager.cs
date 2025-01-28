@@ -31,6 +31,9 @@ public class InputManager : MonoBehaviour
     public bool Blink { get; private set; }
     public bool BlinkHeld { get; private set; }
     public bool BlinkReleased { get; private set; }
+
+    public bool Pause { get; private set; }
+
     private PlayerInput _playerInput;
     private InputAction _moveAction;
     private InputAction _lookAction;
@@ -39,6 +42,7 @@ public class InputManager : MonoBehaviour
     private InputAction _shootAction;
     private InputAction _interactAction;
     private InputAction _blinkAction;
+    private InputAction _pauseAction;
 
     public void Awake()
     {
@@ -72,6 +76,7 @@ public class InputManager : MonoBehaviour
         _shootAction = _playerInput.actions["Shoot"];
         _interactAction = _playerInput.actions["Interact"];
         _blinkAction = _playerInput.actions["Blink"];
+        _pauseAction = _playerInput.actions["Pause"];
     }
 
     private void UpdateInputs()
@@ -99,5 +104,7 @@ public class InputManager : MonoBehaviour
         Blink = _blinkAction.WasPressedThisFrame();
         BlinkHeld = _blinkAction.IsPressed();
         BlinkReleased = _blinkAction.WasReleasedThisFrame();
+
+        Pause = _pauseAction.WasPressedThisFrame();
     }
 }
