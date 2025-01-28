@@ -23,6 +23,12 @@ public class Player : MonoBehaviour
 
     [SerializeField] private int _numberOfBlinks = 2;
 
+    private int maxHealth = 100;
+    private int currentHealth;
+
+    public PlayerCharacter GetPlayerCharacter
+    { get { return playerCharacter; } }
+
     public int NumberOfBlinks { get { return _numberOfBlinks; } }
     
     private int blinkCharge = 200;
@@ -40,7 +46,7 @@ public class Player : MonoBehaviour
 
     [SerializeField] private float _blinkChargeDuration = 3f;
 
-    GameManager gameManager;
+    private GameManager gameManager;
 
     public Coroutine Regen = null;
 
@@ -54,6 +60,8 @@ public class Player : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
+        currentHealth = maxHealth;
+
         gameManager = GameManager.Instance;
 
         Cursor.lockState = CursorLockMode.Locked;
@@ -146,6 +154,12 @@ public class Player : MonoBehaviour
             cameraTarget.up
         );
         */
+    }
+
+    public void DamagePlayer(int damage)
+    {
+        currentHealth -= damage;
+        //Debug.Log(currentHealth);
     }
 
     public IEnumerator ChargeBlink()
