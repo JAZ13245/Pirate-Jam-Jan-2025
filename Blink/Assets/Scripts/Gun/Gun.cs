@@ -133,6 +133,7 @@ public class Gun : MonoBehaviour
         bulletScript.SetSpeed(bulletSpeed);
         bulletScript.SetDamage(bulletDamage);
         bulletScript.SetRange(bulletRange);
+        bulletScript.trail.enabled = true;
         return bulletScript;
     }
 

@@ -13,6 +13,7 @@ public class Bullet : MonoBehaviour
     private float speed;
     private Player player;
     private Rigidbody rb;
+    public TrailRenderer trail;
 
     public void SetSpeed(float speed) {  this.speed = speed; }
     public void SetDamage(int damage) {  this.damage = damage; }
@@ -23,6 +24,7 @@ public class Bullet : MonoBehaviour
     private void Awake()
     {
         rb = GetComponent<Rigidbody>();
+        trail = GetComponent<TrailRenderer>();
     }
 
     private void OnEnable()
@@ -31,6 +33,11 @@ public class Bullet : MonoBehaviour
         maxLifeTime = 10.0f;
         distance = 0f;
         rb.linearVelocity = Vector3.zero;
+    }
+
+    private void OnDisable()
+    {
+        trail.enabled = false;
     }
 
     public void Shoot(Vector3 direction, Player player)
