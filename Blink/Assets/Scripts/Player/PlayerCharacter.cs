@@ -6,6 +6,7 @@ public struct CharacterInput
 {
     public Quaternion Rotation;
     public Vector2 Move;
+    public bool Attack;
     public bool Jump;
     public bool JumpHeld;
     public bool Crouch;
@@ -73,6 +74,7 @@ public class PlayerCharacter : MonoBehaviour, ICharacterController
     private CharacterState _tempState;
     private Quaternion _requestedRotation;
     private Vector3 _requestedMovement;
+    private bool _requestedAttack;
     private bool _requestedJump;
     private bool _requestedJumpHeld;
     private bool _requestedCrouch;
@@ -106,6 +108,8 @@ public class PlayerCharacter : MonoBehaviour, ICharacterController
         _requestedMovement = Vector3.ClampMagnitude(_requestedMovement, 1f);
         // Orient the input so it's relative to the direction the player is facing.
         _requestedMovement = input.Rotation * _requestedMovement;
+
+        _requestedAttack = input.Attack;
 
         // Jumping
         var wasRequestingJump = _requestedJump;
@@ -468,6 +472,14 @@ public class PlayerCharacter : MonoBehaviour, ICharacterController
             _currentBlinkTime = 0;
             testBlinkEffect.SetActive(false);
             StartCoroutine(DeactivateHitBox(blinkHitBox));
+        }
+    }
+
+    public void UpdateAttack(Animator knife)
+    {
+        if (_requestedAttack && !knife.GetCurrentAnimatorStateInfo(0).IsName("Slash"))
+        {
+            knife.SetTrigger("Active");
         }
     }
 

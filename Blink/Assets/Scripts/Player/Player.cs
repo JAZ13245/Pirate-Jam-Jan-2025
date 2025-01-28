@@ -19,6 +19,8 @@ public class Player : MonoBehaviour
     [SerializeField] private PlayerCamera playerCamera;
     [Space]
     [SerializeField] private CameraSpring cameraSpring;
+    [Space]
+    [SerializeField] private Animator knife;
     //[SerializeField] private CameraLean cameraLean;
 
     [Header("Blink Settings")]
@@ -124,6 +126,7 @@ public class Player : MonoBehaviour
         {
             Rotation = playerCamera.transform.rotation,
             Move = InputManager.Instance.Move,
+            Attack = InputManager.Instance.Shoot,
             Jump = InputManager.Instance.Jump,
             JumpHeld = InputManager.Instance.JumpHeld,
             Crouch = InputManager.Instance.Crouch,
@@ -136,6 +139,7 @@ public class Player : MonoBehaviour
         playerCharacter.UpdateInput(characterInput);
         playerCharacter.UpdateBody(deltaTime);
         playerCharacter.BlinkTeleport(this, playerCamera);
+        playerCharacter.UpdateAttack(knife);
 
         /*
         // EDITOR ONLY: Allows Telporting the Player
