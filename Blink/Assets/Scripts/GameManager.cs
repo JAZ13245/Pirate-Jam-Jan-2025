@@ -21,7 +21,7 @@ public class GameManager : MonoBehaviour
 
     public static GameManager Instance { get { return _instance; } }
 
-    private bool faceDetectionEnable = false;
+    private bool faceDetectionEnable = true;
 
     public List<Vector2> points;
 
