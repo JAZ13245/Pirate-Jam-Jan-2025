@@ -4,10 +4,10 @@ public class DamageEnemy : MonoBehaviour
 {
     private void OnTriggerEnter(Collider other)
     {
-        Debug.Log("HIT");
         if(other.tag == "Enemy")
         {
-            Destroy(other.gameObject);
+            Enemy enemy = other.GetComponent<Enemy>();
+            enemy.stateMachine.ChangeState(enemy.deathState);
         }
     }
 }

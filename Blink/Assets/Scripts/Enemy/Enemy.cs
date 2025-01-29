@@ -112,4 +112,9 @@ public class Enemy : MonoBehaviour
             canSeePlayer = false;
 
     }
+
+    public void KillEnemy()
+    {
+        Destroy(gameObject);
+    }
 }

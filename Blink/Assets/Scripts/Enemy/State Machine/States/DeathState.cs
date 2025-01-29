@@ -10,10 +10,12 @@ public class DeathState : BaseState
     public override void Enter()
     {
         base.Enter();
+        enemy.enemyManager.SetAllEnemiesToAttack();
     }
 
     public override void Exit()
     {
+        enemy.KillEnemy();
         base.Exit();
     }
 

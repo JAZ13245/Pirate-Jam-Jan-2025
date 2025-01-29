@@ -99,11 +99,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1d744f15844bb3d40ba2191f32361dc7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  addBulletSpread: 0
-  bulletSpreadVariance: {x: 0.1, y: 0.1, z: 0.1}
+  type: 0
   bulletSpawnPoint: {fileID: 1544190559991338547}
   bullet: {fileID: 7378275618909043269, guid: e14b6048d76b906488f51333084de42b, type: 3}
-  shootDelay: 2
 --- !u!1 &1686295797001693204
 GameObject:
   m_ObjectHideFlags: 0
@@ -204,7 +202,7 @@ GameObject:
   - component: {fileID: 6684704979986936392}
   m_Layer: 0
   m_Name: Enemy
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
