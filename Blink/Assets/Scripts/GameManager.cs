@@ -7,12 +7,21 @@ using DlibFaceLandmarkDetectorExample;
 using System.Threading;
 using System;
 using System.IO;
+using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
+    [Header("Output")]
+    /// <summary>
+    /// The RawImage for previewing the result.
+    /// </summary>
+    public RawImage resultPreview;
+
     private static GameManager _instance;
 
     public static GameManager Instance { get { return _instance; } }
+
+    private bool faceDetectionEnable = false;
 
     public List<Vector2> points;
 
@@ -64,6 +73,9 @@ public class GameManager : MonoBehaviour
     /// The texture.
     Texture2D texture;
 
+    /// The texture.
+    [SerializeField] private Texture2D defaultTexture;
+
     /// Indicates whether this instance is waiting for initialization to complete.
     bool isInitWaiting = false;
 
@@ -106,7 +118,7 @@ public class GameManager : MonoBehaviour
 
 
     // Update is called once per frame
-    void Update()
+    private void Update()
     {
         // Blink
         Color32[] colors = GetColors();
@@ -121,6 +133,10 @@ public class GameManager : MonoBehaviour
             {
                 points = faceLandmarkDetector.DetectLandmark(detectResult[0]);
             }
+
+            faceLandmarkDetector.DrawDetectLandmarkResult<Color32>(colors, texture.width, texture.height, 4, true, 0, 255, 0, 255);
+            texture.SetPixels32(colors);
+            texture.Apply(false);
         }
     }
 
@@ -316,6 +332,15 @@ public class GameManager : MonoBehaviour
         {
             texture = new Texture2D(webCamTexture.width, webCamTexture.height, TextureFormat.RGBA32, false);
         }
+
+        if (faceDetectionEnable){
+            resultPreview.texture = texture;
+            resultPreview.GetComponent<AspectRatioFitter>().aspectRatio = (float)texture.width / texture.height;
+        }
+        else
+        {
+            resultPreview.texture = defaultTexture;
+        }
     }
 
     /// <summary>
@@ -347,7 +372,7 @@ public class GameManager : MonoBehaviour
     /// <summary>
     /// Raises the destroy event.
     /// </summary>
-    void OnDestroy()
+    private void OnDestroy()
     {
         Dispose();
 
@@ -365,7 +390,7 @@ public class GameManager : MonoBehaviour
     /// <param name="dst">Dst colors.</param>
     /// <param name="width">Width.</param>
     /// <param name="height">Height.</param>
-    void Rotate90CW(Color32[] src, Color32[] dst, int height, int width)
+    private void Rotate90CW(Color32[] src, Color32[] dst, int height, int width)
     {
         int i = 0;
         for (int x = height - 1; x >= 0; x--)
@@ -384,7 +409,7 @@ public class GameManager : MonoBehaviour
     /// <param name="colors">Colors.</param>
     /// <param name="width">Width.</param>
     /// <param name="height">Height.</param>
-    void FlipColors(Color32[] colors, int width, int height)
+    private void FlipColors(Color32[] colors, int width, int height)
     {
         int flipCode = int.MinValue;
 
@@ -461,7 +486,7 @@ public class GameManager : MonoBehaviour
     /// <param name="dst">Dst colors.</param>
     /// <param name="width">Width.</param>
     /// <param name="height">Height.</param>
-    void FlipVertical(Color32[] src, Color32[] dst, int width, int height)
+    private void FlipVertical(Color32[] src, Color32[] dst, int width, int height)
     {
         for (var i = 0; i < height / 2; i++)
         {
@@ -485,7 +510,7 @@ public class GameManager : MonoBehaviour
     /// <param name="dst">Dst colors.</param>
     /// <param name="width">Width.</param>
     /// <param name="height">Height.</param>
-    void FlipHorizontal(Color32[] src, Color32[] dst, int width, int height)
+    private void FlipHorizontal(Color32[] src, Color32[] dst, int width, int height)
     {
         for (int i = 0; i < height; i++)
         {
@@ -509,7 +534,7 @@ public class GameManager : MonoBehaviour
     /// <param name="dst">Dst colors.</param>
     /// <param name="width">Width.</param>
     /// <param name="height">Height.</param>
-    void Rotate180(Color32[] src, Color32[] dst, int height, int width)
+    private void Rotate180(Color32[] src, Color32[] dst, int height, int width)
     {
         int i = src.Length;
         for (int x = 0; x < i / 2; x++)
@@ -518,5 +543,17 @@ public class GameManager : MonoBehaviour
             dst[x] = src[i - x - 1];
             dst[i - x - 1] = t;
         }
+    }
+
+    public void SetWebCamDevice(string webcam)
+    {
+        requestedDeviceName = webcam;
+        StartCoroutine(_Initialize());
+    }
+
+    public void EnableWebCam(bool isEnable)
+    {
+        faceDetectionEnable = isEnable;
+        StartCoroutine(_Initialize());
     }
 }
