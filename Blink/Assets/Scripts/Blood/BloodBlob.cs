@@ -9,8 +9,6 @@ public class BloodBlob : MonoBehaviour
     [SerializeField] private Rigidbody rigidBody3D;
     [SerializeField] private MeshRenderer meshRenderer;
     [SerializeField] private GameObject paintSplatterDecalPrefab;
-    [Header("Properties")]
-    [SerializeField] private Color paintColor;
 
     private void OnCollisionEnter(Collision collision)
     {
@@ -28,8 +26,10 @@ public class BloodBlob : MonoBehaviour
             // Set the color of the decal to the color of the paint blob
             DecalProjector decalProjector = paintSplatterDecalObject.GetComponent<DecalProjector>();
             Material decalMaterial = new Material(decalProjector.material);
-            decalMaterial.color = paintColor;
+            decalMaterial.color = new Color(183, 0, 0);
+            decalMaterial.SetColor("_BaseColor", new Color(183, 0, 0));
             decalProjector.material = decalMaterial;
+            Debug.Log(decalMaterial.color.ToString());
 
             // Face the paint splatter decal towards the velocity of the paint blob
             paintSplatterDecalObject.transform.LookAt(collisionPoint);

@@ -71,7 +71,8 @@ public class Bullet : MonoBehaviour
             player.DamagePlayer(damage);
 
         //Destroy(this.gameObject);
-        pool.Release(this);
+        if(this.isActiveAndEnabled)
+            pool.Release(this);
     }
 
     public void SetPool(ObjectPool<Bullet> pool) {  this.pool = pool; }
