@@ -72,6 +72,8 @@ public class Bullet : MonoBehaviour
 
         //Destroy(this.gameObject);
         pool.Release(this);
+
+        Debug.Log(other.gameObject.tag);
     }
 
     public void SetPool(ObjectPool<Bullet> pool) {  this.pool = pool; }

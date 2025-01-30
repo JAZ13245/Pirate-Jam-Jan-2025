@@ -33,7 +33,7 @@ public class Gun : MonoBehaviour
         {
             case GunType.pistol:
                 shootDelay = 2f;
-                bulletSpeed = 3;
+                bulletSpeed = 1;
                 bulletDamage = 10;
                 // -1 means that the enemy never has to reload
                 maxAmmo = -1;
