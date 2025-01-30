@@ -10,6 +10,7 @@ TagManager:
   - EnemyManager
   - PlayerBody
   - Bullet
+  - Terrain
   layers:
   - Default
   - TransparentFX
@@ -19,8 +20,7 @@ TagManager:
   - UI
   - FPS Overlay
   - Player
-  - 
-  - 
+  - Bullet
   - 
   - 
   - 

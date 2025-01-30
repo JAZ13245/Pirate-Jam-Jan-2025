@@ -44,6 +44,7 @@ public class Bullet : MonoBehaviour
     {
         this.direction = direction;
         this.player = player;
+        rb.AddForce(direction * speed, ForceMode.Impulse);
     }
 
     // Update is called once per frame
@@ -51,7 +52,6 @@ public class Bullet : MonoBehaviour
     {
         // Move
         lifeTime += Time.deltaTime;
-        rb.AddForce(direction * speed, ForceMode.Impulse);
 
         distance += speed * Time.deltaTime;
 
@@ -64,6 +64,7 @@ public class Bullet : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
+        Debug.Log(other.gameObject);
         if (other.gameObject.tag == "Enemy" || other.gameObject.tag == "Bullet")
             return;
 
@@ -72,8 +73,6 @@ public class Bullet : MonoBehaviour
 
         //Destroy(this.gameObject);
         pool.Release(this);
-
-        Debug.Log(other.gameObject.tag);
     }
 
     public void SetPool(ObjectPool<Bullet> pool) {  this.pool = pool; }

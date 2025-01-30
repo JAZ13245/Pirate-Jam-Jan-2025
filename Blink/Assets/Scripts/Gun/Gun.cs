@@ -13,17 +13,16 @@ public class Gun : MonoBehaviour
     private float shootDelay = 2f;
     private float bulletSpeed = 5f;
     private int bulletDamage = 10;
-    private float bulletRange = 100f;
+    private float bulletRange = 10.0f;
     private int maxAmmo = -1;
     private float reloadTime = 3;
     private Vector3 bulletSpreadVariance = new Vector3(0.1f, 0.1f, 0.1f);
 
     private BulletManager bulletManager;
     TrailRenderer trails;
-    private float maxLifeTime = 10.0f;
 
     private Player player;
-    PlayerCharacter playerBodies;
+    int count = 0;
 
     private enum GunType { pistol, machineGun, shotgun }
 
@@ -43,13 +42,13 @@ public class Gun : MonoBehaviour
         {
             case GunType.pistol:
                 shootDelay = 2f;
-                bulletSpeed = 1;
+                bulletSpeed = 5f;
                 bulletDamage = 10;
                 // -1 means that the enemy never has to reload
                 maxAmmo = -1;
                 addBulletSpread = false;
                 bulletSpreadVariance = new Vector3(0.1f, 0.1f, 0.1f);
-                shoot = TestShoot;
+                shoot = RegularShoot;
 
                 break;
 
@@ -86,7 +85,6 @@ public class Gun : MonoBehaviour
 
     private void TestShoot(Player player, PlayerCharacter playerBody)
     {
-        playerBodies = playerBody;
         if ((lastShootTime + shootDelay < Time.time) && currentAmmo != 0)
         {
             /*
@@ -106,7 +104,7 @@ public class Gun : MonoBehaviour
             */
             
 
-            StartCoroutine("SimulateBullet");
+            StartCoroutine(SimulateBullet(playerBody));
         }
         else if (currentAmmo == 0)
         {
@@ -114,46 +112,55 @@ public class Gun : MonoBehaviour
         }
     }
 
-    private IEnumerable SimulateBullet()
+    private IEnumerator SimulateBullet(PlayerCharacter playerBody)
     {
-        Debug.Log("called 1");
         float step = 0.02f;
-        Vector3 direction = GetDirection(playerBodies);
+        Vector3 direction = GetDirection(playerBody);
         Vector3 startPosition = bulletSpawnPoint.position;
-        while (maxLifeTime > 0)
+        lastShootTime = Time.time;
+        float travelTime = bulletRange;
+
+        Bullet spawnedBullet = bulletManager.pool.Get();
+        spawnedBullet.transform.position = startPosition;
+
+        if (currentAmmo > 0)
+            currentAmmo--;
+
+        while (travelTime > 0)
         {
-            maxLifeTime -= step;
+            travelTime -= step;
             yield return new WaitForSeconds(step);
 
-            Debug.Log("called");
-
-            //TrailRenderer trail = Instantiate(trails, bulletSpawnPoint.position, Quaternion.identity);
-            //StartCoroutine(SpawnTrail(trail, direction));
+            //Debug.DrawLine(startPosition, direction * (bulletSpeed * step));
 
             if (Physics.Raycast(startPosition, direction, out RaycastHit hit, bulletSpeed * step, hitMasks))
             {
+                //Debug.Log(hit.collider.tag);
 
                 if (hit.collider.CompareTag("PlayerBody"))
                 {
-                    //Debug.Log("hit player!");
-                    player.DamagePlayer(10);
+                    player.DamagePlayer(bulletDamage);
+                    Debug.Log(hit.collider.bounds);
                 }
+
+                //bulletManager.pool.Release(bullet);
                 break;
             }
 
             startPosition += direction * (bulletSpeed * step);
+            spawnedBullet.transform.position = startPosition;
 
         }
     }
 
-    private IEnumerator SpawnTrail(TrailRenderer trail, Vector3 direction)
+    private IEnumerator SpawnTrail(TrailRenderer trail, RaycastHit hit)
     {
         float time = 0;
         Vector3 startPosition = trail.transform.position;
 
         while(time < 1)
         {
-            trail.transform.position = Vector3.Lerp(startPosition, direction, time);
+            trail.transform.position = Vector3.Lerp(startPosition, hit.point, time);
             time += Time.deltaTime / trail.time;
             yield return null;
         }
@@ -164,6 +171,11 @@ public class Gun : MonoBehaviour
             Debug.Log("hit player!");
         }
         */
+        if (hit.collider.CompareTag("PlayerBody"))
+        {
+            Debug.Log("hit player!");
+        }
+        Destroy(trail.gameObject, trail.time);
     }
 
     private void RegularShoot(Player player, PlayerCharacter playerBody)

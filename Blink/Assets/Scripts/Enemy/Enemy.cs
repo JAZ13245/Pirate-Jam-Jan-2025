@@ -71,8 +71,7 @@ public class Enemy : MonoBehaviour
 
     public void OnShoot()
     {
-        if(canSeePlayer)
-            gun.Shoot(player, playerBody);
+        gun.Shoot(player, playerBody);
 
     }
 
