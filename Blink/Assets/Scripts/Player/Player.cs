@@ -13,7 +13,7 @@ public class Player : MonoBehaviour
 {
     [Header("Player Settings")]
     [SerializeField] private bool crouchToggleable;
-    [SerializeField] private bool usingCameraTracking;
+    private bool usingCameraTracking = true;
     [Header("Components")]
     [SerializeField] private PlayerCharacter playerCharacter;
     [SerializeField] private PlayerCamera playerCamera;
@@ -78,6 +78,8 @@ public class Player : MonoBehaviour
 
         cameraSpring.Initialize();
         //cameraLean.Initialize();
+
+        usingCameraTracking = gameManager.GetFaceCamEnable();
     }
 
     // Update is called once per frame
