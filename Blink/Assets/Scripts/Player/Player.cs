@@ -29,7 +29,6 @@ public class Player : MonoBehaviour
     // Health variables
     private int maxHealth = 100;
     private int currentHealth;
-    // 6500 is 6.5 seconds
     private float maxHealingTimer = 10;
     private float currentHealingTimer;
 
@@ -56,6 +55,9 @@ public class Player : MonoBehaviour
     private GameManager gameManager;
 
     public Coroutine Regen = null;
+
+    [Header("UI Settings")]
+    [SerializeField] private Slider healthBar;
 
     // Blink Detection Variables
 
@@ -85,6 +87,9 @@ public class Player : MonoBehaviour
         //cameraLean.Initialize();
 
         usingCameraTracking = gameManager.GetFaceCamEnable();
+
+        healthBar.maxValue = maxHealth;
+        healthBar.value = currentHealth;
     }
 
     // Update is called once per frame
@@ -149,12 +154,17 @@ public class Player : MonoBehaviour
         playerCharacter.UpdateAttack(knife);
 
         // System to repair health after not taking damage for a certain amount of time
+        // This is done in such a gross way but we are running out of time
         if (currentHealingTimer < maxHealingTimer)
             currentHealingTimer += Time.deltaTime;
         else if (currentHealth != maxHealth && currentHealth + 3 <= maxHealth)
-            currentHealth += 3;
+            { currentHealth += 3;
+            healthBar.value = currentHealth; ;
+        }
         else
-            currentHealth = maxHealth;
+            { currentHealth = maxHealth;
+            healthBar.value = currentHealth; ;
+        }
 
         //Debug.Log("countdown: " + currentHealingTimer);
 
@@ -194,6 +204,7 @@ public class Player : MonoBehaviour
     {
         currentHealth -= damage;
         currentHealingTimer = 0;
+        healthBar.value = currentHealth;
         /*
         if (currentHealth <= 0)
             Death();
