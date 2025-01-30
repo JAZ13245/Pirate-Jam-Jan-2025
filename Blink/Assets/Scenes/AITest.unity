@@ -674,6 +674,18 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1159382569}
     m_Modifications:
+    - target: {fileID: 1951251290778651314, guid: a476618be64750940ada462014558edb, type: 3}
+      propertyPath: bulletTrail
+      value: 
+      objectReference: {fileID: 3502706389562607827, guid: e5ced107dac04b84eac7c1cd0d64dcce, type: 3}
+    - target: {fileID: 1951251290778651314, guid: a476618be64750940ada462014558edb, type: 3}
+      propertyPath: hitMasks.m_Bits
+      value: 4294967295
+      objectReference: {fileID: 0}
+    - target: {fileID: 1951251290778651314, guid: a476618be64750940ada462014558edb, type: 3}
+      propertyPath: playerMask.m_Bits
+      value: 192
+      objectReference: {fileID: 0}
     - target: {fileID: 5359581158034492597, guid: a476618be64750940ada462014558edb, type: 3}
       propertyPath: m_Name
       value: Aggressive Enemy
@@ -739,6 +751,10 @@ PrefabInstance:
     - target: {fileID: 965420100503055320, guid: b0422a5510d08354d922603e3034d2f6, type: 3}
       propertyPath: m_LocalPosition.y
       value: 0.8
+      objectReference: {fileID: 0}
+    - target: {fileID: 1052420199611744209, guid: b0422a5510d08354d922603e3034d2f6, type: 3}
+      propertyPath: m_TagString
+      value: PlayerBody
       objectReference: {fileID: 0}
     - target: {fileID: 1069626831073893871, guid: b0422a5510d08354d922603e3034d2f6, type: 3}
       propertyPath: m_LocalPosition.y

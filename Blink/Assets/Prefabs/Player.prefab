@@ -1355,7 +1355,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   crouchToggleable: 0
-  usingCameraTracking: 1
   playerCharacter: {fileID: 4338589318534406155}
   playerCamera: {fileID: 3787559548145609807}
   cameraSpring: {fileID: 5184728431748360982}

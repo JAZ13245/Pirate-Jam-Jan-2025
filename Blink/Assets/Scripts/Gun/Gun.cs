@@ -1,4 +1,5 @@
 using System.Collections;
+using System.Drawing.Text;
 using UnityEngine;
 
 public class Gun : MonoBehaviour
@@ -6,6 +7,8 @@ public class Gun : MonoBehaviour
     [SerializeField] private GunType type;
     [SerializeField] private Transform bulletSpawnPoint;
     [SerializeField] private GameObject bullet;
+    [SerializeField] private GameObject bulletTrail;
+    [SerializeField] private LayerMask hitMasks;
     private bool addBulletSpread = false;
     private float shootDelay = 2f;
     private float bulletSpeed = 5f;
@@ -16,6 +19,11 @@ public class Gun : MonoBehaviour
     private Vector3 bulletSpreadVariance = new Vector3(0.1f, 0.1f, 0.1f);
 
     private BulletManager bulletManager;
+    TrailRenderer trails;
+    private float maxLifeTime = 10.0f;
+
+    private Player player;
+    PlayerCharacter playerBodies;
 
     private enum GunType { pistol, machineGun, shotgun }
 
@@ -28,6 +36,8 @@ public class Gun : MonoBehaviour
     private void Start()
     {
         bulletManager = BulletManager.Instance;
+        trails = bulletTrail.GetComponent<TrailRenderer>();
+        player = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
 
         switch (type)
         {
@@ -39,7 +49,7 @@ public class Gun : MonoBehaviour
                 maxAmmo = -1;
                 addBulletSpread = false;
                 bulletSpreadVariance = new Vector3(0.1f, 0.1f, 0.1f);
-                shoot = RegularShoot;
+                shoot = TestShoot;
 
                 break;
 
@@ -72,6 +82,88 @@ public class Gun : MonoBehaviour
     public void Shoot(Player player, PlayerCharacter playerBody)
     {
         shoot(player, playerBody);
+    }
+
+    private void TestShoot(Player player, PlayerCharacter playerBody)
+    {
+        playerBodies = playerBody;
+        if ((lastShootTime + shootDelay < Time.time) && currentAmmo != 0)
+        {
+            /*
+            Vector3 direction = GetDirection(playerBody);
+            
+            if (Physics.Raycast(bulletSpawnPoint.position, direction, out RaycastHit hit, float.MaxValue, hitMasks))
+            {
+                TrailRenderer trail = Instantiate(trails, bulletSpawnPoint.position, Quaternion.identity);
+
+                StartCoroutine(SpawnTrail(trail, hit));
+
+                lastShootTime = Time.time;
+
+                if (currentAmmo > 0)
+                    currentAmmo--;
+            }
+            */
+            
+
+            StartCoroutine("SimulateBullet");
+        }
+        else if (currentAmmo == 0)
+        {
+            Invoke("Reload", reloadTime);
+        }
+    }
+
+    private IEnumerable SimulateBullet()
+    {
+        Debug.Log("called 1");
+        float step = 0.02f;
+        Vector3 direction = GetDirection(playerBodies);
+        Vector3 startPosition = bulletSpawnPoint.position;
+        while (maxLifeTime > 0)
+        {
+            maxLifeTime -= step;
+            yield return new WaitForSeconds(step);
+
+            Debug.Log("called");
+
+            //TrailRenderer trail = Instantiate(trails, bulletSpawnPoint.position, Quaternion.identity);
+            //StartCoroutine(SpawnTrail(trail, direction));
+
+            if (Physics.Raycast(startPosition, direction, out RaycastHit hit, bulletSpeed * step, hitMasks))
+            {
+
+                if (hit.collider.CompareTag("PlayerBody"))
+                {
+                    //Debug.Log("hit player!");
+                    player.DamagePlayer(10);
+                }
+                break;
+            }
+
+            startPosition += direction * (bulletSpeed * step);
+
+        }
+    }
+
+    private IEnumerator SpawnTrail(TrailRenderer trail, Vector3 direction)
+    {
+        float time = 0;
+        Vector3 startPosition = trail.transform.position;
+
+        while(time < 1)
+        {
+            trail.transform.position = Vector3.Lerp(startPosition, direction, time);
+            time += Time.deltaTime / trail.time;
+            yield return null;
+        }
+        /*
+        //player.DamagePlayer(10);
+        if (hit.collider.CompareTag("PlayerBody"))
+        {
+            Debug.Log("hit player!");
+        }
+        */
     }
 
     private void RegularShoot(Player player, PlayerCharacter playerBody)
