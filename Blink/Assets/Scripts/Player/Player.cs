@@ -31,6 +31,7 @@ public class Player : MonoBehaviour
     private int currentHealth;
     private float maxHealingTimer = 10;
     private float currentHealingTimer;
+    private int healthIncrease = 1;
 
     public PlayerCharacter GetPlayerCharacter
     { get { return playerCharacter; } }
@@ -157,8 +158,8 @@ public class Player : MonoBehaviour
         // This is done in such a gross way but we are running out of time
         if (currentHealingTimer < maxHealingTimer)
             currentHealingTimer += Time.deltaTime;
-        else if (currentHealth != maxHealth && currentHealth + 3 <= maxHealth)
-            { currentHealth += 3;
+        else if (currentHealth != maxHealth && currentHealth + healthIncrease <= maxHealth)
+            { currentHealth += healthIncrease;
             healthBar.value = currentHealth; ;
         }
         else
