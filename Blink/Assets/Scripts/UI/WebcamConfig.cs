@@ -20,7 +20,7 @@ public class WebcamConfig : MonoBehaviour
         gameManager = GameManager.Instance;
         deviceCount = WebCamTexture.devices.Length;
         SetUpDropMenu(WebCamTexture.devices);
-        //this.gameObject.SetActive(false);
+        this.gameObject.SetActive(false);
     }
 
     // Update is called once per frame
