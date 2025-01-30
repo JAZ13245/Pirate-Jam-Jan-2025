@@ -106,6 +106,7 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 946698793709682402}
+  - {fileID: 3497229157976676124}
   m_Father: {fileID: 318351930862182318}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0.5}
@@ -370,7 +371,19 @@ MonoBehaviour:
   m_Group: {fileID: 0}
   onValueChanged:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 4927376646889700349}
+        m_TargetAssemblyTypeName: WebcamConfig, Assembly-CSharp
+        m_MethodName: GetToggleValue
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   m_IsOn: 1
 --- !u!1 &1293380499177943705
 GameObject:
@@ -766,7 +779,6 @@ RectTransform:
   m_Children:
   - {fileID: 6532658434710014865}
   - {fileID: 3441198395887603093}
-  - {fileID: 3497229157976676124}
   - {fileID: 2537671778283923681}
   - {fileID: 3056092148606164107}
   - {fileID: 8916388655426797419}
@@ -816,6 +828,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0235711014c877c49addd22d3d580a92, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  menu: {fileID: 6178687173043778652}
+  toggleFace: {fileID: 6570020913102038683}
 --- !u!1 &2466763869349449654
 GameObject:
   m_ObjectHideFlags: 0
@@ -917,7 +931,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Option A
+  m_text: 
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -1424,16 +1438,16 @@ RectTransform:
   m_GameObject: {fileID: 5285494210124218531}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.49041596, y: 0.49041596, z: 0.49041596}
+  m_LocalScale: {x: 0.5354227, y: 0.5354227, z: 0.5354227}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 318351930862182318}
+  m_Father: {fileID: 3441198395887603093}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
-  m_Pivot: {x: 0.5, y: 0.5}
+  m_Pivot: {x: 0.5, y: 1}
 --- !u!222 &6651564329169607222
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -2341,7 +2355,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 10905, guid: 0000000000000000f000000000000000, type: 0}
+  m_Sprite: {fileID: 21300000, guid: d8aba0600c7703f4aa975d85a3720d09, type: 3}
   m_Type: 1
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -2401,19 +2415,22 @@ MonoBehaviour:
   m_Value: 0
   m_MultiSelect: 0
   m_Options:
-    m_Options:
-    - m_Text: Option A
-      m_Image: {fileID: 0}
-      m_Color: {r: 1, g: 1, b: 1, a: 1}
-    - m_Text: Option B
-      m_Image: {fileID: 0}
-      m_Color: {r: 1, g: 1, b: 1, a: 1}
-    - m_Text: Option C
-      m_Image: {fileID: 0}
-      m_Color: {r: 1, g: 1, b: 1, a: 1}
+    m_Options: []
   m_OnValueChanged:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 4927376646889700349}
+        m_TargetAssemblyTypeName: WebcamConfig, Assembly-CSharp
+        m_MethodName: GetDropdownValue
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   m_AlphaFadeSpeed: 0.15
 --- !u!1 &7894874995032076696
 GameObject:
