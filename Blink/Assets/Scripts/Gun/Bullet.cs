@@ -64,7 +64,6 @@ public class Bullet : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        Debug.Log(other.gameObject);
         if (other.gameObject.tag == "Enemy" || other.gameObject.tag == "Bullet")
             return;
 
