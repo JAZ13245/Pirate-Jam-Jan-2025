@@ -11,6 +11,7 @@ public class Enemy : MonoBehaviour
     public PlayerCharacter playerBody { get; private set; }
     public EnemyManager enemyManager { get; private set; }
     [SerializeField] private Gun gun;
+    private float height;
 
     public StateMachine stateMachine { get; set; }
     public WanderingState wanderingState { get; set; }
@@ -56,6 +57,7 @@ public class Enemy : MonoBehaviour
         aggresiveState = new AggresiveState(this, stateMachine);
         deathState = new DeathState(this, stateMachine);
         alertState = new AlertState(this, stateMachine);
+        height = GetComponent<CapsuleCollider>().height;
 
     }
 
@@ -121,15 +123,16 @@ public class Enemy : MonoBehaviour
 
     public void KillEnemy()
     {
-        Explode();
-        //Destroy(gameObject);
+        Explode(this.transform.up);
+        Destroy(gameObject);
     }
 
     private void Explode(Vector3 direction = default)
     {
+        Vector3 spawnPoint = new Vector3(transform.position.x, transform.position.y + height/2, transform.position.z);
         for (int i = 0; i < bloodBlobSpawnCount; i++)
         {
-            GameObject paintBlob = Instantiate(bloodBlobPrefab, transform.position, Quaternion.identity);
+            GameObject bloodBlob = Instantiate(bloodBlobPrefab, spawnPoint, Quaternion.identity);
 
             Vector3 launchDirection;
             if (direction.magnitude == 0)
@@ -152,7 +155,7 @@ public class Enemy : MonoBehaviour
                 }
             }
 
-            paintBlob.GetComponent<Rigidbody>().linearVelocity = launchDirection;
+            bloodBlob.GetComponent<Rigidbody>().linearVelocity = launchDirection;
         }
     }
 }

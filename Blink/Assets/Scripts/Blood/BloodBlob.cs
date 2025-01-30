@@ -14,6 +14,7 @@ public class BloodBlob : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
+        Debug.Log(collision.gameObject.name);
         // If the paint blob has collidied with the ground, then place a decal at that location
         if ((LayerMask.GetMask("Default") & (1 << collision.gameObject.layer)) > 0)
         {
@@ -40,5 +41,6 @@ public class BloodBlob : MonoBehaviour
             // Destroy the paint blob object
             Destroy(gameObject);
         }
+        
     }
 }
