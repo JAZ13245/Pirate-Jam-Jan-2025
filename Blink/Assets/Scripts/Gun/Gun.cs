@@ -47,7 +47,7 @@ public class Gun : MonoBehaviour
                 shootDelay = 0.1f;
                 bulletSpeed = 5;
                 bulletDamage = 10;
-                maxAmmo = 20;
+                maxAmmo = 10;
                 reloadTime = 3;
                 addBulletSpread = true;
                 bulletSpreadVariance = new Vector3(0.5f, 0.5f, 0.5f);
