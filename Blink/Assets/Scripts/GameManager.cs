@@ -334,13 +334,17 @@ public class GameManager : MonoBehaviour
             texture = new Texture2D(webCamTexture.width, webCamTexture.height, TextureFormat.RGBA32, false);
         }
 
-        if (faceDetectionEnable){
-            resultPreview.texture = texture;
-            resultPreview.GetComponent<AspectRatioFitter>().aspectRatio = (float)texture.width / texture.height;
-        }
-        else
+        if(resultPreview != null)
         {
-            resultPreview.texture = defaultTexture;
+            if (faceDetectionEnable)
+            {
+                resultPreview.texture = texture;
+                resultPreview.GetComponent<AspectRatioFitter>().aspectRatio = (float)texture.width / texture.height;
+            }
+            else
+            {
+                resultPreview.texture = defaultTexture;
+            }
         }
     }
 
