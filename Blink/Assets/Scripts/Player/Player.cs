@@ -151,8 +151,10 @@ public class Player : MonoBehaviour
         // System to repair health after not taking damage for a certain amount of time
         if (currentHealingTimer < maxHealingTimer)
             currentHealingTimer += Time.deltaTime;
-        else if(currentHealth != maxHealth)
-            currentHealth += 5;
+        else if (currentHealth != maxHealth && currentHealth + 3 <= maxHealth)
+            currentHealth += 3;
+        else
+            currentHealth = maxHealth;
 
         //Debug.Log("countdown: " + currentHealingTimer);
 
