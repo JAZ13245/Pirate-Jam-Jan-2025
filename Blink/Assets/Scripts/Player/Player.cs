@@ -29,7 +29,9 @@ public class Player : MonoBehaviour
     // Health variables
     private int maxHealth = 100;
     private int currentHealth;
-    private float healingtimer = 10;
+    // 6500 is 6.5 seconds
+    private float maxHealingTimer = 10;
+    private float currentHealingTimer;
 
     public PlayerCharacter GetPlayerCharacter
     { get { return playerCharacter; } }
@@ -70,6 +72,7 @@ public class Player : MonoBehaviour
     void Start()
     {
         currentHealth = maxHealth;
+        currentHealingTimer = maxHealingTimer;
 
         gameManager = GameManager.Instance;
 
@@ -145,6 +148,14 @@ public class Player : MonoBehaviour
         playerCharacter.BlinkTeleport(this, playerCamera);
         playerCharacter.UpdateAttack(knife);
 
+        // System to repair health after not taking damage for a certain amount of time
+        if (currentHealingTimer < maxHealingTimer)
+            currentHealingTimer += Time.deltaTime;
+        else if(currentHealth != maxHealth)
+            currentHealth += 5;
+
+        //Debug.Log("countdown: " + currentHealingTimer);
+
         /*
         // EDITOR ONLY: Allows Telporting the Player
         #if UNITY_EDITOR
@@ -180,7 +191,7 @@ public class Player : MonoBehaviour
     public void DamagePlayer(int damage)
     {
         currentHealth -= damage;
-        Debug.Log(currentHealth);
+        currentHealingTimer = 0;
         /*
         if (currentHealth <= 0)
             Death();
