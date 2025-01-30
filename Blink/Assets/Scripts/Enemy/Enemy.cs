@@ -122,7 +122,7 @@ public class Enemy : MonoBehaviour
     public void KillEnemy()
     {
         Explode();
-        Destroy(gameObject);
+        //Destroy(gameObject);
     }
 
     private void Explode(Vector3 direction = default)
