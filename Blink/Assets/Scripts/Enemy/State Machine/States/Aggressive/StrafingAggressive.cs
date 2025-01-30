@@ -35,7 +35,7 @@ public class StrafingAggressive : BaseAggresive
 
     private Vector3 GetDistanceFromStoppingDistanceCircle()
     {
-        Debug.Log("called");
+        //Debug.Log("called");
         int position = Random.Range(0, 14);
         float x = base.player.transform.position.x + agent.stoppingDistance * Mathf.Cos(2 * Mathf.PI * 10 / 14);
         float z = base.player.transform.position.z + agent.stoppingDistance * Mathf.Sin(2 * Mathf.PI * 10 / 14); ;
