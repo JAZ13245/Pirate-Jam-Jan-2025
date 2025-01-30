@@ -28,7 +28,7 @@ public class BaseAggresive : ScriptableObject
     public virtual void CallExit() { }
     public virtual void CallUpdate() 
     {
-        enemy.transform.LookAt(player.transform.position);
+        enemy.transform.LookAt(new Vector3(player.transform.position.x, enemy.transform.position.y, player.transform.position.z));
         agent.SetDestination(player.transform.position);
         enemy.OnShoot();
 
