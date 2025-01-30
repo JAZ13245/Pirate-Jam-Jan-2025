@@ -179,8 +179,10 @@ public class Player : MonoBehaviour
     {
         currentHealth -= damage;
         Debug.Log(currentHealth);
+        /*
         if (currentHealth <= 0)
             Death();
+        */
     }
 
     public IEnumerator ChargeBlink()
