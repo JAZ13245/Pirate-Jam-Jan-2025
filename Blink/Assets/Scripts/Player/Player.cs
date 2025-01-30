@@ -206,10 +206,8 @@ public class Player : MonoBehaviour
         currentHealth -= damage;
         currentHealingTimer = 0;
         healthBar.value = currentHealth;
-        /*
         if (currentHealth <= 0)
             Death();
-        */
     }
 
     public IEnumerator ChargeBlink()
