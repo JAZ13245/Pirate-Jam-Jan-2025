@@ -56,7 +56,7 @@ MonoBehaviour:
   - {fileID: -1925210268287778290}
   - {fileID: -5677514569700259782}
   - {fileID: 1232157473817610661}
-  m_RendererFeatureMap: 3a48e961946a35b1a5c93db6b1801911
+  m_RendererFeatureMap: 3a48e961946a35b1a5c93db6b18019118cd2e5628adbf7db32d1bdc91cff1f05
   m_UseNativeRenderPass: 0
   xrSystemData: {fileID: 0}
   postProcessData: {fileID: 11400000, guid: 41439944d30ece34e96484bdb6645b55, type: 2}
@@ -94,9 +94,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6b3d386ba5cd94485973aee1479b272e, type: 3}
   m_Name: RenderObjects
   m_EditorClassIdentifier: 
-  m_Active: 0
+  m_Active: 1
   settings:
-    passTag: RenderObjectsFeature
+    passTag: RenderObjects
     Event: 300
     filterSettings:
       RenderQueueType: 0
