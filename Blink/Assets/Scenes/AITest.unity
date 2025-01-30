@@ -675,6 +675,10 @@ PrefabInstance:
     m_TransformParent: {fileID: 1159382569}
     m_Modifications:
     - target: {fileID: 1951251290778651314, guid: a476618be64750940ada462014558edb, type: 3}
+      propertyPath: type
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1951251290778651314, guid: a476618be64750940ada462014558edb, type: 3}
       propertyPath: bulletTrail
       value: 
       objectReference: {fileID: 3502706389562607827, guid: e5ced107dac04b84eac7c1cd0d64dcce, type: 3}

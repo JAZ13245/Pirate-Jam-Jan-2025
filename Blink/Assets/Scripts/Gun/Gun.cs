@@ -54,7 +54,7 @@ public class Gun : MonoBehaviour
 
             case GunType.machineGun:
                 shootDelay = 0.1f;
-                bulletSpeed = 5;
+                bulletSpeed = 20;
                 bulletDamage = 10;
                 maxAmmo = 10;
                 reloadTime = 3;
