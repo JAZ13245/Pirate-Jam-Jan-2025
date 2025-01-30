@@ -177,7 +177,7 @@ MonoBehaviour:
   aggressive: {fileID: 11400000, guid: a343d92f1890c954a88373bf36edf212, type: 2}
   playerMask:
     serializedVersion: 2
-    m_Bits: 64
+    m_Bits: 128
   obstructionMask:
     serializedVersion: 2
     m_Bits: 1
