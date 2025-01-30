@@ -175,6 +175,10 @@ MonoBehaviour:
   gun: {fileID: 1951251290778651314}
   wander: {fileID: 11400000, guid: f1e3babaabb2eb946980006ae828cd92, type: 2}
   aggressive: {fileID: 11400000, guid: a343d92f1890c954a88373bf36edf212, type: 2}
+  bloodBlobSpawnCount: 1
+  minGenVelocity: 8
+  maxGenVelocity: 8
+  bloodBlobPrefab: {fileID: 960665952200429051, guid: a055e5f0832820f448fa820edf9300e9, type: 3}
   playerMask:
     serializedVersion: 2
     m_Bits: 128
