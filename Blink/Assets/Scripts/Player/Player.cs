@@ -26,8 +26,10 @@ public class Player : MonoBehaviour
     [Header("Blink Settings")]
     [SerializeField] private int _numberOfBlinks = 2;
 
+    // Health variables
     private int maxHealth = 100;
     private int currentHealth;
+    private float healingtimer = 10;
 
     public PlayerCharacter GetPlayerCharacter
     { get { return playerCharacter; } }
