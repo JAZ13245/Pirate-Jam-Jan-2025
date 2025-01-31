@@ -68,6 +68,7 @@ public class Player : MonoBehaviour
     [Header("Edited Through Settings")]
     [SerializeField] private bool crouchToggleable;
     [SerializeField]private bool usingCameraTracking = true;
+    public bool UsingCameraTracking { get { return usingCameraTracking; } }
 
     private bool gamePaused = false;
     private bool playerDead = false;
