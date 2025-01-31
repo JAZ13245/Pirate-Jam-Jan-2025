@@ -20,6 +20,7 @@ public class PlayerCamera : MonoBehaviour
         transform.position = target.position;
         transform.rotation = target.rotation;
 
+        sensitvity = PlayerPrefs.GetFloat("Sensitvity", 0.1f);
         //transform.eulerAngles = _eulerAngels = target.eulerAngles;
     }
 

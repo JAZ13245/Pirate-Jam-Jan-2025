@@ -6,11 +6,14 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEditor.DeviceSimulation;
+using UnityEngine.SceneManagement;
 
 public class WebcamConfig : MonoBehaviour
 {
+    public GameObject alternateBlinkSettings;
     [SerializeField] private TMP_Dropdown menu;
     [SerializeField] private UnityEngine.UI.Toggle toggleFace;
+    
     private GameManager gameManager;
     private int deviceCount;
 
@@ -20,7 +23,14 @@ public class WebcamConfig : MonoBehaviour
         gameManager = GameManager.Instance;
         deviceCount = WebCamTexture.devices.Length;
         SetUpDropMenu(WebCamTexture.devices);
-        this.gameObject.SetActive(false);
+        // Hide Menu if not Main Menu
+        if(SceneManager.GetActiveScene().name != "MainMenu")
+        {
+            this.gameObject.SetActive(false);
+        }
+
+        toggleFace.isOn = PlayerPrefs.GetInt("Toggle_Face", 0) == 1;
+        alternateBlinkSettings.SetActive(!toggleFace.isOn);
     }
 
     // Update is called once per frame
@@ -41,6 +51,7 @@ public class WebcamConfig : MonoBehaviour
     public void GetToggleValue()
     {
         gameManager.EnableWebCam(toggleFace.isOn);
+        alternateBlinkSettings.SetActive(!toggleFace.isOn);
     }
 
     private void SetUpDropMenu(WebCamDevice[] devices)

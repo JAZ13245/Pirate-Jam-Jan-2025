@@ -47,7 +47,7 @@ public class PlayerCharacter : MonoBehaviour, ICharacterController
     [SerializeField] private float crouchHeight = 1f;
     [SerializeField] private float ceilingCheckRadius = 0.5f;
     [SerializeField] private float crouchHeightResponse = 15f;
-    [Range(0, 1f)] [SerializeField] private float standCameraTargetHeight = 0.9f;
+    [Range(0, 1f)] [SerializeField] private float standCameraTargetHeight = 1f;
     [Range(0, 1f)] [SerializeField] private float crouchCameraTargetHeight = 0.7f;
     [Header("Blink Settings")]
     [SerializeField] private float blinkTimeThreshold = 0.5f;

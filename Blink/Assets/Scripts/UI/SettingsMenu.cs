@@ -4,18 +4,32 @@ using UnityEngine.UI;
 
 public class SettingsMenu : MonoBehaviour
 {
+    [Header("Settings Values")]
+    public float volume;
+    public float sensitvity;
+    public int toggleCrouch;
+    [Header("Components")]
     public Slider volumeSlider;
     public AudioMixer audioMixer;
-    public float volume;
+    public Slider sensitvitySlider;
+    public Toggle toggleCrouchBox;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         volume = PlayerPrefs.GetFloat("Volume", 1f);
+        sensitvity = PlayerPrefs.GetFloat("Sensitvity", 0.1f);
+        toggleCrouch = PlayerPrefs.GetInt("Toggle_Crouch", 0);
         audioMixer.SetFloat("MasterVolume", GetDecibelVolume(volume));
 
-        // Slider Setting
+        sensitvitySlider.minValue = 0f;
+        sensitvitySlider.maxValue = 1f;
+
+
+        // Setting Defualt
         volumeSlider.value = volume;
+        sensitvitySlider.value = sensitvity;
+        toggleCrouchBox.isOn = toggleCrouch == 1;
 
         this.gameObject.SetActive(false);
     }
@@ -31,6 +45,24 @@ public class SettingsMenu : MonoBehaviour
         PlayerPrefs.SetFloat("Volume", volume);
         PlayerPrefs.Save();
     }
+
+    public void SetSensitvity()
+    {
+        sensitvity = sensitvitySlider.value;
+
+        // Save the Sensitvity setting
+        PlayerPrefs.SetFloat("Sensitvity", sensitvity);
+        PlayerPrefs.Save();
+    }
+
+    public void SetToggleCrouch()
+    {
+        toggleCrouch = toggleCrouchBox.isOn ? 1 : 0;
+
+        PlayerPrefs.SetInt("Toggle_Crouch", toggleCrouch);
+        PlayerPrefs.Save();
+    }
+
 
     private float GetDecibelVolume(float volume)
     {
