@@ -709,6 +709,7 @@ MonoBehaviour:
   type: 0
   gun: {fileID: 2261327434785172041}
   bullet: {fileID: 7378275618909043269, guid: e14b6048d76b906488f51333084de42b, type: 3}
+  animationController: {fileID: 6781315094619758206}
 --- !u!1 &5471361276234498405
 GameObject:
   m_ObjectHideFlags: 0
