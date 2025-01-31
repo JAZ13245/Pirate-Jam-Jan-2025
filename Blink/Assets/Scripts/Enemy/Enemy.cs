@@ -24,6 +24,7 @@ public class Enemy : MonoBehaviour
     public Animator animationContoller;
     private Vector3 previousPosition;
     private float currentSpeed;
+    private Quaternion previousRotation;
 
     [SerializeField] private BaseWander wander;
     [SerializeField] private BaseAggresive aggressive;
@@ -72,6 +73,7 @@ public class Enemy : MonoBehaviour
         BaseWanderInstance.Initialize(gameObject, this);
         BaseAggresiveInstance.Initialize(gameObject, this);
         previousPosition = transform.position;
+        previousRotation = transform.rotation;
 
         // Starts the state machine on the wandering state
         stateMachine.Initialize(wanderingState);
@@ -87,6 +89,14 @@ public class Enemy : MonoBehaviour
         currentSpeed = currentMovement.magnitude / Time.deltaTime;
         previousPosition = transform.position;
         animationContoller.SetFloat("speed", currentSpeed);
+
+        if ((int)(previousRotation.y * (180 / Mathf.PI)) > (int)(transform.rotation.y * (180 / Mathf.PI)))
+            animationContoller.Play("TurnLeft");
+        else if ((int)(previousRotation.y * (180 / Mathf.PI)) < (int)(transform.rotation.y * (180 / Mathf.PI)))
+            animationContoller.Play("TurnRight");
+
+        previousRotation = transform.rotation;
+        Debug.Log((int)transform.rotation.y * (180/Mathf.PI));
     }
 
     public void OnShoot()
