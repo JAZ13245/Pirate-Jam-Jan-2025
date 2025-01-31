@@ -558,7 +558,7 @@ MonoBehaviour:
   guns:
   - {fileID: 6414228651886458079}
   - {fileID: 7432744677744490724}
-  animationContoller: {fileID: 0}
+  animationContoller: {fileID: 3066584712500098529}
   wander: {fileID: 11400000, guid: f1e3babaabb2eb946980006ae828cd92, type: 2}
   aggressive: {fileID: 11400000, guid: a343d92f1890c954a88373bf36edf212, type: 2}
   bloodBlobSpawnCount: 10
