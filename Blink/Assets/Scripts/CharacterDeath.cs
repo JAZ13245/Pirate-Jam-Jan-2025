@@ -7,15 +7,18 @@ public class KillCharacter : MonoBehaviour
     [SerializeField, Range(8f, 20f), Tooltip("The minimum velocity that this blood blob can have when it is created.")] private float minGenVelocity;
     [SerializeField, Range(8f, 20f), Tooltip("The maximum velocity that this blood blob can have when it is created.")] private float maxGenVelocity;
     [SerializeField] private GameObject bloodBlobPrefab;
+    private EnemyManager enemyManager;
 
     private void Start()
     {
         height = GetComponent<CapsuleCollider>().height;
+        enemyManager = GameObject.FindGameObjectWithTag("EnemyManager").GetComponent<EnemyManager>();
     }
 
     public void Kill()
     {
         Explode(this.transform.up);
+        enemyManager.CharacterDie(this);
         Destroy(gameObject);
     }
 
