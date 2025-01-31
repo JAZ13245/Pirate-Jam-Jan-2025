@@ -12,11 +12,14 @@ EditorBuildSettings:
     path: Assets/Scenes/Cutscene.unity
     guid: cdd5e0f1101f76b459498ed3ce9b032e
   - enabled: 1
-    path: Assets/Scenes/Levels/OldLevel1.unity
-    guid: 851e5b949d574834aab86f5120dbde4e
+    path: Assets/Scenes/Levels/Level1.unity
+    guid: 1d1ce00bcfd510e4a813ab5dec5bcf19
   - enabled: 1
-    path: Assets/Scenes/FPSTest.unity
-    guid: c65e402e4c2db6248bf4edb81a6a9c3f
+    path: Assets/Scenes/Levels/Level2.unity
+    guid: b0b99e24bf9450d4ca9dded5a88a27ca
+  - enabled: 1
+    path: Assets/Scenes/Levels/Level3.unity
+    guid: d481b7d6228c42d42bf35dac4e148bff
   m_configObjects:
     com.unity.input.settings: {fileID: 11400000, guid: 610b5232bca73224492f0170d6bec2f5, type: 2}
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 052faaac586de48259a63d0c4782560b, type: 3}

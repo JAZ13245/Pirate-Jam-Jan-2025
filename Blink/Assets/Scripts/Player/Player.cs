@@ -72,6 +72,7 @@ public class Player : MonoBehaviour
     private bool gamePaused = false;
     private bool playerDead = false;
     private bool playerWin = false;
+    private bool rouge = false;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -292,7 +293,14 @@ public class Player : MonoBehaviour
     {
         playerWin = true;
         PauseGame(true);
-        endScreenManager.showEndScreen(1);
+        endScreenManager.showEndScreen(2);
+    }
+
+    public void Rouge()
+    {
+        playerWin = true;
+        PauseGame(true);
+        endScreenManager.showEndScreen(3);
     }
 
     public void Death()
