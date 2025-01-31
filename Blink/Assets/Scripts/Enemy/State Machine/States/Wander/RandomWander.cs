@@ -1,3 +1,4 @@
+using TMPro;
 using Unity.AI.Navigation;
 using UnityEngine;
 using UnityEngine.AI;
@@ -7,12 +8,14 @@ public class RandomWander : BaseWander
 {
     private NavMeshAgent agent;
     private float radius = 20f;
+    private Vector3 wanderPoint;
 
     public override void CallEnter()
     {
         base.CallEnter();
         agent = enemy.agent;
-        SetWanderPoint(GetWanderPoint());
+        wanderPoint = GetWanderPoint();
+        SetWanderPoint(wanderPoint);
     }
 
     public override void CallExit()
@@ -26,8 +29,13 @@ public class RandomWander : BaseWander
 
         if (agent.remainingDistance <= agent.stoppingDistance)
         {
-            SetWanderPoint(GetWanderPoint());
+            wanderPoint = GetWanderPoint();
+            SetWanderPoint(wanderPoint);
         }
+
+        Quaternion targetRotation = Quaternion.LookRotation(wanderPoint - enemy.transform.position);
+        Quaternion rotationLerp = Quaternion.Lerp(enemy.transform.rotation, targetRotation, 5 * Time.deltaTime);
+        enemy.transform.rotation = rotationLerp;
     }
 
     public override void Initialize(GameObject gameObject, Enemy enemy)
@@ -56,6 +64,5 @@ public class RandomWander : BaseWander
     private void SetWanderPoint(Vector3 point)
     {
         agent.SetDestination(point);
-        enemy.transform.LookAt(point);
     }
 }

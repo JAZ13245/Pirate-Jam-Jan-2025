@@ -12,7 +12,6 @@ public class BloodBlob : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        Debug.Log(collision.gameObject.name);
         // If the paint blob has collidied with the ground, then place a decal at that location
         if ((LayerMask.GetMask("Default") & (1 << collision.gameObject.layer)) > 0)
         {
@@ -26,10 +25,7 @@ public class BloodBlob : MonoBehaviour
             // Set the color of the decal to the color of the paint blob
             DecalProjector decalProjector = paintSplatterDecalObject.GetComponent<DecalProjector>();
             Material decalMaterial = new Material(decalProjector.material);
-            decalMaterial.color = new Color(183, 0, 0);
-            decalMaterial.SetColor("_BaseColor", new Color(183, 0, 0));
             decalProjector.material = decalMaterial;
-            Debug.Log(decalMaterial.color.ToString());
 
             // Face the paint splatter decal towards the velocity of the paint blob
             paintSplatterDecalObject.transform.LookAt(collisionPoint);

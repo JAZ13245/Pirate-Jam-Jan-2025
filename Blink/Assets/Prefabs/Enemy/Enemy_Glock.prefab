@@ -576,7 +576,7 @@ GameObject:
   - component: {fileID: 6781315094619758206}
   - component: {fileID: 7872377876386731279}
   m_Layer: 9
-  m_Name: Enemy
+  m_Name: Enemy_Glock
   m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

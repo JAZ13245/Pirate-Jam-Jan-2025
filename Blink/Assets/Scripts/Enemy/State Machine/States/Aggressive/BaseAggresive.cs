@@ -23,7 +23,7 @@ public class BaseAggresive : ScriptableObject
 
     public virtual void CallEnter() 
     {
-        //enemy.enemyManager.SetAllEnemiesToAttack();
+        agent.speed = 7;
     }
     public virtual void CallExit() { }
     public virtual void CallUpdate() 
