@@ -5,8 +5,9 @@ using UnityEngine;
 public class Gun : MonoBehaviour
 {
     [SerializeField] private GunType type;
-    [SerializeField] private Transform bulletSpawnPoint;
+    [SerializeField] private GameObject gun;
     [SerializeField] private GameObject bullet;
+    private Transform bulletSpawnPoint;
     private bool addBulletSpread = false;
     private float shootDelay = 2f;
     private float bulletSpeed = 5f;
@@ -31,6 +32,7 @@ public class Gun : MonoBehaviour
     private void Start()
     {
         bulletManager = BulletManager.Instance;
+        bulletSpawnPoint = gun.transform;
         player = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
 
         switch (type)
