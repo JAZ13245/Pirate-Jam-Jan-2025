@@ -304,6 +304,13 @@ public class Player : MonoBehaviour
         endScreenManager.showEndScreen(1);
     }
 
+    public void Rouge()
+    {
+        playerDead = true;
+        PauseGame(true);
+        endScreenManager.showEndScreen(3);
+    }
+
     public void PauseGame(bool paused)
     {
         if(paused){
