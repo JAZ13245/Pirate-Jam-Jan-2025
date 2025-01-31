@@ -37,7 +37,7 @@ public class MusicManager : MonoBehaviour
 
     public void QuietMusicVolume()
     {
-        audioSource.volume = 0.1f; 
+        audioSource.volume = 0.08f; 
     }
 
     public void NormalMusicVolume()

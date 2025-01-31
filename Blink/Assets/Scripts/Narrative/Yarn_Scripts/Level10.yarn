@@ -1,0 +1,30 @@
+﻿title: Level10
+tags:
+---
+<<StartAutoContinue 25>>
+<<ChangeTrack 1>>
+
+<<SetTextSpeed 25>>
+
+<<PlayVoiceLine 47>>
+Fine…
+<<PlayVoiceLine 48>>
+Come right on in…
+<<PlayVoiceLine 49>>
+But when you take that knife…
+<<PlayVoiceLine 50>>
+And drive it into my skin
+<<PlayVoiceLine 51>>
+Know this…
+<<PlayVoiceLine 52>>
+You are nothing more…
+
+
+
+<<StartAutoContinue 45>>
+<<PlayVoiceLine 53>>
+Than a defective weapon
+
+<<LoadSelectedLevelScene>>
+<<StopAutoContinue>>
+===
