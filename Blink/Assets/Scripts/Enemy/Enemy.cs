@@ -3,6 +3,7 @@ using Unity.AI.Navigation;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.Animations;
 
 public class Enemy : MonoBehaviour
 {
@@ -18,6 +19,10 @@ public class Enemy : MonoBehaviour
     public AggresiveState aggresiveState { get; set; }
     public AlertState alertState { get; set; }
     public DeathState deathState { get; set; }
+
+    public Animator animationContoller;
+    private Vector3 previousPosition;
+    private float currentSpeed;
 
     [SerializeField] private BaseWander wander;
     [SerializeField] private BaseAggresive aggressive;
@@ -65,6 +70,7 @@ public class Enemy : MonoBehaviour
     {
         BaseWanderInstance.Initialize(gameObject, this);
         BaseAggresiveInstance.Initialize(gameObject, this);
+        previousPosition = transform.position;
 
         // Starts the state machine on the wandering state
         stateMachine.Initialize(wanderingState);
@@ -75,6 +81,11 @@ public class Enemy : MonoBehaviour
     private void Update()
     {
         stateMachine.currentState.Update();
+
+        Vector3 currentMovement = transform.position - previousPosition;
+        currentSpeed = currentMovement.magnitude / Time.deltaTime;
+        previousPosition = transform.position;
+        animationContoller.SetFloat("speed", currentSpeed);
     }
 
     public void OnShoot()
