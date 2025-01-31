@@ -7,6 +7,7 @@ public class Gun : MonoBehaviour
     [SerializeField] private GunType type;
     [SerializeField] private GameObject gun;
     [SerializeField] private GameObject bullet;
+    [SerializeField] private Animator animationController;
     private Transform bulletSpawnPoint;
     private bool addBulletSpread = false;
     private float shootDelay = 2f;
@@ -140,6 +141,8 @@ public class Gun : MonoBehaviour
         bulletScript.SetDamage(bulletDamage);
         bulletScript.SetRange(bulletRange);
         bulletScript.trail.enabled = true;
+
+        animationController.Play("Shoot", 1);
         return bulletScript;
     }
 
