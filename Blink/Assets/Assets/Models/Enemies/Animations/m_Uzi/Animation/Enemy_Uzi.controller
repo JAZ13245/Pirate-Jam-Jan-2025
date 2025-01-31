@@ -21,15 +21,6 @@ AnimatorStateMachine:
   - serializedVersion: 1
     m_State: {fileID: -3301540273433439874}
     m_Position: {x: 390, y: 250, z: 0}
-  - serializedVersion: 1
-    m_State: {fileID: 7273950658704645261}
-    m_Position: {x: 700, y: 360, z: 0}
-  - serializedVersion: 1
-    m_State: {fileID: 9052489103585989919}
-    m_Position: {x: 880.52545, y: 306.73312, z: 0}
-  - serializedVersion: 1
-    m_State: {fileID: 4163604811152528155}
-    m_Position: {x: 964.3931, y: 230.26556, z: 0}
   m_ChildStateMachines: []
   m_AnyStateTransitions: []
   m_EntryTransitions: []
@@ -40,6 +31,25 @@ AnimatorStateMachine:
   m_ExitPosition: {x: 690, y: 120, z: 0}
   m_ParentStateMachinePosition: {x: 800, y: 20, z: 0}
   m_DefaultState: {fileID: -3301540273433439874}
+--- !u!1107 &-7060969156719869958
+AnimatorStateMachine:
+  serializedVersion: 6
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: UpperBody
+  m_ChildStates: []
+  m_ChildStateMachines: []
+  m_AnyStateTransitions: []
+  m_EntryTransitions: []
+  m_StateMachineTransitions: {}
+  m_StateMachineBehaviours: []
+  m_AnyStatePosition: {x: 50, y: 20, z: 0}
+  m_EntryPosition: {x: 50, y: 120, z: 0}
+  m_ExitPosition: {x: 800, y: 120, z: 0}
+  m_ParentStateMachinePosition: {x: 800, y: 20, z: 0}
+  m_DefaultState: {fileID: 0}
 --- !u!1102 &-5568468358821069202
 AnimatorState:
   serializedVersion: 6
@@ -112,6 +122,18 @@ AnimatorController:
     m_SyncedLayerIndex: -1
     m_DefaultWeight: 0
     m_IKPass: 0
+    m_SyncedLayerAffectsTiming: 0
+    m_Controller: {fileID: 9100000}
+  - serializedVersion: 5
+    m_Name: UpperBody
+    m_StateMachine: {fileID: -7060969156719869958}
+    m_Mask: {fileID: 31900000, guid: 66cf9324c5497b54386e7566f1291c3c, type: 2}
+    m_Motions: []
+    m_Behaviours: []
+    m_BlendingMode: 0
+    m_SyncedLayerIndex: -1
+    m_DefaultWeight: 1
+    m_IKPass: 1
     m_SyncedLayerAffectsTiming: 0
     m_Controller: {fileID: 9100000}
 --- !u!1102 &4163604811152528155
