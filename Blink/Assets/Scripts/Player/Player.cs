@@ -11,9 +11,7 @@ using static Unity.Collections.AllocatorManager;
 
 public class Player : MonoBehaviour
 {
-    [Header("Player Settings")]
-    [SerializeField] private bool crouchToggleable;
-    [SerializeField]private bool usingCameraTracking = true;
+    
     [Header("Components")]
     [SerializeField] private PlayerCharacter playerCharacter;
     [SerializeField] private PlayerCamera playerCamera;
@@ -67,6 +65,10 @@ public class Player : MonoBehaviour
     bool blinkReleased = false;
     [Header("End Screen Settings")]
     [SerializeField] private EndScreenManager endScreenManager;
+    [Header("Edited Through Settings")]
+    [SerializeField] private bool crouchToggleable;
+    [SerializeField]private bool usingCameraTracking = true;
+
     private bool gamePaused = false;
     private bool playerDead = false;
     private bool playerWin = false;
@@ -91,6 +93,10 @@ public class Player : MonoBehaviour
 
         healthBar.maxValue = maxHealth;
         healthBar.value = currentHealth;
+
+        // Get Current Settings
+        crouchToggleable = PlayerPrefs.GetInt("Toggle_Crouch", 0) == 1;
+        crouchToggleable = PlayerPrefs.GetInt("Toggle_Crouch", 0) == 1;
     }
 
     // Update is called once per frame
@@ -113,7 +119,7 @@ public class Player : MonoBehaviour
         // Blink
 
         List<Vector2> points = gameManager.points;
-
+        
         if (points.Count > 0 && (IsEyeClosed(DetectLeftEye(points)) || IsEyeClosed(DetectRightEye(points))))
         {
             if (!blink)
