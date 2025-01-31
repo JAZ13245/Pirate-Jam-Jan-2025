@@ -12,7 +12,7 @@ EditorBuildSettings:
     path: Assets/Scenes/Cutscene.unity
     guid: cdd5e0f1101f76b459498ed3ce9b032e
   - enabled: 1
-    path: Assets/Scenes/Levels/Level1.unity
+    path: Assets/Scenes/Levels/OldLevel1.unity
     guid: 851e5b949d574834aab86f5120dbde4e
   - enabled: 1
     path: Assets/Scenes/FPSTest.unity

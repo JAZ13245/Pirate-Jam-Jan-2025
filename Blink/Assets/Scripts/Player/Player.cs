@@ -13,7 +13,7 @@ public class Player : MonoBehaviour
 {
     [Header("Player Settings")]
     [SerializeField] private bool crouchToggleable;
-    private bool usingCameraTracking = true;
+    [SerializeField]private bool usingCameraTracking = true;
     [Header("Components")]
     [SerializeField] private PlayerCharacter playerCharacter;
     [SerializeField] private PlayerCamera playerCamera;
@@ -160,11 +160,11 @@ public class Player : MonoBehaviour
             currentHealingTimer += Time.deltaTime;
         else if (currentHealth != maxHealth && currentHealth + healthIncrease <= maxHealth)
             { currentHealth += healthIncrease;
-            healthBar.value = currentHealth; ;
+            //healthBar.value = currentHealth; ;
         }
         else
             { currentHealth = maxHealth;
-            healthBar.value = currentHealth; ;
+           // healthBar.value = currentHealth; ;
         }
 
         //Debug.Log("countdown: " + currentHealingTimer);
