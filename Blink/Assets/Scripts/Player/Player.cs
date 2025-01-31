@@ -160,11 +160,11 @@ public class Player : MonoBehaviour
             currentHealingTimer += Time.deltaTime;
         else if (currentHealth != maxHealth && currentHealth + healthIncrease <= maxHealth)
             { currentHealth += healthIncrease;
-            //healthBar.value = currentHealth; ;
+            healthBar.value = currentHealth; ;
         }
         else
             { currentHealth = maxHealth;
-           // healthBar.value = currentHealth; ;
+            healthBar.value = currentHealth; ;
         }
 
         //Debug.Log("countdown: " + currentHealingTimer);
