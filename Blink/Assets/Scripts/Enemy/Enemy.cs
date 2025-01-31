@@ -4,6 +4,7 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.Animations;
+using System.Collections.Generic;
 
 public class Enemy : MonoBehaviour
 {
@@ -11,7 +12,7 @@ public class Enemy : MonoBehaviour
     public Player player { get; private set; }
     public PlayerCharacter playerBody { get; private set; }
     public EnemyManager enemyManager { get; private set; }
-    [SerializeField] private Gun gun;
+    [SerializeField] private List<Gun> guns;
     private float height;
 
     public StateMachine stateMachine { get; set; }
@@ -91,7 +92,8 @@ public class Enemy : MonoBehaviour
     public void OnShoot()
     {
         if(canSeePlayer)
-            gun.Shoot(player, playerBody);
+            foreach(Gun gun in guns)
+                gun.Shoot(player, playerBody);
 
     }
 
