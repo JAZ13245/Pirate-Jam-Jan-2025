@@ -90,7 +90,7 @@ public class Player : MonoBehaviour
         cameraSpring.Initialize();
         //cameraLean.Initialize();
 
-        usingCameraTracking = gameManager.GetFaceCamEnable();
+        usingCameraTracking = PlayerPrefs.GetInt("Toggle_Face", 0) == 1;
 
         healthBar.maxValue = maxHealth;
         healthBar.value = currentHealth;
@@ -103,6 +103,7 @@ public class Player : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        Debug.Log(usingCameraTracking);
         if(InputManager.Instance.Pause && !playerDead && !playerWin)
         {
             SetPause(!gamePaused);

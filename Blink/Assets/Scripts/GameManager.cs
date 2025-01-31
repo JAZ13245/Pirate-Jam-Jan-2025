@@ -105,6 +105,8 @@ public class GameManager : MonoBehaviour
             Destroy(this.gameObject);
         else
             _instance = this;
+
+        //DontDestroyOnLoad(this.gameObject);
     }
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
