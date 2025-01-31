@@ -414,9 +414,6 @@ public class PlayerCharacter : MonoBehaviour, ICharacterController
         if (player.BlinkCharge < 100) { _currentBlinkTime = 0; return; }
 
 
-        Vector3 hitBoxSize = blinkHitBox.transform.localScale;
-        hitBoxSize.z = 2;
-        blinkHitBox.transform.localScale = hitBoxSize;
 
         if (_requestedBlinkHeld && !_requestedBlinkRelease)
         {
@@ -427,6 +424,10 @@ public class PlayerCharacter : MonoBehaviour, ICharacterController
         }
         else if (_requestedBlinkRelease)
         {
+
+            Vector3 hitBoxSize = blinkHitBox.transform.localScale;
+            hitBoxSize.z = 3;
+            blinkHitBox.transform.localScale = hitBoxSize;
 
             RaycastHit hit;
             float blinkDistance = baseBlinkDistance;
@@ -458,7 +459,7 @@ public class PlayerCharacter : MonoBehaviour, ICharacterController
                     blinkDistance = hit.distance - 1;
                 }
             }
-            hitBoxSize.z = blinkDistance;
+            hitBoxSize.z = blinkDistance + 3;
             blinkHitBox.transform.localScale = hitBoxSize;
             SetPosition(cam.transform.position + cam.transform.forward * blinkDistance, false);
             blinkHitBox.GetComponent<CapsuleCollider>().enabled = true;
@@ -584,9 +585,10 @@ public class PlayerCharacter : MonoBehaviour, ICharacterController
 
     IEnumerator DeactivateHitBox(GameObject go)
     {
-        yield return 0;
+        yield return new WaitForSeconds(.3f);
 
         go.GetComponent<CapsuleCollider>().enabled = false;
     }
     
+   
 }
