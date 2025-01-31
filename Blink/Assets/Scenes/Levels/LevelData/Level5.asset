@@ -14,5 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   levelName: Target Acquired
   levelNumber: 5
-  levelPreview: {fileID: 21300000, guid: 5dba4b17a1fc30747b5b10c847f2cbd6, type: 3}
+  levelPreview: {fileID: 21300000, guid: 958a52203f746084fbfd411d937a52d9, type: 3}
   sceneName: Level5
