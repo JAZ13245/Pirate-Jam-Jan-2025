@@ -137,6 +137,7 @@ public class Enemy : MonoBehaviour
     public void KillEnemy()
     {
         Explode(this.transform.up);
+        enemyManager.EnemyDied(this);
         Destroy(gameObject);
     }
 

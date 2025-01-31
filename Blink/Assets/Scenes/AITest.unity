@@ -1586,6 +1586,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemies:
   - {fileID: 1642699018}
+  - {fileID: 779082322}
 --- !u!4 &1159382569
 Transform:
   m_ObjectHideFlags: 0
