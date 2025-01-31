@@ -661,7 +661,7 @@ Transform:
   m_GameObject: {fileID: 5359581158034492597}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: 0.14563759, z: -0, w: 0.98933804}
-  m_LocalPosition: {x: 2.1441193, y: -6.999, z: -27.437286}
+  m_LocalPosition: {x: 26.06, y: -1.26, z: -34.63}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -680,7 +680,7 @@ NavMeshAgent:
   m_Enabled: 1
   m_AgentTypeID: 0
   m_Radius: 0.5
-  m_Speed: 7
+  m_Speed: 4
   m_Acceleration: 8
   avoidancePriority: 50
   m_AngularSpeed: 120
@@ -705,6 +705,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gun: {fileID: 1951251290778651314}
+  animationContoller: {fileID: 6781315094619758206}
   wander: {fileID: 11400000, guid: 7a2a193b0f7af124ca4a12016d5a074b, type: 2}
   aggressive: {fileID: 11400000, guid: 4f3fbeac96972914e9cc7e7d01dcb9de, type: 2}
   bloodBlobSpawnCount: 10
