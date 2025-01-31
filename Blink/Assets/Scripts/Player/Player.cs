@@ -294,7 +294,7 @@ public class Player : MonoBehaviour
     {
         playerWin = true;
         PauseGame(true);
-        endScreenManager.showEndScreen(1);
+        endScreenManager.showEndScreen(2);
     }
 
     public void Death()
