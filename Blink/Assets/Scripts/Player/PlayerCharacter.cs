@@ -420,7 +420,7 @@ public class PlayerCharacter : MonoBehaviour, ICharacterController
             _currentBlinkTime += Time.deltaTime;
 
             //Test Blinking
-            testBlinkEffect.SetActive(true);
+            if (!player.UsingCameraTracking) testBlinkEffect.SetActive(true);
         }
         else if (_requestedBlinkRelease)
         {
