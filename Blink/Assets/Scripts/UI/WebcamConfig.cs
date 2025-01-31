@@ -52,6 +52,7 @@ public class WebcamConfig : MonoBehaviour
     {
         gameManager.EnableWebCam(toggleFace.isOn);
         alternateBlinkSettings.SetActive(!toggleFace.isOn);
+        PlayerPrefs.SetInt("Toggle_Face", toggleFace.isOn ? 1 : 0);
     }
 
     private void SetUpDropMenu(WebCamDevice[] devices)
