@@ -633,8 +633,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3016a81cd9bd8ee4084abfabe549fd47, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  guns:
-  - {fileID: 7872377876386731279}
+  gun: {fileID: 7872377876386731279}
   animationContoller: {fileID: 6781315094619758206}
   wander: {fileID: 11400000, guid: 7a2a193b0f7af124ca4a12016d5a074b, type: 2}
   aggressive: {fileID: 11400000, guid: 4f3fbeac96972914e9cc7e7d01dcb9de, type: 2}
