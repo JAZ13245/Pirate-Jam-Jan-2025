@@ -14,5 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   levelName: Eyes Wide Open
   levelNumber: 2
-  levelPreview: {fileID: 21300000, guid: 5dba4b17a1fc30747b5b10c847f2cbd6, type: 3}
+  levelPreview: {fileID: 21300000, guid: a1ecb087ba47e004f993d9b5ef9eb9cd, type: 3}
   sceneName: Level2
