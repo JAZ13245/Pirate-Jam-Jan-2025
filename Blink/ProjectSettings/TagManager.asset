@@ -11,6 +11,7 @@ TagManager:
   - PlayerBody
   - Bullet
   - Terrain
+  - Character
   layers:
   - Default
   - TransparentFX

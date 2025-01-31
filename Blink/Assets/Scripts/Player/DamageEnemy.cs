@@ -9,5 +9,11 @@ public class DamageEnemy : MonoBehaviour
             Enemy enemy = other.GetComponent<Enemy>();
             enemy.stateMachine.ChangeState(enemy.deathState);
         }
+
+        if(other.tag == "Character")
+        {
+            KillCharacter character = other.GetComponent<KillCharacter>();
+            character.Kill();
+        }
     }
 }

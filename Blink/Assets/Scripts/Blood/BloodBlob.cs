@@ -13,7 +13,7 @@ public class BloodBlob : MonoBehaviour
     private void OnCollisionEnter(Collision collision)
     {
         // If the paint blob has collidied with the ground, then place a decal at that location
-        if ((LayerMask.GetMask("Default") & (1 << collision.gameObject.layer)) > 0)
+        if ((LayerMask.GetMask("Default") & (1 << collision.gameObject.layer)) > 0 || (LayerMask.GetMask("Water") & (1 << collision.gameObject.layer)) > 0)
         {
             Vector3 collisionNormal = collision.contacts[0].normal;
             Vector3 collisionPoint = collision.contacts[0].point;
