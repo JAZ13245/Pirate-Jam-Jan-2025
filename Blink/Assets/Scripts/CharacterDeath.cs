@@ -12,13 +12,17 @@ public class KillCharacter : MonoBehaviour
     private void Start()
     {
         height = GetComponent<CapsuleCollider>().height;
+        if(GameObject.FindGameObjectWithTag("EnemyManager") != null )
         enemyManager = GameObject.FindGameObjectWithTag("EnemyManager").GetComponent<EnemyManager>();
     }
 
     public void Kill()
     {
         Explode(this.transform.up);
-        enemyManager.CharacterDie(this);
+
+        if (enemyManager != null )
+            enemyManager.CharacterDie(this);
+
         Destroy(gameObject);
     }
 
