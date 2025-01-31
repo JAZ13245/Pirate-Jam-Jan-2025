@@ -1,0 +1,19 @@
+﻿title: Level9
+tags:
+---
+<<StartAutoContinue 25>>
+<<ChangeTrack 1>>
+
+<<SetTextSpeed 25>>
+
+<<PlayVoiceLine 45>>
+This won’t wash your hands of blood Iris…
+
+
+<<StartAutoContinue 45>>
+<<PlayVoiceLine 46>>
+I hope you’ve realized that by now…
+
+<<LoadSelectedLevelScene>>
+<<StopAutoContinue>>
+===

@@ -1,0 +1,22 @@
+﻿title: Level2
+tags:
+---
+<<StartAutoContinue 25>>
+<<ChangeTrack 1>>
+
+<<SetTextSpeed 25>>
+
+<<PlayVoiceLine 7>>
+Agent Iris come in!
+<<PlayVoiceLine 8>>
+All the targets have not been eliminated…
+<<PlayVoiceLine 9>>
+Finish the job…
+
+<<StartAutoContinue 40>>
+<<PlayVoiceLine 10>>
+Agent Iris, where are you!
+
+<<LoadSelectedLevelScene>>
+<<StopAutoContinue>>
+===

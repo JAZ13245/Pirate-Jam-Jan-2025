@@ -1,0 +1,22 @@
+﻿title: Level5
+tags:
+---
+<<StartAutoContinue 25>>
+<<ChangeTrack 1>>
+
+<<SetTextSpeed 25>>
+
+<<PlayVoiceLine 21>>
+Iris…
+<<PlayVoiceLine 22>>
+I’ve been tracking your position…
+<<PlayVoiceLine 23>>
+WHY ARE YOU ON ROUTE TO HEADQUARTERS!
+
+<<StartAutoContinue 40>>
+<<PlayVoiceLine 24>>
+What the hell are you planning!
+
+<<LoadSelectedLevelScene>>
+<<StopAutoContinue>>
+===

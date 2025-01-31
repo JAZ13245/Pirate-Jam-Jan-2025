@@ -1,0 +1,26 @@
+﻿title: Level4
+tags:
+---
+<<StartAutoContinue 25>>
+<<ChangeTrack 1>>
+
+<<SetTextSpeed 25>>
+
+<<PlayVoiceLine 15>>
+After all the targets you’ve killed…”
+<<PlayVoiceLine 16>>
+This is where you get cold feet?”
+<<PlayVoiceLine 17>>
+At a damn baby?!”
+<<PlayVoiceLine 18>>
+Iris I’ve seen you rip people apart so badly…
+<<PlayVoiceLine 19>>
+That they can’t even reconstruct their faces
+
+<<StartAutoContinue 40>>
+<<PlayVoiceLine 20>>
+Don’t grow a heart on me now…
+
+<<LoadSelectedLevelScene>>
+<<StopAutoContinue>>
+===

@@ -6,12 +6,18 @@ tags:
 
 <<SetTextSpeed 25>>
 
-<<PlayVoiceLine 0>>
-“Contacting Agent Iris…”
-“I got a job for you…”
-“Dispose of the target and return to station”
-“This one should be simple”
-“Don’t screw around…”
+<<PlayVoiceLine 3>>
+Contacting Agent Iris…
+
+<<PlayVoiceLine 4>>
+I got a job for you…
+
+<<PlayVoiceLine 5>>
+Clear the area and return to your station
+
+<<StartAutoContinue 40>>
+<<PlayVoiceLine 6>>
+This mission should be simple
 
 <<LoadSelectedLevelScene>>
 <<StopAutoContinue>>

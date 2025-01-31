@@ -55,6 +55,7 @@ public class MainMenuManager : MonoBehaviour
         LevelData level = LevelDataManager.Instance.GetLevelByIndex(levelIndex);
 
         selectedLevel = level;
+        PlayerPrefs.SetString("selectedSceneName", level.sceneName);
         levelName.text = level.levelName;
         levelPreview.sprite = level.levelPreview;
         levelNumber.text = $"{level.levelNumber}";

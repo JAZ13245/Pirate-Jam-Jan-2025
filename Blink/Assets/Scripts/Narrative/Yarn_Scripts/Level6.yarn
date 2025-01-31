@@ -1,0 +1,26 @@
+﻿title: Level6
+tags:
+---
+<<StartAutoContinue 25>>
+<<ChangeTrack 1>>
+
+<<SetTextSpeed 25>>
+
+<<PlayVoiceLine 25>>
+Iris if you stop right now…
+<<PlayVoiceLine 26>>
+We can put this all behind us
+<<PlayVoiceLine 27>>
+Just head back to your station…
+<<PlayVoiceLine 28>>
+And I’ll sort this all out with HQ.
+
+
+
+<<StartAutoContinue 45>>
+<<PlayVoiceLine 29>>
+Please… Iris just talk to me…
+
+<<LoadSelectedLevelScene>>
+<<StopAutoContinue>>
+===

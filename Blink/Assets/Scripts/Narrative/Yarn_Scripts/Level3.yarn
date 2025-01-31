@@ -1,0 +1,22 @@
+﻿title: Level3
+tags:
+---
+<<StartAutoContinue 25>>
+<<ChangeTrack 1>>
+
+<<SetTextSpeed 25>>
+
+<<PlayVoiceLine 11>>
+Iris, have you lost your mind!
+<<PlayVoiceLine 12>>
+Reports are coming in…
+<<PlayVoiceLine 13>>
+Why are you killing our agents…
+
+<<StartAutoContinue 40>>
+<<PlayVoiceLine 14>>
+Cease this immediately!
+
+<<LoadSelectedLevelScene>>
+<<StopAutoContinue>>
+===

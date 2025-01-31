@@ -1,0 +1,25 @@
+﻿title: Level8
+tags:
+---
+<<StartAutoContinue 25>>
+<<ChangeTrack 1>>
+
+<<SetTextSpeed 25>>
+
+<<PlayVoiceLine 40>>
+Iris, do you honestly think…
+<<PlayVoiceLine 41>>
+That killing me is the solution
+<<PlayVoiceLine 42>>
+That there isn’t 100 men lined up to take my job…
+<<PlayVoiceLine 43>>
+There is still time Iris…
+
+
+<<StartAutoContinue 40>>
+<<PlayVoiceLine 44>>
+Stop this…
+
+<<LoadSelectedLevelScene>>
+<<StopAutoContinue>>
+===
