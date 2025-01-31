@@ -6,20 +6,28 @@ tags:
 
 <<SetTextSpeed 25>>
 
-<<PlayVoiceLine 15>>
-After all the targets you’ve killed…”
-<<PlayVoiceLine 16>>
-This is where you get cold feet?”
-<<PlayVoiceLine 17>>
-At a damn baby?!”
-<<PlayVoiceLine 18>>
-Iris I’ve seen you rip people apart so badly…
-<<PlayVoiceLine 19>>
-That they can’t even reconstruct their faces
+<<PlayVoiceLine 30>>
+Hey I was just reading your file…
+<<PlayVoiceLine 31>>
+Let’s see…
+<<PlayVoiceLine 32>>
+Agent Iris - Supernatural Killer
+<<PlayVoiceLine 33>>
+Found cold and alone on the streets
+<<PlayVoiceLine 34>>
+While stealing bread from a bakery
+<<PlayVoiceLine 35>>
+Teleporting away from the scene of the crime…
+<<PlayVoiceLine 36>>
+Iris…
+<<PlayVoiceLine 37>>
+This agency made you…
+<<PlayVoiceLine 38>>
+Without us you would have been nothing more…
 
-<<StartAutoContinue 40>>
-<<PlayVoiceLine 20>>
-Don’t grow a heart on me now…
+<<StartAutoContinue 45>>
+<<PlayVoiceLine 39>>
+than a government experiment!
 
 <<LoadSelectedLevelScene>>
 <<StopAutoContinue>>

@@ -6,16 +6,16 @@ tags:
 
 <<SetTextSpeed 25>>
 
-<<PlayVoiceLine 11>>
-Iris, have you lost your mind!
-<<PlayVoiceLine 12>>
-Reports are coming in…
-<<PlayVoiceLine 13>>
-Why are you killing our agents…
+<<PlayVoiceLine 21>>
+Iris…
+<<PlayVoiceLine 22>>
+I’ve been tracking your position…
+<<PlayVoiceLine 23>>
+WHY ARE YOU ON ROUTE TO HEADQUARTERS!
 
 <<StartAutoContinue 40>>
-<<PlayVoiceLine 14>>
-Cease this immediately!
+<<PlayVoiceLine 24>>
+What the hell are you planning!
 
 <<LoadSelectedLevelScene>>
 <<StopAutoContinue>>
